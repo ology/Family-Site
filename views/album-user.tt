@@ -1,0 +1,58 @@
+<% page = 'album' %>
+
+<% INCLUDE head.tt %>
+
+<% IF target == user || target == 'Family' %>
+<div id="input_block" class="input_block">
+    <br clear="all"/>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="filename"/>
+        <input type="hidden" name="target" value="<% target %>"/>
+        <input type="submit" value=" Add " class="button-primary"/>
+<!--
+    <% IF target == 'Family' %>
+        ( Adding to <b>album/Family</b> )
+    <% ELSE %>
+        ( Adding to <b>album/<% user %></b> )
+    <% END %>
+-->
+        &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
+        <br />
+        &nbsp; <b>Hint: To save a caption, press ENTER after adding it.</b>
+    </form>
+</div>
+<% END %>
+<div id="data">
+<% FOREACH file IN files %>
+<div class="img">
+    <a href="<% target %>/<% file %>"><img src="<% target %>/<% file %>" height="10%" width="10%" /></a>
+    <div class="desc">
+    <% IF user == target || target == 'Family' %>
+        <form action="/caption" method="POST" enctype="multipart/form-data" class="album">
+            <input type="hidden" name="file" value="<% file %>" />
+            <input type="hidden" name="target" value="<% target %>" />
+            <input type="text" name="caption" value="<% captions.$file %>" onmouseupx="this.form.submit()" />
+        </form>
+        <form action="/delete" method="POST" enctype="multipart/form-data" class="album">
+            <input type="hidden" name="file" value="<% file %>" />
+            <input type="hidden" name="target" value="<% target %>" />
+            <input type="submit" name="delete" value="Delete" onclick="return confirm('Delete <% file %>?')" />
+        </form>
+    <% ELSE %>
+        <% captions.$file %>
+    <% END %>
+    </div>
+</div>
+<% END %>
+</div>
+
+<script>
+$(function(){
+    var $container = $('#data');
+    $container.imagesLoaded(function(){
+        $container.masonry({
+            itemSelector : '.img',
+        });
+    });
+});
+</script>

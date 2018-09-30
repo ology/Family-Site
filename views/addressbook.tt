@@ -1,0 +1,75 @@
+<% page = 'addressbook' %>
+
+<% INCLUDE head.tt %>
+<div id="input_block" class="input_block">
+    <form action="/address" method="post">
+        <br clear="all"/>
+        First name: <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>">
+        Last name: <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>">
+        Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>">
+        <br/>
+        Street: <input type="text" name="street" size="30" maxlength="50" value="<% edit.street %>">
+        City: <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>">
+        State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
+        Zip: <input type="text" name="zip" size="10" maxlength="10" value="<% edit.zip %>">
+        <br/>
+        Phone: <input type="text" name="phone" size="15" maxlength="15" value="<% edit.phone %>">
+        Phone2: <input type="text" name="phone2" size="15" maxlength="15" value="<% edit.phone2 %>">
+        Email: <input type="text" name="email" size="30" maxlength="50" value="<% edit.email %>">
+        &nbsp;
+        <% IF method == 'add' %>
+            <input type="submit" name="add" value="Add" class="button-primary" />
+        <% ELSE %>
+            <input type="hidden" name="id" value="<% edit.id %>">
+            <input type="submit" name="update" value="Update" class="button-primary" />
+            &nbsp;
+            <a href="/addressbook" class="button">Cancel</a>
+        <% END %>
+    </form>
+<% IF edit %>
+    <form action="/address" method="post">
+        <input type="hidden" name="id" value="<% edit.id %>">
+        <input type="submit" name="delete" value="Delete" class="button-primary" onclick="return confirm('Delete <% edit.first_name %>?')"/>
+    </form>
+<% END %>
+</div>
+<% IF ! edit %>
+<div id="data" class="data">
+    <table border="0">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Phone</th>
+            <th>Phone2</th>
+            <th>Birthday</th>
+            <th>Email</th>
+        </tr>
+    <% FOREACH i IN sorted %>
+        <tr>
+            <td>
+                <a href="/addressbook?id=<% data.$i.id %>"><% data.$i.first_name %></a>
+            </td>
+            <td><% data.$i.last_name %></td>
+            <td><a href="https://www.google.com/maps/place/<% data.$i.street | uri %>+<% data.$i.city %>+<% data.$i.state %>+<% data.$i.zip %>/" target="_blank"><% data.$i.street %></a></td>
+            <td><% data.$i.city %></td>
+            <td><% data.$i.state %></td>
+            <td><% data.$i.zip %></td>
+            <td>
+                <a href="tel:<% data.$i.phone %>"><% data.$i.phone %></a>
+            </td>
+            <td>
+                <a href="tel:<% data.$i.phone2 %>"><% data.$i.phone2 %></a>
+            </td>
+            <td><% data.$i.birthday %></td>
+            <td>
+                <a href="mailto:<% data.$i.email %>"><% data.$i.email %></a>
+            </td>
+        </tr>
+    <% END %>
+    </table>
+</div>
+<% END %>

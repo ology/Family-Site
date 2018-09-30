@@ -1,0 +1,48 @@
+<% page = 'calendar' %>
+
+<% INCLUDE head.tt %>
+
+<div id="input_block" class="input_block">
+    <form action="/event" method="post">
+        <br clear="all"/>
+        Event title: <input type="text" name="title" size="20" maxlength="20" value="<% edit.title %>">
+        Month: <input type="text" name="month" size="2" maxlength="2" value="<% edit.month %>">
+        Day: <input type="text" name="day" size="2" maxlength="2" value="<% edit.day %>">
+        Sticky: <input type="checkbox" name="important" <% IF edit.important %>checked<% END %>>
+        <br/>
+        Note: <input type="text" name="note" size="60" maxlength="90" value="<% edit.note %>">
+        &nbsp;
+        <% IF method == 'add' %>
+            <input type="submit" name="add" value="Add" class="button-primary" />
+        <% ELSE %>
+            <input type="hidden" name="id" value="<% edit.id %>">
+            <input type="submit" name="update" value="Update" class="button-primary" />
+            &nbsp;
+            <a href="/calendar/<% year %>/<% month %>" class="button">Cancel</a>
+        <% END %>
+    </form>
+<% IF edit %>
+    <form action="/event" method="post">
+        <input type="hidden" name="id" value="<% edit.id %>">
+        <input type="hidden" name="month" value="<% month %>">
+        <input type="hidden" name="year" value="<% year %>">
+        <input type="submit" name="delete" value="Delete" class="button-primary" onclick="return confirm('Delete <% edit.title %>?')"/>
+    </form>
+<% END %>
+</div>
+
+<% IF ! edit %>
+<div>
+    <p class="center">
+        <b><a href="/calendar/<% prev_year %>/<% prev_month %>" class="button">&lt; Previous month</a></b>
+        &nbsp; | &nbsp;
+        <b><a href="/calendar/<% next_year %>/<% next_month %>" class="button">Next month &gt;</a></b>
+    </p>
+    <% calendar %>
+    <p class="center">
+        <b><a href="/calendar/<% prev_year %>/<% prev_month %>" class="button">&lt; Previous month</a></b>
+        &nbsp; | &nbsp;
+        <b><a href="/calendar/<% next_year %>/<% next_month %>" class="button">Next month &gt;</a></b>
+    </p>
+</div>
+<% END %>

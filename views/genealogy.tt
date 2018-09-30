@@ -1,0 +1,28 @@
+<% page = 'genealogy' %>
+
+<% INCLUDE head.tt %>
+<% IF user == 'gene' %>
+<div id="input_block" class="input_block">
+    <form action="/tree" method="post" name="myform">
+        <br clear="all"/>
+        Name: <input type="text" name="name" size="20" maxlength="100" value="<% edit.name %>" />
+        Date: <input type="text" name="date" size="20" maxlength="50" value="<% edit.date %>" />
+        <br />
+        Parent: <input type="text" name="parent" size="20" maxlength="100" value="<% edit.parent %>" />
+        Spouse: <input type="text" name="spouse" size="20" maxlength="100" value="<% edit.spouse %>" />
+        &nbsp;
+        <% IF method == 'add' %>
+            <input type="submit" name="add" value=" Add " class="button-primary" />
+        <% ELSE %>
+            <input type="hidden" name="id" value="<% edit.id %>" />
+            <input type="submit" name="update" value=" Update " class="button-primary" />
+            &nbsp;
+            <a href="/genealogy" class="button">Cancel</a>
+        <% END %>
+    </form>
+</div>
+<% END %>
+<div id="data">
+<% relations %>
+</div>
+<p/>

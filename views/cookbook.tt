@@ -1,0 +1,94 @@
+<% page = 'cookbook' %>
+
+<% INCLUDE head.tt %>
+<% INCLUDE menu.tt %>
+
+<% IF edit || new %>
+<div id="input_block" class="input_block">
+    <form action="/recipe" method="post">
+        <br clear="all"/>
+        Title: <input type="text" name="title" size="50" maxlength="90" value="<% entry.title %>">
+        <br/>
+        Type: <select name="type">
+            <option value="appetizer" <% entry.type == 'appetizer' ? 'selected' : '' %>>Appetizer</option>
+            <option value="crockpot" <% entry.type == 'crockpot' ? 'selected' : '' %>>Crockpot</option>
+            <option value="dessert" <% entry.type == 'dessert' ? 'selected' : '' %>>Dessert</option>
+            <option value="drink" <% entry.type == 'drink' ? 'selected' : '' %>>Drink</option>
+            <option value="entree" <% entry.type == 'entree' ? 'selected' : '' %>>Entree</option>
+            <option value="other" <% entry.type == 'other' ? 'selected' : '' %>>Other</option>
+            <option value="sauce" <% entry.type == 'sauce' ? 'selected' : '' %>>Sauce</option>
+            <option value="salad" <% entry.type == 'salad' ? 'selected' : '' %>>Salad</option>
+            <option value="soup" <% entry.type == 'soup' ? 'selected' : '' %>>Soup</option>
+        </select>
+        <br/>
+        Note: <input type="text" name="note" size="50" maxlength="90" value="<% entry.note %>">
+        <br/>
+        Ingredients:
+        <br/>
+        <textarea name="ingredients" rows="20" cols="60"><% entry.ingredients %></textarea>
+        <br/>
+        Instructions:
+        <br/>
+        <textarea name="instructions" rows="20" cols="60"><% entry.instructions %></textarea>
+        <br/>
+        <% IF method == 'add' %>
+            <input type="submit" name="add" value="Add" class="button-primary" />
+            &nbsp;
+            <a href="/cookbook" class="button">Cancel</a>
+        <% ELSE %>
+            <input type="hidden" name="id" value="<% entry.id %>">
+            <input type="submit" name="update" value="Update" class="button-primary" />
+            &nbsp;
+            <a href="/cookbook?id=<% entry.id %>" class="button">Cancel</a>
+        <% END %>
+    </form>
+        <% IF entry %>
+    <br />
+    <form action="/recipe" method="post">
+        <input type="hidden" name="id" value="<% entry.id %>">
+        <input type="submit" name="delete" value="Delete" class="button-primary" onclick="return confirm('Delete <% entry.title %>?')"/>
+    </form>
+        <% END %>
+</div>
+<% ELSE %>
+    <% IF entry %>
+<div id="entry_block" class="input_block">
+    <b>Title:</b> <a href="/cookbook?edit=1&id=<% entry.id %>"><% entry.title %></a>
+    <br/>
+    <b>By:</b> <% entry.user %>
+    <br/>
+    <b>Type:</b> <% entry.type FILTER ucfirst %>
+    <br/>
+    <b>Note:</b> <% entry.note %>
+    <br/>
+    <b>Ingredients:</b> <ul><li><% entry.ingredients.split('\n').join('<li/>') %></ul>
+    <b>Instructions:</b> <ul><li><% entry.instructions.split('\n').join('<li/>') %></ul>
+        <% IF entry.image %>
+    <br/>
+    <img src="<% entry.image %>" width="320" height="240" />
+        <% END %>
+</div>
+    <% END %>
+
+    <% IF sorted %>
+<div id="data" class="data">
+    <ul>
+        <% FOREACH i IN sorted %>
+<div class="item">
+        <li><a href="/cookbook?id=<% data.$i.id %>"><% data.$i.title %></a></li>
+</div>
+        <% END %>
+    </ul>
+</div>
+    <% END %>
+<% END %>
+
+<script>
+$(function(){
+    var $container = $('#data');
+    $container.masonry({
+        itemSelector : '.item',
+        columnWidth : 300
+    });
+});
+</script>

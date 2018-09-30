@@ -1,0 +1,15 @@
+<div class="head">
+    <h4 class="head">
+<!-- <img src="/images/Family-Site.png" /> -->
+    <b><i>Family <% page FILTER ucfirst %>!</i></b></h4>
+    <b><a class="button" href="/addressbook">Addresses</a></b>
+<% IF page == 'log' %>
+    <b><a class="button" href="/ban">Bans</a></b>
+<% END %>
+    <b><a class="button" href="/calendar/<% year %>/<% month %>">Calendar</a></b>
+    <b><a class="button" href="/">Chat</a></b>
+    <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b>
+    <b><a class="button" href="/cookbook">Cookbook</a></b>
+    <b><a class="button" href="/album">Photos</a></b>
+    <b><a class="button" href="/logout">Logout</a></b>
+</div>

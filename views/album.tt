@@ -1,0 +1,57 @@
+<% page = 'album' %>
+
+<% INCLUDE head.tt %>
+</div>
+<div id="data">
+<div class="img">
+    <a href="album/Family"><img src="album/Family/Picture_029.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Family"><b>Family</b></a></div>
+</div>
+<div class="img">
+    <a href="album/Emily"><img src="album/Emily/emily-and-aimee.png" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Emily">Emily</a></div>
+</div>
+<div class="img">
+    <a href="album/Frances"><img src="album/Frances/Picture_038.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Frances">Frances</a></div>
+</div>
+<div class="img">
+    <a href="album/gene"><img src="album/gene/Mike-Sam-Gene-1983.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/gene">Gene</a></div>
+</div>
+<div class="img">
+    <a href="album/Janey"><img src="album/Janey//1503065423-me, Emily & friends in 1950's Carthage.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Janey">Janey</a></div>
+</div>
+<div class="img">
+    <a href="album/Karl"><img src="album/Karl/Picture_021.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Karl">Karl</a></div>
+</div>
+<div class="img">
+    <a href="album/Logan"><img src="album/Logan/LL_Booth_Up_and_Ready_1.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Logan">Logan</a></div>
+</div>
+<div class="img">
+    <a href="album/Lois"><img src="album/Lois/File0011.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Lois">Lois</a></div>
+</div>
+<div class="img">
+    <a href="album/Olivia"><img src="album/Olivia/holl.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Olivia">Olivia</a></div>
+</div>
+<div class="img">
+    <a href="album/Tabitha"><img src="album/Tabitha/Teddiswedding.jpg" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/Tabitha">Tabitha</a></div>
+</div>
+</div>
+
+<script>
+$(function(){
+    var $container = $('#data');
+    $container.imagesLoaded(function(){
+        $container.masonry({
+            itemSelector : '.img',
+        });
+    });
+});
+</script>

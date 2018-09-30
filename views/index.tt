@@ -1,0 +1,89 @@
+<%
+    page = 'chat'
+
+    named = {
+        '1'  = 'January'
+        '2'  = 'February'
+        '3'  = 'March'
+        '4'  = 'April'
+        '5'  = 'May'
+        '6'  = 'June'
+        '7'  = 'July'
+        '8'  = 'August'
+        '9'  = 'September'
+        '10' = 'October'
+        '11' = 'November'
+        '12' = 'December'
+    }
+
+    who = {
+        '1'  = 'Lois'
+        '2'  = 'Lois'
+        '3'  = 'Lois'
+        '4'  = 'Lois'
+        '5'  = 'Lois'
+        '6'  = ''
+        '7'  = ''
+        '8'  = 'Lois'
+        '9'  = 'Lois'
+        '10' = 'Lois'
+        '11' = 'Lois'
+        '12' = 'Lois'
+    }
+%>
+
+<% INCLUDE head.tt %>
+<div id="input_block" class="input_block">
+    <form action="/chat" method="post">
+        <textarea name="text" rows="4" wrap="soft" class="chat" autofocus></textarea>
+        <input type="submit" name="Chat" value=" Chat " class="button-primary" />
+<% IF who.$month %>
+&nbsp; <b>The month of <% named.$month %> is brought to you by <% who.$month %>. Thanks <% who.$month %>!</b>
+<% END %>
+<!--
+        <select name="lines" onchange="this.form.submit()">
+            <option value="25"  <% lines == 25  ? 'selected' : '' %>>Show 25 posts</option>
+            <option value="50"  <% lines == 50  ? 'selected' : '' %>>Show 50 posts</option>
+            <option value="100" <% lines == 100 ? 'selected' : '' %>>Show 100 posts</option>
+            <option value="200" <% lines == 200 ? 'selected' : '' %>>Show 200 posts</option>
+        </select>
+-->
+    </form>
+</div>
+<div id="data">
+    <table border="0" width="100%">
+        <tr>
+            <td align=left>
+<% FOREACH line IN chat %>
+                <% line %>
+<% END %>
+            </td>
+            <td valign="top" width="15%" bgcolor="#D7D3B9">
+                <div class="event">
+                    <b>This month:</b><br/>
+                    <ul class="event">
+<% FOREACH event IN cal %>
+                        <li>
+                            <i><% event.day %></i> - <% event.title %>
+                            <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
+                        </li>
+<% END %>
+                    </ul>
+<% IF important.size %>
+                    <hr/>
+                    <b>This year:</b><br/>
+                    <ul class="event">
+    <% FOREACH event IN important %>
+        <% NEXT IF event.month == month %>
+                        <li>
+                            <i><a href="/calendar/<% year %>/<% event.month %>"><% event.month %>/<% event.day %></a></i> - <% event.title %>
+                            <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
+                        </li>
+    <% END %>
+                    </ul>
+<% END %>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

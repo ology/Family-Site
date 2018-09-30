@@ -1,0 +1,49 @@
+<% page = 'ban' %>
+
+<% INCLUDE head.tt %>
+
+<div id="input_block" class="input_block">
+    <form action="/block" method="post">
+        <br clear="all"/>
+        IP: <input type="text" name="ip" size="15" maxlength="15" value="<% entry.ip %>">
+        <% IF method == 'add' %>
+            <input type="submit" name="add" value=" Add " class="button-primary" />
+        <% ELSE %>
+            <input type="hidden" name="id" value="<% entry.id %>">
+            <input type="hidden" name="last_seen" value="<% entry.last_seen %>">
+            <input type="submit" name="update" value=" Update " class="button-primary" />
+            &nbsp;
+            <a href="/ban" class="button">Cancel</a>
+        <% END %>
+    </form>
+<% IF entry %>
+    <form action="/block" method="post">
+        <input type="submit" name="delete" value=" Delete " class="button-primary" onclick="return confirm('Delete <% entry.ip %>?')"/>
+        <input type="hidden" name="id" value="<% entry.id %>">
+    </form>
+    <br/>
+    <b>Last seen:</b> <% entry.last_seen %>
+<% END %>
+</div>
+
+<% IF sorted %>
+<div id="data" class="data">
+    <ul>
+    <% FOREACH i IN sorted %>
+<div class="item">
+        <li><a href="/ban?id=<% data.$i.id %>"><% data.$i.ip %></a></li>
+</div>
+    <% END %>
+    </ul>
+</div>
+<% END %>
+
+<script>
+$(function(){
+    var $container = $('#data');
+    $container.masonry({
+        itemSelector : '.item',
+        columnWidth : 300
+    });
+});
+</script>
