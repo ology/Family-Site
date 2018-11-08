@@ -36,8 +36,8 @@ plugins:
         database: 'example_family'
         host: 'localhost'
         port: 3306
-        username: 'someone'
-        password: 'something'
+        username: 'root'
+        password: 'abc123'
         connection_check_threshold: 10
         dbi_params:
             RaiseError: 1
@@ -48,8 +48,8 @@ plugins:
     "example_family":
         schema_class: Family::Site::Schema
         dsn: "dbi:mysql:database=example_family"
-        user: 'someone'
-        password: 'something'
+        user: 'root'
+        password: 'abc123'
   Auth::Extensible:
         exit_page: '/'
 #        login_page_handler: 'Family::Site::_login_page_handler'
