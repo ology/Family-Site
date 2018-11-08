@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: localhost    Database: example_family
 -- ------------------------------------------------------
--- Server version	5.7.13-0ubuntu0.16.04.2
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,6 +18,8 @@
 --
 -- Current Database: `example_family`
 --
+
+DROP DATABASE IF EXISTS `example_family`;
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `example_family` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
@@ -49,6 +51,21 @@ CREATE TABLE `address` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `ban`
+--
+
+DROP TABLE IF EXISTS `ban`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ban` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `last_seen` datetime DEFAULT NULL,
+  `ip` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `calendar`
 --
 
@@ -63,7 +80,7 @@ CREATE TABLE `calendar` (
   `important` int(1) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +99,7 @@ CREATE TABLE `cookbook` (
   `ingredients` text NOT NULL,
   `instructions` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,6 +118,47 @@ CREATE TABLE `genealogy` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `history`
+--
+
+DROP TABLE IF EXISTS `history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `history` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `who` varchar(20) COLLATE latin1_bin NOT NULL DEFAULT '',
+  `what` varchar(256) COLLATE latin1_bin NOT NULL DEFAULT '',
+  `when` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `remote_addr` varchar(15) COLLATE latin1_bin NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `task`
+--
+
+DROP TABLE IF EXISTS `task`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `task` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user` int(11) unsigned NOT NULL,
+  `title` varchar(90) NOT NULL DEFAULT '',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
+  `is_done` int(1) DEFAULT '0',
+  `delegated_to` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`),
+  KEY `delegated_to` (`delegated_to`),
+  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`),
+  CONSTRAINT `task_ibfk_2` FOREIGN KEY (`delegated_to`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,4 +189,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-02 23:11:13
+-- Dump completed on 2018-11-08 11:59:01
