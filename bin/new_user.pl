@@ -27,6 +27,7 @@ else {
     my $pass = ReadLine(0);
     chomp $pass;
     print "\n";
+    ReadMode('restore');
 
     my $csh = Crypt::SaltedHash->new( algorithm => 'SHA-1' );
     $csh->add($pass);
