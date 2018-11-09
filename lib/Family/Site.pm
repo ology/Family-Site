@@ -177,9 +177,9 @@ get '/' => require_login sub {
         while( defined( my $line = $io->getline ) ) {
             last if ++$counter > $lines;
             my ( $who, $when, $what ) = ( $line =~ /^(\w+) ([ \d:-]+): (.*)$/ );
-            my $formatted = sprintf '<b>%s</b> <span style="font-size:10px">%s:</span> %s',
+            my $formatted = sprintf '<b>%s</b> <span class="smallstamp">%s:</span> %s',
                 $who, $when, $what;
-            push @content, '<p style="padding-left: 10px; padding-right: 10px;">' . $formatted . '</p>';
+            push @content, '<p class="padding">' . $formatted . '</p>';
         }
     }
 

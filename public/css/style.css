@@ -47,6 +47,15 @@ p.center {
     text-align: center;
 }
 
+p.padding {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+span.smallstamp {
+    font-size: 10px
+}
+
 textarea.chat {
     width: 100%;
 }
