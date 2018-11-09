@@ -251,7 +251,7 @@ post '/chat' => require_login sub {
 
         $text = unidecode($text);
 
-        $text = sprintf '%s %s %s',
+        $text = sprintf '%s %s: %s',
             $user->{username},
             ( $stamp ? ' ' . $now : '' ),
             $text;
