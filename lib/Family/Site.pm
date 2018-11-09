@@ -176,7 +176,10 @@ get '/' => require_login sub {
         $io->backwards;
         while( defined( my $line = $io->getline ) ) {
             last if ++$counter > $lines;
-            push @content, '<p style="padding-left: 10px; padding-right: 10px;">' . $line . '</p>';
+            my ( $who, $when, $what ) = ( $line =~ /^(\w+) ([ \d:-]+): (.*)$/ );
+            my $formatted = sprintf '<b>%s</b> <span style="font-size:10px">%s:</span> %s',
+                $who, $when, $what;
+            push @content, '<p style="padding-left: 10px; padding-right: 10px;">' . $formatted . '</p>';
         }
     }
 
@@ -248,7 +251,7 @@ post '/chat' => require_login sub {
 
         $text = unidecode($text);
 
-        $text = sprintf '<b>%s</b><span style="font-size:10px">%s:</span> %s',
+        $text = sprintf '%s %s %s',
             $user->{username},
             ( $stamp ? ' ' . $now : '' ),
             $text;
