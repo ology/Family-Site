@@ -8,7 +8,7 @@
 <% END %>
     <b><a class="button" href="/calendar/<% year %>/<% month %>">Calendar</a></b>
     <b><a class="button" href="/">Chat</a></b>
-    <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b>
+<!--     <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b> -->
     <b><a class="button" href="/cookbook">Cookbook</a></b>
     <b><a class="button" href="/album">Photos</a></b>
     <b><a class="button" href="/logout">Logout</a></b>
