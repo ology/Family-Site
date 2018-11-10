@@ -198,7 +198,7 @@ get '/' => require_login sub {
         };
     }
     my @important;
-    $events = schema->resultset('Calendar')->search( { important => 1 }, { order_by => { -asc => [qw( month day )]  } } );
+    $events = schema->resultset('Calendar')->search( { important => 1, month => { '!=' => $MONTH } }, { order_by => { -asc => [qw( month day )]  } } );
     while ( my $result = $events->next ) {
         push @important, {
             title => $result->title,
@@ -706,9 +706,14 @@ get '/album' => require_login sub {
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
     my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
+    my $users = {
+        foo => '404.jpg',
+    };
+
     template 'album', {
         month => $MONTH,
         year  => $YEAR,
+        users => $users,
     };
 };
 
