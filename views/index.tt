@@ -53,7 +53,7 @@
 <div id="data">
     <table border="0" width="100%">
         <tr>
-            <td align=left>
+            <td valign="top" align=left>
 <% FOREACH line IN chat %>
                 <% line %>
 <% END %>
