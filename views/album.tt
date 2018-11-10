@@ -7,10 +7,12 @@
     <a href="album/Family"><img src="album/Family/Picture_029.jpg" height="10%" width="10%" /></a>
     <div class="desc"><a href="album/Family"><b>Family</b></a></div>
 </div>
+<% FOREACH key IN users.keys.sort %>
 <div class="img">
-    <a href="album/gene"><img src="album/gene/Mike-Sam-Gene-1983.jpg" height="10%" width="10%" /></a>
-    <div class="desc"><a href="album/gene">Gene</a></div>
+    <a href="album/<% key %>"><img src="album/<% key %>/<% users.$key.pic %>" height="10%" width="10%" /></a>
+    <div class="desc"><a href="album/<% key %>"><% key FILTER ucfirst %></a></div>
 </div>
+<% END %>
 </div>
 
 <script>
