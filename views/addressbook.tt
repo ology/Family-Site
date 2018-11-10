@@ -6,7 +6,7 @@
         <br clear="all"/>
         First name: <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>">
         Last name: <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>">
-        Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>">
+<!--         Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>"> -->
         <br/>
         Street: <input type="text" name="street" size="30" maxlength="50" value="<% edit.street %>">
         City: <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>">
@@ -45,7 +45,7 @@
             <th>Zip</th>
             <th>Phone</th>
             <th>Phone2</th>
-            <th>Birthday</th>
+<!--             <th>Birthday</th> -->
             <th>Email</th>
         </tr>
     <% FOREACH i IN sorted %>
@@ -64,7 +64,7 @@
             <td>
                 <a href="tel:<% data.$i.phone2 %>"><% data.$i.phone2 %></a>
             </td>
-            <td><% data.$i.birthday %></td>
+<!--             <td><% data.$i.birthday %></td> -->
             <td>
                 <a href="mailto:<% data.$i.email %>"><% data.$i.email %></a>
             </td>
