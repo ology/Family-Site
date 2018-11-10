@@ -38,6 +38,10 @@ else {
     $entry->password($encrypted);
     $entry->active(1);
     $entry->update;
+
+    my $path = 'public/album';
+    mkdir( "$path/$user" ) or die "Can't mkdir $path/$user: $!";
+    open( my $fh, '>', "$path/$user/caption.txt" ) or die "Can't write $path/$user/caption.txt: $!";
 }
 
 sub usage {
