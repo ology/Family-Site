@@ -9,7 +9,7 @@
 </div>
 <% FOREACH key IN users.keys.sort %>
 <div class="img">
-    <a href="album/<% key %>"><img src="album/<% key %>/<% users.$key %>" height="10%" width="10%" /></a>
+    <a href="album/<% key %>"><img src="<% users.$key %>" height="10%" width="10%" /></a>
     <div class="desc"><a href="album/<% key %>"><% key FILTER ucfirst %></a></div>
 </div>
 <% END %>
