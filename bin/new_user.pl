@@ -36,7 +36,6 @@ else {
     my $entry = $schema->resultset('User')->create({ username => $user });
 
     $entry->password($encrypted);
-    $entry->active(1);
     $entry->update;
 
     my $path = 'public/album';
