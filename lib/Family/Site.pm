@@ -706,14 +706,22 @@ get '/album' => require_login sub {
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
     my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
-    my $users = {
-        foo => '404.jpg',
-    };
+    my $users = schema->resultset('User')->search( { active => 1 } );
+    my $records;
+    while ( my $result = $users->next ) {
+        my @files = File::Find::Rule->file()->in( $ALBUM . '/' . $result->username );
+        @files = grep { !/\.txt$/ } @files;
+        my @mtimes = map { { name => $_, mtime => (stat $_)[9] } } @files;
+        @files = map { $_->{name} } sort { $a->{mtime} <=> $b->{mtime} } @mtimes;
+        @files = map { s/^public\/(.*)$/$1/r } @files;
+
+        $records->{ $result->username } = $files[0] || '404.jpg';
+    }
 
     template 'album', {
         month => $MONTH,
         year  => $YEAR,
-        users => $users,
+        users => $records,
     };
 };
 
@@ -735,9 +743,9 @@ post '/upload' => require_login sub {
         # Add a post to the chat about this upload.
         if ( params->{notify} ) {
             my $text = sprintf
-                '<b>%s</b><span style="font-size:10px"> %s:</span> uploaded a new photo: <a href="album/%s"><img src="album/%s" height="10%" width="10%" style="vertical-align: middle;" /></a>',
+                '%s %s: Uploaded a new photo: <a href="album/%s"><img src="album/%s" height="10%" width="10%" style="vertical-align: middle;" /></a>',
                 $user->{username},
-                scalar(localtime),
+                DateTime->now(),
                 $name, $name;
             "$text\n" >> io($FILE);
         }
