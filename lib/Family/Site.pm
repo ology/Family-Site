@@ -715,7 +715,7 @@ get '/album' => require_login sub {
         @files = map { $_->{name} } sort { $a->{mtime} <=> $b->{mtime} } @mtimes;
         @files = map { s/^public\/(.*)$/$1/r } @files;
 
-        $records->{ $result->username } = $files[0] || '404.jpg';
+        $records->{ $result->username } = $files[0] || '/images/person.png';
     }
 
     template 'album', {
