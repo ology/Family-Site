@@ -253,7 +253,7 @@ post '/chat' => require_login sub {
 
         $text = sprintf '%s %s: %s',
             $user->{username},
-            ( $stamp ? ' ' . $now : '' ),
+            ( $stamp ? $now : '' ),
             $text;
         $text =~ s/\n/<br\/>/g;
 
