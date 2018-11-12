@@ -100,3 +100,7 @@ div.menu {
 td.log {
     padding-left: 10px;
 }
+
+img.vmid {
+    vertical-align: middle;
+}

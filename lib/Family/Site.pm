@@ -743,7 +743,7 @@ post '/upload' => require_login sub {
         # Add a post to the chat about this upload.
         if ( params->{notify} ) {
             my $text = sprintf
-                '%s %s: Uploaded a new photo: <a href="album/%s"><img src="album/%s" height="10%" width="10%" style="vertical-align: middle;" /></a>',
+                '%s %s: Uploaded a new photo: <a href="album/%s"><img src="album/%s" height="10%" width="10%" class="vmid" /></a>',
                 $user->{username},
                 DateTime->now(),
                 $name, $name;
