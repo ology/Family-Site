@@ -259,10 +259,11 @@ post '/chat' => require_login sub {
 
         "$text\n" >> io($FILE);
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'add ', length($text), ' chars to chat',
-#        );
+        _add_history(
+            who         => $user->{username},
+            what        => 'chatted ' . length($text) . ' chars',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Return to the main page
@@ -992,8 +993,7 @@ sub _add_history {
         {
             who         => $args{who},
             what        => $args{what},
-            when        => DateTime->now(),
-#            remote_addr => params->{remote_addr},
+            remote_addr => $args{remote_addr},
         }
     );
 }
