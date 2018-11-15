@@ -2,7 +2,7 @@ package Family::Site;
 
 # ABSTRACT: Family::Site
 
-our $VERSION = '0.21';
+our $VERSION = '0.22';
 
 use Crypt::SaltedHash;
 use Dancer qw( :syntax );
