@@ -100,10 +100,11 @@ post '/block' => require_login sub {
             }
         );
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => "ban $ip",
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => "ban $ip",
+            remote_addr => request->remote_address,
+        );
     }
 
     # Get the current entry
@@ -115,20 +116,22 @@ post '/block' => require_login sub {
         $entry->last_seen($last_seen);
         $entry->update;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => "update $ip ban",
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => "update $ip ban",
+            remote_addr => request->remote_address,
+        );
     }
 
     # Delete the entry
     if ( $entry && params->{delete} ) {
         $entry->delete;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => "delete $ip ban",
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => "delete $ip ban",
+            remote_addr => request->remote_address,
+        );
     }
 
     # Set the record of the current entry, to display
@@ -297,10 +300,11 @@ post '/password_set' => require_login sub {
         $entry->active(1);
         $entry->update;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'reset password',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'reset password',
+            remote_addr => request->remote_address,
+        );
 
         # Return to the main page
         redirect '/';
@@ -509,10 +513,11 @@ post '/address' => require_login sub {
             }
         );
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'add "', params->{first_name}, ' ', params->{last_name}, '" address',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'add "' . params->{first_name} . ' ' . params->{last_name} . '" address',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Get the current entry
@@ -533,20 +538,22 @@ post '/address' => require_login sub {
         $entry->birthday($birthday);
         $entry->update;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'update "', params->{first_name}, ' ', params->{last_name}, '" address',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'update ' . params->{id} . ' address',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Delete the entry
     if ( params->{delete} ) {
         $entry->delete;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'delete ', params->{id}, ' address',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'delete ' . params->{id} . ' address',
+            remote_addr => request->remote_address,
+        );
     }
 
     redirect '/addressbook';
@@ -663,10 +670,11 @@ post '/event' => require_login sub {
             }
         );
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'add "', $title, '" event',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'add "' . $title . '" event',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Get the current entry
@@ -681,20 +689,22 @@ post '/event' => require_login sub {
         $entry->note($note);
         $entry->update;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'update "', $title, '" event',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'update "' . $title . '" event',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Delete an entry
     if ( params->{delete} ) {
         $entry->delete;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'delete "', $title, '" event',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'delete "' . $title . '" event',
+            remote_addr => request->remote_address,
+        );
     }
 
     redirect "/calendar/$year/$month";
@@ -751,10 +761,11 @@ post '/upload' => require_login sub {
             "$text\n" >> io($FILE);
         }
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'add ', $name, ' file',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'add ' . $name . ' file',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Return to the user page
@@ -778,10 +789,11 @@ post '/delete' => require_login sub {
     if ( -e $file ) {
         unlink $file or die "Can't unlink $file: $!";
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'delete ', $file, ' file',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'delete ' . $file . ' file',
+            remote_addr => request->remote_address,
+        );
     }
     else {
         send_error( 'File does not exist', 400 );
@@ -942,10 +954,11 @@ post '/recipe' => require_login sub {
             }
         );
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'add ', params->{title}, ' recipe',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'add ' . params->{title} . ' recipe',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Get the current entry
@@ -960,20 +973,22 @@ post '/recipe' => require_login sub {
         $entry->instructions( params->{instructions} );
         $entry->update;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'update ', params->{title}, ' recipe',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'update ' . params->{id} . ' recipe',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Delete the entry
     if ( params->{delete} ) {
         $entry->delete;
 
-#        _add_history(
-#            who  => $user->{username},
-#            what => 'delete ', params->{id}, ' recipe',
-#        );
+        _add_history(
+            who  => $user->{username},
+            what => 'delete ' . params->{id} . ' recipe',
+            remote_addr => request->remote_address,
+        );
     }
 
     # Redirect appropriately
