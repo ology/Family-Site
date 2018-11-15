@@ -35,6 +35,7 @@ WriteMakefile(
         'Readonly' => 0,
         'Text::Unidecode' => 0,
         'URL::Search' => 0,
+        'DateTime::Format::MySQL' => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Family-Site-*' },
