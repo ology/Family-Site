@@ -103,24 +103,6 @@ CREATE TABLE `cookbook` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `genealogy`
---
-
-DROP TABLE IF EXISTS `genealogy`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `genealogy` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL DEFAULT '',
-  `parent` varchar(100) DEFAULT NULL,
-  `spouse` varchar(100) DEFAULT NULL,
-  `date` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `history`
 --
 
@@ -135,30 +117,6 @@ CREATE TABLE `history` (
   `remote_addr` varchar(15) COLLATE latin1_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `task`
---
-
-DROP TABLE IF EXISTS `task`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `task` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user` int(11) unsigned NOT NULL,
-  `title` varchar(90) NOT NULL DEFAULT '',
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `start` datetime NOT NULL,
-  `end` datetime NOT NULL,
-  `is_done` int(1) DEFAULT '0',
-  `delegated_to` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user` (`user`),
-  KEY `delegated_to` (`delegated_to`),
-  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`),
-  CONSTRAINT `task_ibfk_2` FOREIGN KEY (`delegated_to`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
