@@ -1,5 +1,7 @@
 <% page = 'calendar' %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
 
 <div id="input_block" class="input_block">
@@ -46,3 +48,5 @@
     </p>
 </div>
 <% END %>
+
+</div>
