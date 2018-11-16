@@ -1,5 +1,7 @@
 <% page = 'addressbook' %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
 <div id="input_block" class="input_block">
     <form action="/address" method="post">
@@ -73,3 +75,5 @@
     </table>
 </div>
 <% END %>
+
+</div>

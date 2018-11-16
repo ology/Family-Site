@@ -1,8 +1,8 @@
 <div class="row">
     <div class="three columns">
-        <h4><b><i>Family <% page FILTER ucfirst %>!</i></b></h4>
+        <h4><b><i><% page FILTER ucfirst %>!</i></b></h4>
     </div>
-    <div class="nine columns">
+    <div class="nine columns" style="text-align: right;">
         <b><a class="button" href="/addressbook">Addresses</a></b>
 <% IF page == 'log' %>
         <b><a class="button" href="/ban">Bans</a></b>

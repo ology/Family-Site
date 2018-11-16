@@ -1,5 +1,5 @@
 <%
-    page = 'chat'
+    page = 'family chat'
 
     named = {
         '1'  = 'January'
