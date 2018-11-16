@@ -1,7 +1,9 @@
 <% page = 'album' %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
-</div>
+
 <div id="data">
 <div class="img">
     <a href="album/Family"><img src="album/Family/example_family.jpg" height="10%" width="10%" /></a>
@@ -13,6 +15,8 @@
     <div class="desc"><a href="album/<% key %>"><% key FILTER ucfirst %></a></div>
 </div>
 <% END %>
+</div>
+
 </div>
 
 <script>
