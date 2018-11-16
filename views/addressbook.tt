@@ -6,8 +6,8 @@
 <div id="input_block" class="input_block">
     <form action="/address" method="post">
         <br clear="all"/>
-        First name: <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>">
-        Last name: <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>">
+        First: <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>">
+        Last: <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>">
 <!--         Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>"> -->
         <br/>
         Street: <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>">
