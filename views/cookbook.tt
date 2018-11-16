@@ -1,5 +1,7 @@
 <% page = 'cookbook' %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
 <% INCLUDE menu.tt %>
 
@@ -82,6 +84,8 @@
 </div>
     <% END %>
 <% END %>
+
+</div>
 
 <script>
 $(function(){
