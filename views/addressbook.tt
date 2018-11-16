@@ -17,7 +17,7 @@
         <br/>
         Phone: <input type="text" name="phone" size="12" maxlength="20" value="<% edit.phone %>">
         Phone2: <input type="text" name="phone2" size="12" maxlength="20" value="<% edit.phone2 %>">
-        Email: <input type="text" name="email" size="30" maxlength="50" value="<% edit.email %>">
+        Email: <input type="text" name="email" size="20" maxlength="50" value="<% edit.email %>">
         &nbsp;
         <% IF method == 'add' %>
             <input type="submit" name="add" value="Add" class="button-primary" />
