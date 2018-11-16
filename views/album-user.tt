@@ -26,8 +26,13 @@
 <% END %>
 <div id="data">
 <% FOREACH file IN files %>
+<% IF file.match('\.pdf$') %>
+    <% img_src = '/images/pdf.png' %>
+<% ELSE %>
+    <% img_src = target _ '/' _ file %>
+<% END %>
 <div class="img">
-    <a href="<% target %>/<% file %>"><img src="<% target %>/<% file %>" height="10%" width="10%" /></a>
+    <a href="<% target %>/<% file %>"><img src="<% img_src %>" height="10%" width="10%" /></a>
     <div class="desc">
     <% IF user == target || target == 'Family' %>
         <form action="/caption" method="POST" enctype="multipart/form-data" class="album">
