@@ -13,7 +13,7 @@
         Street: <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>">
         City: <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>">
         State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
-        Zip: <input type="text" name="zip" size="10" maxlength="10" value="<% edit.zip %>">
+        Zip: <input type="text" name="zip" size="5" maxlength="10" value="<% edit.zip %>">
         <br/>
         Phone: <input type="text" name="phone" size="15" maxlength="15" value="<% edit.phone %>">
         Phone2: <input type="text" name="phone2" size="15" maxlength="15" value="<% edit.phone2 %>">
