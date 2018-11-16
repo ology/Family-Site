@@ -10,8 +10,8 @@
         Last name: <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>">
 <!--         Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>"> -->
         <br/>
-        Street: <input type="text" name="street" size="30" maxlength="50" value="<% edit.street %>">
-        City: <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>">
+        Street: <input type="text" name="street" size="30" maxlength="20" value="<% edit.street %>">
+        City: <input type="text" name="city" size="10" maxlength="10" value="<% edit.city %>">
         State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
         Zip: <input type="text" name="zip" size="10" maxlength="10" value="<% edit.zip %>">
         <br/>
