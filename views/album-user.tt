@@ -1,5 +1,7 @@
 <% page = 'album' %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
 
 <% IF target == user || target == 'Family' %>
@@ -44,6 +46,8 @@
     </div>
 </div>
 <% END %>
+</div>
+
 </div>
 
 <script>
