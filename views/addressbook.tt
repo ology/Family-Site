@@ -15,8 +15,8 @@
         State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
         Zip: <input type="text" name="zip" size="5" maxlength="10" value="<% edit.zip %>">
         <br/>
-        Phone: <input type="text" name="phone" size="15" maxlength="15" value="<% edit.phone %>">
-        Phone2: <input type="text" name="phone2" size="15" maxlength="15" value="<% edit.phone2 %>">
+        Phone: <input type="text" name="phone" size="12" maxlength="20" value="<% edit.phone %>">
+        Phone2: <input type="text" name="phone2" size="12" maxlength="20" value="<% edit.phone2 %>">
         Email: <input type="text" name="email" size="30" maxlength="50" value="<% edit.email %>">
         &nbsp;
         <% IF method == 'add' %>
