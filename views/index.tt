@@ -32,14 +32,21 @@
     }
 %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
-<div id="input_block" class="input_block">
+
+<div class="row">
+<div class="twelve columns">
     <form action="/chat" method="post">
         <textarea name="text" rows="4" wrap="soft" class="chat" autofocus></textarea>
+        <br>
         <input type="submit" name="Chat" value=" Chat " class="button-primary" />
+
 <% IF who.$month %>
 &nbsp; <b>The month of <% named.$month %> is brought to you by <% who.$month %>. Thanks <% who.$month %>!</b>
 <% END %>
+
 <!--
         <select name="lines" onchange="this.form.submit()">
             <option value="25"  <% lines == 25  ? 'selected' : '' %>>Show 25 posts</option>
@@ -48,42 +55,40 @@
             <option value="200" <% lines == 200 ? 'selected' : '' %>>Show 200 posts</option>
         </select>
 -->
+
     </form>
 </div>
-<div id="data">
-    <table border="0" width="100%">
-        <tr>
-            <td valign="top" align=left>
-<% FOREACH line IN chat %>
-                <% line %>
-<% END %>
-            </td>
-            <td valign="top" width="15%" bgcolor="#D7D3B9">
-                <div class="event">
-                    <b>This month:</b><br/>
-                    <ul class="event">
-<% FOREACH event IN cal %>
-                        <li>
-                            <i><% event.day %></i> - <% event.title %>
-                            <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
-                        </li>
-<% END %>
-                    </ul>
-<% IF important.size %>
-                    <hr/>
-                    <b>This year:</b><br/>
-                    <ul class="event">
-    <% FOREACH event IN important %>
-        <% NEXT IF event.month == month %>
-                        <li>
-                            <i><a href="/calendar/<% year %>/<% event.month %>"><% event.month %>/<% event.day %></a></i> - <% event.title %>
-                            <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
-                        </li>
+
+<div class="row">
+    <div class="nine columns">
+    <% FOREACH line IN chat %>
+        <% line %>
     <% END %>
-                    </ul>
+    </div>
+    <div class="three columns">
+        <b>This month:</b><br/>
+        <ul class="event">
+<% FOREACH event IN cal %>
+            <li>
+                <i><% event.day %></i> - <% event.title %>
+                <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
+            </li>
 <% END %>
-                </div>
-            </td>
-        </tr>
-    </table>
+        </ul>
+<% IF important.size %>
+        <hr/>
+        <b>This year:</b><br/>
+        <ul class="event">
+<% FOREACH event IN important %>
+<% NEXT IF event.month == month %>
+            <li>
+                <i><a href="/calendar/<% year %>/<% event.month %>"><% event.month %>/<% event.day %></a></i> - <% event.title %>
+                <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
+            </li>
+<% END %>
+        </ul>
+<% END %>
+    </div>
+</div>
+
 </div>
