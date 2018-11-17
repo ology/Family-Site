@@ -30,6 +30,8 @@
     <% img_src = '/images/pdf.png' %>
 <% ELSIF file.match('\.mp3') %>
     <% img_src = '/images/audio.png' %>
+<% ELSIF file.match('\.mp4') %>
+    <% img_src = '/images/video.png' %>
 <% ELSE %>
     <% img_src = target _ '/' _ file %>
 <% END %>
