@@ -28,6 +28,8 @@
 <% FOREACH file IN files %>
 <% IF file.match('\.pdf$') %>
     <% img_src = '/images/pdf.png' %>
+<% ELSIF file.match('\.mp3') %>
+    <% img_src = '/images/audio.png' %>
 <% ELSE %>
     <% img_src = target _ '/' _ file %>
 <% END %>
