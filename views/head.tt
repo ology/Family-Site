@@ -4,6 +4,7 @@
     </div>
     <div class="nine columns" style="text-align: right;">
         <b><a class="button" href="/addressbook">Addresses</a></b>
+        <b><a class="button" href="/album">Album</a></b>
 <% IF page == 'log' %>
         <b><a class="button" href="/ban">Bans</a></b>
 <% END %>
@@ -11,7 +12,6 @@
         <b><a class="button" href="/">Chat</a></b>
 <!--     <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b> -->
         <b><a class="button" href="/cookbook">Cookbook</a></b>
-        <b><a class="button" href="/album">Photos</a></b>
         <b><a class="button" href="/logout">Logout</a></b>
     </div>
 </div>
