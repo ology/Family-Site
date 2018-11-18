@@ -7,11 +7,11 @@ use Family::Site::Schema;
 use Term::ReadKey;
 use YAML::XS 'LoadFile';
 
-my $db   = shift || die usage();
-my $user = shift || die usage();
+my $user = shift || die "Usage: perl $0 username\n";
 
 my $config = LoadFile('config.yml');
 
+my $db     = $config->{plugins}{Database}{database};
 my $dbuser = $config->{plugins}{Database}{username};
 my $dbpass = $config->{plugins}{Database}{password};
 
