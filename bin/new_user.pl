@@ -3,6 +3,7 @@ use strict;
 use warnings;
 
 use Crypt::SaltedHash;
+use lib 'lib';
 use Family::Site::Schema;
 use Term::ReadKey;
 use YAML::XS 'LoadFile';
