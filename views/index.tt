@@ -39,7 +39,7 @@
 <div class="row">
 <div class="twelve columns">
     <form action="/chat" method="post">
-        <textarea name="text" rows="4" wrap="soft" class="chat" autofocus></textarea>
+        <textarea name="text" rows="4" wrap="soft" class="chat" placeholder="What's on your mind?" autofocus></textarea>
         <br>
         <input type="submit" name="Chat" value=" Chat " class="button-primary" />
 
