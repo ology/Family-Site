@@ -55,7 +55,3 @@ else {
         }
     );
 }
-
-sub usage {
-    "Usage: perl $0 database username";
-}
