@@ -202,7 +202,10 @@ get '/' => require_login sub {
         };
     }
     my @important;
-    $events = schema->resultset('Calendar')->search( { important => 1, month => { '!=' => $MONTH } }, { order_by => { -asc => [qw( month day )]  } } );
+    $events = schema->resultset('Calendar')->search(
+        { important => 1, month => { '!=' => $MONTH } },
+        { order_by => { -asc => [qw( month day )]  } }
+    );
     while ( my $result = $events->next ) {
         push @important, {
             title => $result->title,
