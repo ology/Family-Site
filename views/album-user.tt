@@ -5,7 +5,8 @@
 <% INCLUDE head.tt %>
 
 <% IF target == user || target == 'Family' %>
-<div id="input_block" class="input_block">
+<div class="row">
+<div class="twelve columns">
     <br clear="all"/>
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <input type="file" name="filename"/>
@@ -22,8 +23,11 @@
         <br />
         &nbsp; <b>Hints: 2MB maximum size. To save a caption, press ENTER after adding it.</b>
     </form>
+    <hr>
+</div>
 </div>
 <% END %>
+
 <div id="data">
 <% FOREACH file IN files %>
 <% IF file.match('\.pdf$') %>
