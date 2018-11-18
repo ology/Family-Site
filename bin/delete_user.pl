@@ -37,7 +37,7 @@ if ( $entry ) {
     $schema->resultset('History')->create(
         {
             who  => $ENV{USER},
-            what => 'deleted: ' . $user . " ($count files removed)",
+            what => "deleted: $user ($count files removed)",
             remote_addr => '127.0.0.1',
         }
     );
