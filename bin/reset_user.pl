@@ -44,6 +44,7 @@ if ( $entry ) {
         {
             who  => $ENV{USER},
             what => 'reset password for: ' . $user,
+            remote_addr => '127.0.0.1',
         }
     );
 }

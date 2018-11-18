@@ -52,6 +52,7 @@ else {
         {
             who  => $ENV{USER},
             what => 'new user: ' . $user,
+            remote_addr => '127.0.0.1',
         }
     );
 }
