@@ -2,7 +2,7 @@ package Family::Site;
 
 # ABSTRACT: Family::Site
 
-our $VERSION = '0.22';
+our $VERSION = '0.23';
 
 use Crypt::SaltedHash;
 use Dancer qw( :syntax );
@@ -12,7 +12,7 @@ use Date::Manip;
 use DateTime;
 use DateTime::Duration;
 use DateTime::Format::DateParse;
-use Encoding::FixLatin qw(fix_latin);
+use Encoding::FixLatin qw( fix_latin );
 use Time::Ago;
 use File::Find::Rule;
 use Geo::IP::PurePerl;
