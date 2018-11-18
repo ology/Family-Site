@@ -369,6 +369,7 @@ get '/log' => require_login sub {
         my $io = io($FILE);
         $io->backwards;
         while( defined( my $line = $io->getline ) ) {
+            $line = fix_latin($line);
             $last = $line;
             last;
         }
