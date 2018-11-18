@@ -515,6 +515,16 @@ post '/address' => require_login sub {
             }
         );
 
+        # Add a post to the chat about this entry.
+        if ( params->{notify} ) {
+            my $text = sprintf
+                '%s %s: Added address for %s %s',
+                $user->{username},
+                DateTime->now(),
+                params->{first_name}, params->{last_name};
+            "$text\n" >> io($FILE);
+        }
+
         _add_history(
             who  => $user->{username},
             what => 'add "' . params->{first_name} . ' ' . params->{last_name} . '" address',
@@ -671,6 +681,16 @@ post '/event' => require_login sub {
                 note      => $note,
             }
         );
+
+        # Add a post to the chat about this entry.
+        if ( params->{notify} ) {
+            my $text = sprintf
+                '%s %s: Added %d/%d event: %s',
+                $user->{username},
+                DateTime->now(),
+                $month, $day, $title;
+            "$text\n" >> io($FILE);
+        }
 
         _add_history(
             who  => $user->{username},
@@ -959,6 +979,16 @@ post '/recipe' => require_login sub {
                 instructions => params->{instructions},
             }
         );
+
+        # Add a post to the chat about this entry.
+        if ( params->{notify} ) {
+            my $text = sprintf
+                '%s %s: Added recipe: %s',
+                $user->{username},
+                DateTime->now(),
+                params->{title};
+            "$text\n" >> io($FILE);
+        }
 
         _add_history(
             who  => $user->{username},

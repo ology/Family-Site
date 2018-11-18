@@ -11,6 +11,7 @@
         Month: <input type="text" name="month" size="2" maxlength="2" value="<% edit.month %>">
         Day: <input type="text" name="day" size="2" maxlength="2" value="<% edit.day %>">
         Sticky: <input type="checkbox" name="important" <% IF edit.important %>checked<% END %>>
+        &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br/>
         Note: <input type="text" name="note" size="60" maxlength="90" value="<% edit.note %>">
         &nbsp;

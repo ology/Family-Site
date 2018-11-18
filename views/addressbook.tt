@@ -10,6 +10,7 @@
         First: <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>">
         Last: <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>">
 <!--         Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>"> -->
+        &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br/>
         Street: <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>">
         City: <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>">
