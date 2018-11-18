@@ -4,22 +4,23 @@
 
 <% INCLUDE head.tt %>
 
-<div id="input_block" class="input_block">
+<div class="row">
+<div class="twelve columns">
     <form action="/address" method="post">
         <br clear="all"/>
-        First: <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>">
-        Last: <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>">
+        <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>" placeholder="First name">
+        <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>" placeholder="Last name">
 <!--         Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>"> -->
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br/>
-        Street: <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>">
-        City: <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>">
+        <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>" placeholder="Street">
+        <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>" placeholder="City">
         State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
-        Zip: <input type="text" name="zip" size="5" maxlength="10" value="<% edit.zip %>">
+        <input type="text" name="zip" size="5" maxlength="10" value="<% edit.zip %>" placeholder="Zip">
         <br/>
-        Phone: <input type="text" name="phone" size="12" maxlength="20" value="<% edit.phone %>">
-        Phone2: <input type="text" name="phone2" size="12" maxlength="20" value="<% edit.phone2 %>">
-        Email: <input type="text" name="email" size="20" maxlength="50" value="<% edit.email %>">
+        <input type="text" name="phone" size="12" maxlength="20" value="<% edit.phone %>" placeholder="Phone">
+        <input type="text" name="phone2" size="12" maxlength="20" value="<% edit.phone2 %>" placeholder="Phone2">
+        <input type="text" name="email" size="20" maxlength="50" value="<% edit.email %>" placeholder="Email">
         &nbsp;
         <% IF method == 'add' %>
             <input type="submit" name="add" value="Add" class="button-primary" />
@@ -37,6 +38,8 @@
     </form>
 <% END %>
 </div>
+</div>
+
 <% IF ! edit %>
 <div id="data" class="data">
     <table border="0">
