@@ -6,13 +6,14 @@
 <% INCLUDE menu.tt %>
 
 <% IF edit || new %>
-<div id="input_block" class="input_block">
+<div class="row">
+<div class="twelve columns">
     <form action="/recipe" method="post">
         <br clear="all"/>
-        Title: <input type="text" name="title" size="50" maxlength="90" value="<% entry.title %>">
+        <input type="text" name="title" size="50" maxlength="90" value="<% entry.title %>" placeholder="Recipe title">
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br/>
-        Type: <select name="type">
+        <select name="type">
             <option value="appetizer" <% entry.type == 'appetizer' ? 'selected' : '' %>>Appetizer</option>
             <option value="crockpot" <% entry.type == 'crockpot' ? 'selected' : '' %>>Crockpot</option>
             <option value="dessert" <% entry.type == 'dessert' ? 'selected' : '' %>>Dessert</option>
@@ -24,15 +25,11 @@
             <option value="soup" <% entry.type == 'soup' ? 'selected' : '' %>>Soup</option>
         </select>
         <br/>
-        Note: <input type="text" name="note" size="50" maxlength="90" value="<% entry.note %>">
+        <input type="text" name="note" size="50" maxlength="90" value="<% entry.note %>" placeholder="Recipe notes">
         <br/>
-        Ingredients:
+        <textarea name="ingredients" rows="20" cols="60" placeholder="Ingredients"><% entry.ingredients %></textarea>
         <br/>
-        <textarea name="ingredients" rows="20" cols="60"><% entry.ingredients %></textarea>
-        <br/>
-        Instructions:
-        <br/>
-        <textarea name="instructions" rows="20" cols="60"><% entry.instructions %></textarea>
+        <textarea name="instructions" rows="20" cols="60" placeholder="Instructions"><% entry.instructions %></textarea>
         <br/>
         <% IF method == 'add' %>
             <input type="submit" name="add" value="Add" class="button-primary" />
@@ -53,9 +50,11 @@
     </form>
         <% END %>
 </div>
+</div>
 <% ELSE %>
     <% IF entry %>
-<div id="entry_block" class="input_block">
+<div class="row">
+<div class="twelve columns">
     <b>Title:</b> <a href="/cookbook?edit=1&id=<% entry.id %>"><% entry.title %></a>
     <br/>
     <b>By:</b> <% entry.user %>
@@ -70,6 +69,7 @@
     <br/>
     <img src="<% entry.image %>" width="320" height="240" />
         <% END %>
+</div>
 </div>
     <% END %>
 
