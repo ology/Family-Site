@@ -5,11 +5,17 @@ use warnings;
 use Crypt::SaltedHash;
 use Family::Site::Schema;
 use Term::ReadKey;
+use YAML::XS 'LoadFile';
 
 my $db   = shift || die usage();
 my $user = shift || die usage();
 
-my $schema = Family::Site::Schema->connect( "dbi:mysql:dbname=$db", 'root', 'abc123' );
+my $config = LoadFile('config.yml');
+
+my $dbuser = $config->{plugins}{Database}{username};
+my $dbpass = $config->{plugins}{Database}{password};
+
+my $schema = Family::Site::Schema->connect( "dbi:mysql:dbname=$db", $dbuser, $dbpass );
 
 # Show all users:
 #my @rs = $schema->resultset('User')->search();
