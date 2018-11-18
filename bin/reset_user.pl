@@ -20,7 +20,7 @@ my $schema = Family::Site::Schema->connect( "dbi:mysql:dbname=$db", $dbuser, $db
 
 # Show all users:
 #my @rs = $schema->resultset('User')->search();
-#print $_->username, "\n" for @rs;
+#printf "%s (%d)\n", $_->username, $_->active for @rs;
 #exit;
 
 my $entry = $schema->resultset('User')->find( { username => $user } );
