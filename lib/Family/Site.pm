@@ -12,13 +12,13 @@ use Date::Manip;
 use DateTime;
 use DateTime::Duration;
 use DateTime::Format::DateParse;
+use Encoding::FixLatin qw(fix_latin);
 use Time::Ago;
 use File::Find::Rule;
 use Geo::IP::PurePerl;
 use HTML::CalendarMonthSimple;
 use IO::All -utf8;
 use Readonly;
-use Text::Unidecode;
 use URL::Search qw( partition_urls );
 
 Readonly my $FILE    => 'chat.txt';
@@ -179,6 +179,7 @@ get '/' => require_login sub {
         $io->backwards;
         while( defined( my $line = $io->getline ) ) {
             last if ++$counter > $lines;
+            $line = fix_latin($line);
             my ( $who, $when, $what ) = ( $line =~ /^(\w+) ([T \d:-]+): (.*)$/ );
             my $formatted = sprintf '<b>%s</b> <span class="smallstamp">%s:</span> %s',
                 $who, $when, $what;
@@ -251,8 +252,6 @@ post '/chat' => require_login sub {
             }
         }
         $text = $html;
-
-        $text = unidecode($text);
 
         $text = sprintf '%s %s: %s',
             $user->{username},
