@@ -14,7 +14,7 @@
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br/>
         <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>" placeholder="Street">
-        <input type="text" name="city" size="10" maxlength="20" value="<% edit.city %>" placeholder="City">
+        <input type="text" name="city" size="20" maxlength="50" value="<% edit.city %>" placeholder="City">
         State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
         <input type="text" name="zip" size="5" maxlength="10" value="<% edit.zip %>" placeholder="Zip">
         <br/>
