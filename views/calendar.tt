@@ -4,16 +4,17 @@
 
 <% INCLUDE head.tt %>
 
-<div id="input_block" class="input_block">
+<div class="row">
+<div class="twelve columns">
     <form action="/event" method="post">
         <br clear="all"/>
-        Event title: <input type="text" name="title" size="20" maxlength="20" value="<% edit.title %>">
+        <input type="text" name="title" size="20" maxlength="20" value="<% edit.title %>" placeholder="Event title">
         Month: <input type="text" name="month" size="2" maxlength="2" value="<% edit.month %>">
         Day: <input type="text" name="day" size="2" maxlength="2" value="<% edit.day %>">
         Sticky: <input type="checkbox" name="important" <% IF edit.important %>checked<% END %>>
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br/>
-        Note: <input type="text" name="note" size="60" maxlength="90" value="<% edit.note %>">
+        <input type="text" name="note" size="60" maxlength="90" value="<% edit.note %>" placeholder="Event notes">
         &nbsp;
         <% IF method == 'add' %>
             <input type="submit" name="add" value="Add" class="button-primary" />
@@ -32,6 +33,7 @@
         <input type="submit" name="delete" value="Delete" class="button-primary" onclick="return confirm('Delete <% edit.title %>?')"/>
     </form>
 <% END %>
+</div>
 </div>
 
 <% IF ! edit %>
