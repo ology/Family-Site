@@ -7,7 +7,6 @@
 <% IF target == user || target == 'Family' %>
 <div class="row">
 <div class="twelve columns">
-    <br clear="all"/>
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <input type="file" name="filename"/>
         <input type="hidden" name="target" value="<% target %>"/>

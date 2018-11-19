@@ -7,7 +7,6 @@
 <div class="row">
 <div class="twelve columns">
     <form action="/address" method="post">
-        <br clear="all"/>
         <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>" placeholder="First name">
         <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>" placeholder="Last name">
 <!--         Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>"> -->
