@@ -840,11 +840,14 @@ get '/album/:user' => require_login sub {
     my $path = "$ALBUM/$target";
 
     # Collect the album files to display by most recent
-    opendir my $dh, $path or die "Can't open $path: $!";
-    my @files = reverse grep { !/^\./ && !/\.txt$/ }
-        sort { ( stat "$path/$a" )[9] <=> ( stat "$path/$b" )[9] }
-            readdir $dh;
-    closedir $dh;
+    my @files;
+    if ( -d $path ) {
+        opendir my $dh, $path or die "Can't open $path: $!";
+        @files = reverse grep { !/^\./ && !/\.txt$/ }
+            sort { ( stat "$path/$a" )[9] <=> ( stat "$path/$b" )[9] }
+                readdir $dh;
+        closedir $dh;
+    }
 
     my $captions;
     my $caption_file = "$path/$CAPTION";
