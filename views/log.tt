@@ -5,7 +5,7 @@
 <% INCLUDE head.tt %>
 
 <div class="row">
-<div class="six columns">
+<div class="five columns">
             <ol>
                 <% FOREACH row IN sorted %>
                 <li>
@@ -17,7 +17,7 @@
                 <% END %>
             </ol>
 </div>
-<div class="six columns">
+<div class="seven columns">
                 <p><% line %></p>
                 Current month events:
                 <ol>
@@ -39,4 +39,6 @@
                     <img src="<% files.last %>" height="10%" width="10%" />
                 </p>
 </div>
+</div>
+
 </div>
