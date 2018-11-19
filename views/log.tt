@@ -1,11 +1,11 @@
 <% page = 'log' %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
 
-<div id="log" class="input_block">
-<table width="100%" border="0">
-    <tr>
-        <td nowrap valign="top" bgcolor="#F1EDD3" class="log">
+<div class="row">
+<div class="six columns">
             <ol>
                 <% FOREACH row IN sorted %>
                 <li>
@@ -16,9 +16,8 @@
                 </li>
                 <% END %>
             </ol>
-        </td>
-        <td valign="top" width="60%">
-            <div>
+</div>
+<div class="six columns">
                 <p><% line %></p>
                 Current month events:
                 <ol>
@@ -39,8 +38,5 @@
                     ...
                     <img src="<% files.last %>" height="10%" width="10%" />
                 </p>
-            </div>
-        </td>
-    </tr>
-</table>
+</div>
 </div>
