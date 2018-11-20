@@ -10,7 +10,9 @@
         <input type="text" name="first_name" size="20" maxlength="20" value="<% edit.first_name %>" placeholder="First name">
         <input type="text" name="last_name" size="20" maxlength="20" value="<% edit.last_name %>" placeholder="Last name">
 <!--         Birthday: <input type="text" name="birthday" size="10" maxlength="10" value="<% edit.birthday %>"> -->
+<% IF method == 'add' %>
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
+<% END %>
         <br/>
         <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>" placeholder="Street">
         <input type="text" name="city" size="20" maxlength="50" value="<% edit.city %>" placeholder="City">

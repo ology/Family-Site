@@ -10,7 +10,9 @@
 <div class="twelve columns">
     <form action="/recipe" method="post">
         <input type="text" name="title" size="50" maxlength="90" value="<% entry.title %>" placeholder="Recipe title">
+<% IF method == 'add' %>
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
+<% END %>
         <br/>
         <select name="type">
             <option value="appetizer" <% entry.type == 'appetizer' ? 'selected' : '' %>>Appetizer</option>
