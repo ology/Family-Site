@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=<% settings.charset %>" />
+<meta name="google" content="notranslate">
 <!--
 <% page = request.request_uri.match('^\/([\w+/]+)$').0.ucfirst %>
 <% page = page || 'Chat' %>
