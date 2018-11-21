@@ -8,8 +8,8 @@
 <div class="twelve columns">
     <form action="/event" method="post">
         <input type="text" name="title" size="20" maxlength="20" value="<% edit.title %>" placeholder="Event title">
-        Month: <input type="text" name="month" size="2" maxlength="2" value="<% edit.month %>">
-        Day: <input type="text" name="day" size="2" maxlength="2" value="<% edit.day %>">
+        Month: <input type="text" name="month" size="2" maxlength="2" value="<% edit.month %>" placeholder="##">
+        Day: <input type="text" name="day" size="2" maxlength="2" value="<% edit.day %>" placeholder="##">
         Sticky: <input type="checkbox" name="important" <% IF edit.important %>checked<% END %>>
 <% IF method == 'add' %>
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
