@@ -20,7 +20,7 @@
 -->
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br />
-        &nbsp; <b>Hints: 2MB maximum size. To save a caption, press ENTER after typing it.</b>
+        &nbsp; <b>Hints: 4MB maximum size. To save a caption, press ENTER after typing it.</b>
     </form>
     <hr>
 </div>
