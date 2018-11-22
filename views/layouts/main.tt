@@ -25,10 +25,13 @@
 <% content %>
 
 <div class="row brown">
-<div class="six columns leftpad">
+<div class="four columns leftpad">
     <a class="nohover" href="/privacy">Privacy policy</a>
 </div>
-<div class="six columns rightpad">
+<div class="four columns centerpad">
+    <a class="nohover" href="/help">Help</a>
+</div>
+<div class="four columns rightpad">
     Built by <a class="nohover" href="http://gene.ology.net/">Gene Boggs</a>
 </div>
 </div>
