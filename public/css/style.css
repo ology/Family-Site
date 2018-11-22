@@ -29,14 +29,6 @@ div.desc {
     text-align: center;
 }
 
-#footer {
-    clear: both;
-    font-style: italic;
-    color: #555555;
-    background-color: #D7D3B9;
-//    text-align: right;
-}
-
 div.input_block {
     text-align: left;
     background-color: #D7D3B9;
