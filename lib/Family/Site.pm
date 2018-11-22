@@ -25,7 +25,7 @@ use URL::Search qw( partition_urls );
 Readonly my $FILE    => 'chat.txt';
 Readonly my $CAPTION => 'caption.txt';
 Readonly my $ALBUM   => 'public/album';
-Readonly my $GEODAT  => '/home/gene/geoip/GeoLiteCity.dat';
+Readonly my $GEODAT  => $ENV{HOME} . '/geoip/GeoLiteCity.dat';
 Readonly my $PWSIZE  => 6;
 Readonly my $TZ      => 'America/Los_Angeles';
 
