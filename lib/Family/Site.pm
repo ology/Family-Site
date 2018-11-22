@@ -1080,4 +1080,24 @@ post '/request_access' => sub {
     halt;
 };
 
+get '/messages' => require_login sub {
+    my $messages = [
+        { first_name => 'Fred', last_name => 'Flintstone', email => 'fred@example.com', message => 'Yabba dabba do!' },
+    ];
+
+    template 'messages', {
+        messages => $messages,
+    };
+};
+
+post '/grant_access' => sub {
+    redirect '/';
+    halt;
+};
+
+post '/deny_access' => sub {
+    redirect '/';
+    halt;
+};
+
 true;
