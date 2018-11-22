@@ -29,14 +29,16 @@
 
 <div id="data">
 <% FOREACH file IN files %>
-<% IF file.match('\.pdf$') %>
+<% IF file.match('(?i)\.gif$') || file.match('(?i)\.jpe?g$') || file.match('(?i)\.png$') %>
+    <% img_src = target _ '/' _ file %>
+<% ELSIF file.match('\.pdf$') %>
     <% img_src = '/images/pdf.png' %>
 <% ELSIF file.match('\.mp3') %>
     <% img_src = '/images/audio.png' %>
 <% ELSIF file.match('\.mp4') %>
     <% img_src = '/images/video.png' %>
 <% ELSE %>
-    <% img_src = target _ '/' _ file %>
+    <% img_src = '/images/file.png' %>
 <% END %>
 <div class="img">
     <a href="<% target %>/<% file %>"><img src="<% img_src %>" height="10%" width="10%" /></a>
