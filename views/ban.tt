@@ -1,11 +1,14 @@
 <% page = 'ban' %>
 
+<div class="container">
+
 <% INCLUDE head.tt %>
 
-<div id="input_block" class="input_block">
+<div class="row">
+<div class="twelve columns">
     <form action="/block" method="post">
         <br clear="all"/>
-        IP: <input type="text" name="ip" size="15" maxlength="15" value="<% entry.ip %>">
+        <input type="text" name="ip" size="15" maxlength="15" value="<% entry.ip %>" placeholder="IP">
         <% IF method == 'add' %>
             <input type="submit" name="add" value=" Add " class="button-primary" />
         <% ELSE %>
@@ -25,6 +28,7 @@
     <b>Last seen:</b> <% entry.last_seen %>
 <% END %>
 </div>
+</div>
 
 <% IF sorted %>
 <div id="data" class="data">
@@ -37,6 +41,8 @@
     </ul>
 </div>
 <% END %>
+
+</div>
 
 <script>
 $(function(){
