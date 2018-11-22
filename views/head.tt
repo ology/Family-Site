@@ -2,7 +2,7 @@
     <div class="three columns">
         <h4><b><i><% page FILTER ucfirst %>!</i></b></h4>
     </div>
-    <div class="nine columns" style="text-align: right; padding-top: 5px;">
+    <div class="nine columns btnright">
         <b><a class="button" href="/addressbook">Addresses</a></b>
         <b><a class="button" href="/album">Album</a></b>
 <% IF page == 'log' %>
