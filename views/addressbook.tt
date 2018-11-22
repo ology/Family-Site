@@ -16,7 +16,7 @@
         <br/>
         <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>" placeholder="Street">
         <input type="text" name="city" size="20" maxlength="20" value="<% edit.city %>" placeholder="City">
-        State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
+        State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>" placeholder="##">
         <input type="text" name="zip" size="5" maxlength="10" value="<% edit.zip %>" placeholder="Zip">
         <br/>
         <input type="text" name="phone" size="12" maxlength="15" value="<% edit.phone %>" placeholder="Phone">
