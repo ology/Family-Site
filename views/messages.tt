@@ -19,6 +19,7 @@
     <form action="/deny_access" method="post" style="display: inline-block;">
         <input type="submit" name="deny" value=" Deny " />
     </form>
+    <hr>
 </div>
 </div>
 <% END %>
