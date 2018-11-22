@@ -776,10 +776,11 @@ post '/upload' => require_login sub {
 
         # Add a post to the chat about this upload.
         if ( params->{notify} ) {
-            my $src = $name =~ /\.pdf$/i ? '/images/pdf.png'
+            my $src = $name =~ /\.(gif|jpe?g|png)$/i ? "album/$name"
+                : $name =~ /\.pdf$/i ? '/images/pdf.png'
                 : $name =~ /\.mp3$/i ? '/images/audio.png'
                 : $name =~ /\.mp4$/i ? '/images/video.png'
-                : "album/$name"
+                : '/images/file.png';
             my $text = sprintf
                 '%s %s: Uploaded: <a href="album/%s"><img src="%s" height="10%" width="10%" class="vmid" /></a>',
                 $user->{username},
