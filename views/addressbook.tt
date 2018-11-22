@@ -15,12 +15,12 @@
 <% END %>
         <br/>
         <input type="text" name="street" size="20" maxlength="50" value="<% edit.street %>" placeholder="Street">
-        <input type="text" name="city" size="20" maxlength="50" value="<% edit.city %>" placeholder="City">
+        <input type="text" name="city" size="20" maxlength="20" value="<% edit.city %>" placeholder="City">
         State: <input type="text" name="state" size="2" maxlength="2" value="<% edit.state %>">
         <input type="text" name="zip" size="5" maxlength="10" value="<% edit.zip %>" placeholder="Zip">
         <br/>
-        <input type="text" name="phone" size="12" maxlength="20" value="<% edit.phone %>" placeholder="Phone">
-        <input type="text" name="phone2" size="12" maxlength="20" value="<% edit.phone2 %>" placeholder="Phone2">
+        <input type="text" name="phone" size="12" maxlength="15" value="<% edit.phone %>" placeholder="Phone">
+        <input type="text" name="phone2" size="12" maxlength="15" value="<% edit.phone2 %>" placeholder="Phone2">
         <input type="text" name="email" size="20" maxlength="50" value="<% edit.email %>" placeholder="Email">
         &nbsp;
         <% IF method == 'add' %>
