@@ -183,7 +183,7 @@ get '/' => require_login sub {
             my ( $who, $when, $what ) = ( $line =~ /^(\w+) ([T \d:-]+): (.*)$/ );
             my $formatted = sprintf '<b>%s</b> <span class="smallstamp">%s:</span> %s',
                 $who, $when, $what;
-            push @content, '<p class="padding">' . $formatted . '</p>';
+            push @content, '<p>' . $formatted . '</p>';
         }
     }
 
