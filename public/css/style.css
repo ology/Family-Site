@@ -29,13 +29,6 @@ div.desc {
     text-align: center;
 }
 
-div.input_block {
-    text-align: left;
-    background-color: #D7D3B9;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
 div.data {
     padding-left: 10px;
 }
