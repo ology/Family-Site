@@ -12,13 +12,14 @@ use Date::Manip;
 use DateTime;
 use DateTime::Duration;
 use DateTime::Format::DateParse;
+use Email::Valid;
 use Encoding::FixLatin qw( fix_latin );
-use Time::Ago;
 use File::Find::Rule;
 use Geo::IP::PurePerl;
 use HTML::CalendarMonthSimple;
 use IO::All -utf8;
 use Readonly;
+use Time::Ago;
 use URL::Search qw( partition_urls );
 
 Readonly my $FILE    => 'chat.txt';
@@ -1060,6 +1061,21 @@ get '/privacy' => sub {
 
 get '/help' => sub {
     template 'help', {};
+};
+
+get '/request' => sub {
+    template 'request', {};
+};
+
+post '/request_access' => sub {
+    my $address = Email::Valid->address( params->{email} );
+
+    send_error( 'Both first and last name needed', 400 ) unless params->{first_name} && params->{last_name};
+    send_error( 'Invalid email', 400 ) unless $address;
+    send_error( 'Message required', 400 ) unless params->{message};
+
+    redirect '/';
+    halt;
 };
 
 true;
