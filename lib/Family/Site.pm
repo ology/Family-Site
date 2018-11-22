@@ -1083,6 +1083,7 @@ post '/request_access' => sub {
 get '/messages' => require_login sub {
     my $messages = [
         { first_name => 'Fred', last_name => 'Flintstone', email => 'fred@example.com', message => 'Yabba dabba do!' },
+        { first_name => 'Barney', last_name => 'Rubble', email => 'barney@example.com', message => 'Hey Fred!' },
     ];
 
     template 'messages', {
@@ -1090,12 +1091,12 @@ get '/messages' => require_login sub {
     };
 };
 
-post '/grant_access' => sub {
+post '/grant_access' => require_login sub {
     redirect '/';
     halt;
 };
 
-post '/deny_access' => sub {
+post '/deny_access' => require_login sub {
     redirect '/';
     halt;
 };
