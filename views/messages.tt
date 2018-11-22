@@ -9,15 +9,14 @@
 <div class="twelve columns">
     <p><b>Access Request:</b></p>
     <% msg.first_name %> <% msg.last_name %>
-    <br/>
-    <a href="mailto:<% msg.email %>"><% msg.email %></a>
+    <<a href="mailto:<% msg.email %>"><% msg.email %></a>>
     <br/>
     <% msg.message %>
     <br/>
-    <form action="/grant_access" method="post">
+    <form action="/grant_access" method="post" style="display: inline-block;">
         <input type="submit" name="grant" value=" Grant " />
     </form>
-    <form action="/deny_access" method="post">
+    <form action="/deny_access" method="post" style="display: inline-block;">
         <input type="submit" name="deny" value=" Deny " />
     </form>
 </div>
