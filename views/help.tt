@@ -1,0 +1,36 @@
+<h1>Family Website Help</h1>
+
+<h2>Addressbook</h2>
+
+<p>The entry first name is linked to edit the entry itself.</p>
+<p>The street address is linked to a Google Map of the location.</p>
+<p>The phone numbers are linked with the prefix "tel:" and email with "mailto:"</p>
+
+<h2>Album</h2>
+
+<p>Each active site user will have a block for their uploads.</p>
+<p>The first uploaded image will be used for that user's main album entry.</p>
+<p>The album can contain any file besides ".txt"</p>
+<p>Images (gif/jpg/png) are shown as a linked icon sized version.</p>
+<p>If the upload is not an image, currently these formats are recognized with their own icon: .mp3, .mp4 and .pdf</p>
+<p>To add a caption for an upload, just type it into the slot below the file and hit the enter key, and it will be saved.</p>
+
+<h2>Calendar</h2>
+
+<p>This rotating calendar is for one-year anniversaries.</p>
+<p>The "sticky" flag adds this event as a reminder to the site chat, year-round.</p>
+
+<h2>Chat</h2>
+
+<h2>Cookbook</h2>
+
+<p>Entries are listed according to their "recipe type", like "Appetizer" for instance.</p>
+<p>To add a new recipe, click the "NEW" link in the categories list.</p>
+<p>The Ingredients and Instructions input boxes can be resized in most browsers.</p>
+<p>When viewing an entry, clicking the title will edit the entry itself.</p>
+
+<h2>Logout</h2>
+
+<p>Please use this when logged-in at a public place.</p>
+<p>On your home device, you can stay logged in as long as the browser cookie is present.</p>
+<p>In the event that the site has to be restarted or its session files cleared, you will have to re-authenticate.</p>
