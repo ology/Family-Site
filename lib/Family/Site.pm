@@ -1058,4 +1058,8 @@ get '/privacy' => sub {
     template 'privacy', {};
 };
 
+get '/help' => sub {
+    template 'help', {};
+};
+
 true;
