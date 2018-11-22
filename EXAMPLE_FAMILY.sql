@@ -151,7 +151,7 @@ CREATE TABLE `message` (
   `stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `first_name` varchar(20) NOT NULL DEFAULT '',
   `last_name` varchar(20) NOT NULL DEFAULT '',
-  `email` varchar(50) DEFAULT NOT NULL,
+  `email` varchar(50) NOT NULL,
   `message` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
