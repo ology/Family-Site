@@ -1064,7 +1064,9 @@ get '/help' => sub {
 };
 
 get '/request' => sub {
-    template 'request', {};
+    template 'request', {
+        help => 0,
+    };
 };
 
 post '/request_access' => sub {
