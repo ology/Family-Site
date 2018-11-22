@@ -1054,4 +1054,8 @@ sub _add_history {
     );
 }
 
+get '/privacy' => sub {
+    template 'privacy', {};
+};
+
 true;
