@@ -60,18 +60,6 @@ div.event {
     text-align: left;
 }
 
-div.head {
-    text-align: right;
-    background-color: #D7D3B9;
-    padding-top: 5px;
-    padding-right: 5px;
-}
-
-h4.head {
-    float: left;
-    color: #555555;
-}
-
 form.album {
     display: inline;
     margin: 0;
@@ -80,10 +68,6 @@ form.album {
 div.menu {
     padding: 5px;
     text-align: right;
-}
-
-td.log {
-    padding-left: 10px;
 }
 
 img.vmid {
