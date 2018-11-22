@@ -12,7 +12,7 @@ use Date::Manip;
 use DateTime;
 use DateTime::Duration;
 use DateTime::Format::DateParse;
-use Email::Valid;
+#use Email::Valid;
 use Encoding::FixLatin qw( fix_latin );
 use File::Find::Rule;
 use Geo::IP::PurePerl;
