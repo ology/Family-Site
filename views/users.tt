@@ -16,10 +16,12 @@
     <br/>
     <form action="/user_delete" method="post" class="block">
         <input type="hidden" name="id" value="<% user.id %>" />
+        <input type="hidden" name="username" value="<% user.username %>" />
         <input type="submit" name="delete" value="Delete" />
     </form>
     <form action="/user_reset" method="post" class="block">
         <input type="hidden" name="id" value="<% user.id %>" />
+        <input type="hidden" name="username" value="<% user.username %>" />
         <input type="submit" name="reset" value="Reset" />
     </form>
     <hr>
