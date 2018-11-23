@@ -12,6 +12,10 @@
         <b><a class="button" href="/">Chat</a></b>
 <!--     <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b> -->
         <b><a class="button" href="/cookbook">Cookbook</a></b>
+<% IF page == 'log' %>
+        <b><a class="button" href="/messages">Messages</a></b>
+        <b><a class="button" href="/users">Users</a></b>
+<% END %>
         <b><a class="button" href="/logout">Logout</a></b>
     </div>
 </div>
