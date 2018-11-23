@@ -16,6 +16,7 @@ use DateTime::Format::DateParse;
 use Email::Valid;
 use Encoding::FixLatin qw( fix_latin );
 use File::Find::Rule;
+use File::Path qw( remove_tree );
 use Geo::IP::PurePerl;
 use HTML::CalendarMonthSimple;
 use IO::All -utf8;
@@ -1107,6 +1108,63 @@ get '/users' => require_login sub {
     template 'users', {
         users => \@users,
     };
+};
+
+post '/user_delete' => require_login sub {
+    my $user = logged_in_user;
+    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+
+    my $entry = schema->resultset('User')->search( { id => params->{id} } );
+    $entry->delete;
+
+    my $count = 0;
+    my $path = "$ALBUM/" . params->{username};
+    if ( params->{username} && -d $path ) {
+        $count = remove_tree($path);
+    }
+
+    schema->resultset('History')->create(
+        {
+            who  => $user->{username},
+            what => 'deleted: ' . params->{username} . " ($count files removed)",
+            remote_addr => request->remote_address,
+        }
+    );
+
+    flash message => 'User ' . params->{username} . ' deleted';
+
+    redirect '/users';
+    halt;
+};
+
+post '/user_reset' => require_login sub {
+    my $user = logged_in_user;
+    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+
+    my $pass = 'chat';
+
+    my $entry = schema->resultset('User')->find( { id => params->{id} } );
+
+    my $csh = Crypt::SaltedHash->new( algorithm => 'SHA-1' );
+    $csh->add($pass);
+    my $encrypted = $csh->generate;
+
+    $entry->password($encrypted);
+    $entry->active(0);
+    $entry->update;
+
+    schema->resultset('History')->create(
+        {
+            who  => $user->{username},
+            what => 'reset password for: ' . params->{username},
+            remote_addr => request->remote_address,
+        }
+    );
+
+    flash message => 'Password reset for user: ' . params->{username};
+
+    redirect '/users';
+    halt;
 };
 
 get '/messages' => require_login sub {
