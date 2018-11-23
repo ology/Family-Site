@@ -46,8 +46,8 @@ else {
     $entry->update;
 
     my $path = 'public/album';
-    mkdir( "$path/$user" ) or die "Can't mkdir $path/$user: $!";
-    open( my $fh, '>', "$path/$user/caption.txt" ) or die "Can't write $path/$user/caption.txt: $!";
+    mkdir( "$path/$user" ) or warn "Can't mkdir $path/$user: $!";
+    open( my $fh, '>', "$path/$user/caption.txt" ) or warn "Can't write $path/$user/caption.txt: $!";
 
     $schema->resultset('History')->create(
         {
