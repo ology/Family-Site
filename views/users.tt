@@ -1,0 +1,30 @@
+<% page = 'users' %>
+
+<div class="container">
+
+<% INCLUDE 'head.tt' %>
+
+<% IF flash.message %>
+    <div class="flashmsg"><% flash.message %></div>
+    <p>
+<% END %>
+
+<% FOREACH user in users %>
+<div class="row">
+<div class="twelve columns">
+    <% user.username %>
+    <br/>
+    <form action="/user_delete" method="post" class="block">
+        <input type="hidden" name="id" value="<% user.id %>" />
+        <input type="submit" name="delete" value="Delete" />
+    </form>
+    <form action="/user_reset" method="post" class="block">
+        <input type="hidden" name="id" value="<% user.id %>" />
+        <input type="submit" name="reset" value="Reset" />
+    </form>
+    <hr>
+</div>
+</div>
+<% END %>
+
+</div>

@@ -1091,9 +1091,26 @@ post '/request_access' => sub {
     halt;
 };
 
+get '/users' => require_login sub {
+    my $user = logged_in_user;
+    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+
+    my @users;
+    my $users = schema->resultset('User')->search( {}, { order_by => 'username' } );
+    while ( my $result = $users->next ) {
+        push @users, {
+            id       => $result->id,
+            username => $result->username,
+        };
+    }
+
+    template 'users', {
+        users => \@users,
+    };
+};
+
 get '/messages' => require_login sub {
     my $user = logged_in_user;
-
     send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
 
     my @msg;
