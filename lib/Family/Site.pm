@@ -1232,8 +1232,8 @@ post '/grant_access' => require_login sub {
     );
 
     my $path = "$ALBUM/$new_user";
-    mkdir($path) or die "Can't mkdir $path: $!";
-    open( my $fh, '>', "$path/caption.txt" ) or die "Can't write $path/caption.txt: $!";
+    mkdir($path);
+    open( my $fh, '>', "$path/caption.txt" ) if -d $path;
 
     $entry = schema->resultset('Message')->search( { id => params->{id} } );
     $entry->delete;
