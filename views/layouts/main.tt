@@ -26,17 +26,17 @@
 
 <div class="row brown">
 <div class="four columns leftpad">
-    <a class="nohover" href="/privacy">Privacy policy</a>
+    <a href="/privacy">Privacy policy</a>
 </div>
 <div class="four columns centerpad">
 <% IF help == 0 %>
     &nbsp;
 <% ELSE %>
-    <a class="nohover" href="/help">Help</a>
+    <a href="/help">Help</a>
 <% END %>
 </div>
 <div class="four columns rightpad">
-    Built by <a class="nohover" href="http://gene.ology.net/">Gene Boggs</a>
+    Built by <a href="http://gene.ology.net/">Gene Boggs</a>
 </div>
 </div>
 
