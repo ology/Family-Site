@@ -65,6 +65,10 @@ form.album {
     margin: 0;
 }
 
+form.block {
+    display: inline-block;
+}
+
 div.menu {
     padding: 5px;
     text-align: right;
