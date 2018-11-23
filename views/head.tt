@@ -5,14 +5,14 @@
     <div class="nine columns btnright">
         <b><a class="button" href="/addressbook">Addresses</a></b>
         <b><a class="button" href="/album">Album</a></b>
-<% IF page == 'log' %>
+<% IF page == 'log' || page == 'users' || page == 'messages' %>
         <b><a class="button" href="/ban">Bans</a></b>
 <% END %>
         <b><a class="button" href="/calendar/<% year %>/<% month %>">Calendar</a></b>
         <b><a class="button" href="/">Chat</a></b>
 <!--     <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b> -->
         <b><a class="button" href="/cookbook">Cookbook</a></b>
-<% IF page == 'log' %>
+<% IF page == 'log' || page == 'users' || page == 'messages' %>
         <b><a class="button" href="/messages">Messages</a></b>
         <b><a class="button" href="/users">Users</a></b>
 <% END %>
