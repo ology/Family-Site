@@ -1141,7 +1141,7 @@ post '/grant_access' => require_login sub {
     schema->resultset('History')->create(
         {
             who  => $user->{username},
-            what => 'new user: ' . param->{first_name},
+            what => 'new user: ' . params->{first_name},
             remote_addr => request->remote_address,
         }
     );
