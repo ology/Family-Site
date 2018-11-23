@@ -282,7 +282,7 @@ post '/chat' => require_login sub {
 
 get '/password' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
-    template 'password';
+    template 'password', { help => 0 };
 };
 
 post '/password_set' => require_login sub {
