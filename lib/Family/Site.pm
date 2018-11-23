@@ -1223,6 +1223,14 @@ post '/grant_access' => require_login sub {
     $entry->password($encrypted);
     $entry->update;
 
+    schema->resultset('Address')->create(
+        {
+            first_name => $new_user,
+            last_name  => params->{last_name},
+            email      => params->{email},
+        }
+    );
+
     my $path = "$ALBUM/$new_user";
     mkdir($path) or die "Can't mkdir $path: $!";
     open( my $fh, '>', "$path/caption.txt" ) or die "Can't write $path/caption.txt: $!";
