@@ -1172,11 +1172,11 @@ sub login_page_handler {
         : '';
     my $return_url = params->{return_url} || '';
 
-    template 'login', { error => $login_fail_message, return_url => $return_url };
-}
-
-sub permission_denied_page_handler {
-    template 'login', { error => 'LOGIN FAILED' };
+    template 'login', {
+        error      => $login_fail_message,
+        return_url => $return_url,
+        help       => 0,
+    };
 }
 
 true;
