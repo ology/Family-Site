@@ -21,7 +21,7 @@
 
 DROP DATABASE IF EXISTS `example_family`;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `example_family` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `example_family` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `example_family`;
 
@@ -47,7 +47,7 @@ CREATE TABLE `address` (
   `phone2` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `first_name` (`first_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +80,7 @@ CREATE TABLE `calendar` (
   `important` int(1) DEFAULT NULL,
   `note` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `cookbook` (
   `ingredients` text NOT NULL,
   `instructions` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,12 +111,12 @@ DROP TABLE IF EXISTS `history`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `history` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `who` varchar(20) COLLATE latin1_bin NOT NULL DEFAULT '',
-  `what` varchar(256) COLLATE latin1_bin NOT NULL DEFAULT '',
+  `who` varchar(20) NOT NULL DEFAULT '',
+  `what` varchar(256) NOT NULL DEFAULT '',
   `when` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `remote_addr` varchar(15) COLLATE latin1_bin NOT NULL DEFAULT '',
+  `remote_addr` varchar(15) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +154,7 @@ CREATE TABLE `message` (
   `email` varchar(50) NOT NULL,
   `message` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
