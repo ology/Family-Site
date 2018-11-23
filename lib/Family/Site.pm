@@ -329,7 +329,7 @@ get '/log' => require_login sub {
     my $users = schema->resultset('User')->search( { last_login => { '!=' => undef } } );
     while ( my $result = $users->next ) {
         $records->{ $result->id } = {
-            username    => $result->username,
+            username    => scalar fix_latin( $result->username ),
             last_login  => $result->last_login->ymd . ' ' . $result->last_login->hms,
             remote_addr => $result->remote_addr,
         };
