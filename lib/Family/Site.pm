@@ -788,7 +788,7 @@ post '/upload' => require_login sub {
             my $text = sprintf
                 '%s %s: Uploaded: <a href="album/%s"><img src="%s" height="10%" width="10%" class="vmid" /></a>',
                 $user->{username},
-                DateTime->now(),
+                DateTime->now( time_zone => $TZ ),
                 $name, $src;
             "$text\n" >> io($FILE);
         }
