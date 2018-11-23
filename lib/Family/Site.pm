@@ -12,7 +12,7 @@ use Date::Manip;
 use DateTime;
 use DateTime::Duration;
 use DateTime::Format::DateParse;
-#use Email::Valid;
+use Email::Valid;
 use Encoding::FixLatin qw( fix_latin );
 use File::Find::Rule;
 use Geo::IP::PurePerl;
@@ -28,6 +28,7 @@ Readonly my $ALBUM   => 'public/album';
 Readonly my $GEODAT  => $ENV{HOME} . '/geoip/GeoLiteCity.dat';
 Readonly my $PWSIZE  => 6;
 Readonly my $TZ      => 'America/Los_Angeles';
+Readonly my $ADMIN   => 'gene';
 
 sub is_blocked {
     my ($remote_address) = @_;
@@ -1076,28 +1077,89 @@ post '/request_access' => sub {
     send_error( 'Invalid email', 400 ) unless $address;
     send_error( 'Message required', 400 ) unless params->{message};
 
+    schema->resultset('Message')->create(
+        {
+            first_name => params->{first_name},
+            last_name  => params->{last_name},
+            email      => params->{email},
+            message    => params->{message},
+        }
+    );
+
     redirect '/';
     halt;
 };
 
 get '/messages' => require_login sub {
-    my $messages = [
-        { first_name => 'Fred', last_name => 'Flintstone', email => 'fred@example.com', message => 'Yabba dabba do!' },
-        { first_name => 'Barney', last_name => 'Rubble', email => 'barney@example.com', message => 'Hey Fred!' },
-    ];
+    my $user = logged_in_user;
+
+    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+
+    my @msg;
+    my $messages = schema->resultset('Message')->search( {}, { order_by => 'stamp' } );
+    while ( my $result = $messages->next ) {
+        push @msg, {
+            id         => $result->id,
+            first_name => $result->first_name,
+            last_name  => $result->last_name,
+            email      => $result->email,
+            message    => $result->message,
+        };
+    }
 
     template 'messages', {
-        messages => $messages,
+        messages => \@msg,
     };
 };
 
 post '/grant_access' => require_login sub {
-    redirect '/';
+    my $user = logged_in_user;
+
+    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+
+    my $pass = 'chat';
+    my $new_user = params->{first_name};
+
+    my @entries = schema->resultset('User')->search( { username => $new_user } );
+    send_error( 'Duplicate user first name', 400 ) if @entries;
+
+    my $csh = Crypt::SaltedHash->new( algorithm => 'SHA-1' );
+    $csh->add($pass);
+    my $encrypted = $csh->generate;
+
+    my $entry = schema->resultset('User')->create({ username => $new_user });
+    $entry->password($encrypted);
+    $entry->update;
+
+    my $path = "$ALBUM/$new_user";
+    mkdir($path) or die "Can't mkdir $path: $!";
+    open( my $fh, '>', "$path/caption.txt" ) or die "Can't write $path/caption.txt: $!";
+
+    $entry = schema->resultset('Message')->search( { id => params->{id} } );
+    $entry->delete;
+
+    schema->resultset('History')->create(
+        {
+            who  => $user->{username},
+            what => 'new user: ' . param->{first_name},
+            remote_addr => request->remote_address,
+        }
+    );
+
+    # Delete message entry
+    redirect '/messages';
     halt;
 };
 
 post '/deny_access' => require_login sub {
-    redirect '/';
+    my $user = logged_in_user;
+
+    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+
+    my $entry = schema->resultset('Message')->search( { id => params->{id} } );
+    $entry->delete;
+
+    redirect '/messages';
     halt;
 };
 
