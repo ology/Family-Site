@@ -373,8 +373,7 @@ get '/log' => require_login sub {
         my $io = io($FILE);
         $io->backwards;
         while( defined( my $line = $io->getline ) ) {
-            $line = fix_latin($line);
-            $last = $line;
+            $last = fix_latin($line);
             last;
         }
     }
@@ -387,7 +386,7 @@ get '/log' => require_login sub {
     my $events = schema->resultset('Calendar')->search( { month => $MONTH }, { order_by => 'day' } );
     while ( my $result = $events->next ) {
         push @cal, {
-            title => $result->title,
+            title => scalar fix_latin( $result->title ),
             month => $result->month,
             day   => $result->day,
         };
