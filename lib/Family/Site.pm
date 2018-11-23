@@ -1067,12 +1067,16 @@ get '/help' => sub {
 };
 
 get '/request' => sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     template 'request', {
         help => 0,
     };
 };
 
 post '/request_access' => sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     my $address = Email::Valid->address( params->{email} );
 
     send_error( 'Both first and last name needed', 400 ) unless params->{first_name} && params->{last_name};
@@ -1093,6 +1097,8 @@ post '/request_access' => sub {
 };
 
 get '/users' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
 
@@ -1111,6 +1117,8 @@ get '/users' => require_login sub {
 };
 
 post '/user_delete' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
 
@@ -1138,6 +1146,8 @@ post '/user_delete' => require_login sub {
 };
 
 post '/user_reset' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
 
@@ -1168,6 +1178,8 @@ post '/user_reset' => require_login sub {
 };
 
 get '/messages' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
 
@@ -1189,6 +1201,8 @@ get '/messages' => require_login sub {
 };
 
 post '/grant_access' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     my $user = logged_in_user;
 
     send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
@@ -1230,6 +1244,8 @@ post '/grant_access' => require_login sub {
 };
 
 post '/deny_access' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     my $user = logged_in_user;
 
     send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
