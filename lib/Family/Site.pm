@@ -8,6 +8,7 @@ use Crypt::SaltedHash;
 use Dancer qw( :syntax );
 use Dancer::Plugin::Auth::Extensible;
 use Dancer::Plugin::DBIC qw( schema resultset );
+use Dancer::Plugin::FlashMessage;
 use Date::Manip;
 use DateTime;
 use DateTime::Duration;
@@ -1145,6 +1146,8 @@ post '/grant_access' => require_login sub {
             remote_addr => request->remote_address,
         }
     );
+
+    flash message => 'New user created. Please contact ' . params->{email} . ' with their initial password, ' . $pass;
 
     # Delete message entry
     redirect '/messages';

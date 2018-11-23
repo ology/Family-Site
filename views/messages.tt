@@ -4,6 +4,11 @@
 
 <% INCLUDE 'head.tt' %>
 
+<% IF flash.message %>
+    <div class="flashmsg"><% flash.message %></div>
+    <p>
+<% END %>
+
 <% FOREACH msg in messages %>
 <div class="row">
 <div class="twelve columns">
