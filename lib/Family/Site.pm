@@ -1166,4 +1166,17 @@ post '/deny_access' => require_login sub {
     halt;
 };
 
+sub login_page_handler {
+    my $login_fail_message = vars->{login_failed}
+        ? 'LOGIN FAILED'
+        : '';
+    my $return_url = params->{return_url} || '';
+
+    template 'login', { error => $login_fail_message, return_url => $return_url };
+}
+
+sub permission_denied_page_handler {
+    template 'login', { error => 'LOGIN FAILED' };
+}
+
 true;

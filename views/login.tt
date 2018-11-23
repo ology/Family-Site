@@ -1,0 +1,14 @@
+<h1>Login Required</h1>
+
+<p>You need to log in to continue.</p>
+
+<% IF error %><p><% error %></p><% END %>
+
+<form method="post">
+<input type="text" name="username" id="username" placeholder="Username">
+<br />
+<input type="password" name="password" id="password" placeholder="Password">
+<br />
+<input type="hidden" name="return_url" value="<% return_url %>">
+<input type="submit" value="Login">
+</form>
