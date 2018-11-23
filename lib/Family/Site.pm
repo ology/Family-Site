@@ -28,7 +28,7 @@ Readonly my $ALBUM   => 'public/album';
 Readonly my $GEODAT  => $ENV{HOME} . '/geoip/GeoLiteCity.dat';
 Readonly my $PWSIZE  => 6;
 Readonly my $TZ      => 'America/Los_Angeles';
-Readonly my $ADMIN   => 'gene';
+Readonly my $ADMIN   => 'Gene';
 
 sub is_blocked {
     my ($remote_address) = @_;
