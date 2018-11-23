@@ -755,7 +755,7 @@ get '/album' => require_login sub {
         @files = map { $_->{name} } sort { $a->{mtime} <=> $b->{mtime} } @mtimes;
         @files = map { s/^public\/(.*)$/$1/r } @files;
 
-        $records->{ $result->username } = $files[0] || '/images/person.png';
+        $records->{ fix_latin( $result->username ) } = $files[0] || '/images/person.png';
     }
 
     template 'album', {
@@ -864,7 +864,7 @@ get '/album/:user' => require_login sub {
         while ( my $line = readline($fh) ) {
             chomp $line;
             my ( $filename, $caption ) = split /\t/, $line, 2;
-            $captions->{$filename} = fix_latin( $caption );
+            $captions->{$filename} = fix_latin($caption);
         }
         close $fh
             or die "Can't close $caption_file: $!";
@@ -1109,7 +1109,7 @@ get '/users' => require_login sub {
     while ( my $result = $users->next ) {
         push @users, {
             id       => $result->id,
-            username => $result->username,
+            username => scalar fix_latin( $result->username ),
         };
     }
 
@@ -1190,10 +1190,10 @@ get '/messages' => require_login sub {
     while ( my $result = $messages->next ) {
         push @msg, {
             id         => $result->id,
-            first_name => $result->first_name,
-            last_name  => $result->last_name,
+            first_name => scalar fix_latin( $result->first_name ),
+            last_name  => scalar fix_latin( $result->last_name ),
             email      => $result->email,
-            message    => $result->message,
+            message    => scalar fix_latin( $result->message ),
         };
     }
 
