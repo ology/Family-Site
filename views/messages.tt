@@ -18,14 +18,14 @@
     <br/>
     <% msg.message %>
     <br/>
-    <form action="/grant_access" method="post" style="display: inline-block;">
+    <form action="/grant_access" method="post" class="block">
         <input type="hidden" name="id" value="<% msg.id %>" />
         <input type="hidden" name="first_name" value="<% msg.first_name %>" />
         <input type="hidden" name="last_name" value="<% msg.last_name %>" />
         <input type="hidden" name="email" value="<% msg.email %>" />
         <input type="submit" name="grant" value=" Grant " />
     </form>
-    <form action="/deny_access" method="post" style="display: inline-block;">
+    <form action="/deny_access" method="post" class="block">
         <input type="hidden" name="id" value="<% msg.id %>" />
         <input type="submit" name="deny" value=" Deny " />
     </form>
