@@ -14,6 +14,7 @@
     <% msg.message %>
     <br/>
     <form action="/grant_access" method="post" style="display: inline-block;">
+        <input type="hidden" name="id" value="<% msg.id %>" />
         <input type="hidden" name="first_name" value="<% msg.first_name %>" />
         <input type="hidden" name="last_name" value="<% msg.last_name %>" />
         <input type="hidden" name="email" value="<% msg.email %>" />
