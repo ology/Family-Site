@@ -3,7 +3,7 @@
 <div class="row">
 <div class="twelve columns">
     <form action="/request_access" method="post">
-        <h2><i>Request Access</i></h1>
+        <h2><i>Request Access</i></h2>
         <input type="text" name="first_name" size="20" maxlength="20" placeholder="First name">
         <input type="text" name="last_name" size="20" maxlength="20" placeholder="Last name">
         <br/>
