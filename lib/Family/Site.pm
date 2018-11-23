@@ -199,10 +199,10 @@ get '/' => require_login sub {
     my $events = schema->resultset('Calendar')->search( { month => $MONTH }, { order_by => 'day' } );
     while ( my $result = $events->next ) {
         push @cal, {
-            title => $result->title,
+            title => scalar fix_latin( $result->title ),
             month => $result->month,
             day   => $result->day,
-            note  => $result->note,
+            note  => scalar fix_latin( $result->note ),
         };
     }
     my @important;
@@ -212,10 +212,10 @@ get '/' => require_login sub {
     );
     while ( my $result = $events->next ) {
         push @important, {
-            title => $result->title,
+            title => scalar fix_latin( $result->title ),
             month => $result->month,
             day   => $result->day,
-            note  => $result->note,
+            note  => scalar fix_latin( $result->note ),
         };
     }
 
