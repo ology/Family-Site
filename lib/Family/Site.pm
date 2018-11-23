@@ -81,7 +81,7 @@ post '/block' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-    send_error( 'Not allowed', 403 ) if $user->{username} ne 'gene';
+    send_error( 'Not allowed', 403 ) if $user->{username} ne $ADMIN;
 
     my $now = DateTime->now( time_zone => $TZ )->ymd
         . ' ' . DateTime->now( time_zone => $TZ )->hms;
