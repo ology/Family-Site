@@ -52,7 +52,8 @@ plugins:
         password: 'abc123'
   Auth::Extensible:
         exit_page: '/'
-#        login_page_handler: 'Family::Site::_login_page_handler'
+        login_page_handler: 'Family::Site::login_page_handler'
+        permission_denied_page_handler: 'Family::Site::permission_denied_page_handler'
         realms:
             users:
                 provider: 'Database'
