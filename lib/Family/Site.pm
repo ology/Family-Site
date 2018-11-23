@@ -438,16 +438,16 @@ get '/addressbook' => require_login sub {
     if ($entry) {
         $record = {
             id         => $entry->id,
-            first_name => $entry->first_name,
-            last_name  => $entry->last_name,
-            street     => $entry->street,
-            city       => $entry->city,
+            first_name => scalar fix_latin( $entry->first_name ),
+            last_name  => scalar fix_latin( $entry->last_name ),
+            street     => scalar fix_latin( $entry->street ),
+            city       => scalar fix_latin( $entry->city ),
             state      => $entry->state,
             zip        => $entry->zip,
             phone      => $entry->phone,
             phone2     => $entry->phone2,
             email      => $entry->email,
-            notes      => $entry->notes,
+            notes      => scalar fix_latin( $entry->notes ),
             $entry->birthday ? ( birthday => $entry->birthday->ymd ) : (),
         };
     }
@@ -461,16 +461,16 @@ get '/addressbook' => require_login sub {
         $records->{ $result->id } =
             {
                 id         => $result->id,
-                first_name => $result->first_name,
-                last_name  => $result->last_name,
-                street     => $result->street,
-                city       => $result->city,
+                first_name => scalar fix_latin( $result->first_name ),
+                last_name  => scalar fix_latin( $result->last_name ),
+                street     => scalar fix_latin( $result->street ),
+                city       => scalar fix_latin( $result->city ),
                 state      => $result->state,
                 zip        => $result->zip,
                 phone      => $result->phone,
                 phone2     => $result->phone2,
                 email      => $result->email,
-                notes      => $result->notes,
+                notes      => scalar fix_latin( $result->notes ),
                 $result->birthday ? ( birthday => $result->birthday->ymd ) : (),
             };
     }
@@ -598,11 +598,11 @@ get '/calendar/:year/:month' => require_login sub {
     if ( !params->{update} && params->{id} ) {
         $record = {
             id        => $entry->id,
-            title     => $entry->title,
+            title     => scalar fix_latin( $entry->title ),
             month     => $entry->month,
             day       => $entry->day,
             important => $entry->important,
-            note      => $entry->note,
+            note      => scalar fix_latin( $entry->note ),
         };
     }
 
@@ -612,7 +612,7 @@ get '/calendar/:year/:month' => require_login sub {
     while ( my $result = $events->next ) {
         $records->{ $result->id } =
             {
-                title => $result->title,
+                title => scalar fix_latin( $result->title ),
                 month => $result->month,
                 day   => $result->day,
             };
@@ -865,7 +865,7 @@ get '/album/:user' => require_login sub {
         while ( my $line = readline($fh) ) {
             chomp $line;
             my ( $filename, $caption ) = split /\t/, $line, 2;
-            $captions->{$filename} = $caption;
+            $captions->{$filename} = fix_latin( $caption );
         }
         close $fh
             or die "Can't close $caption_file: $!";
@@ -936,12 +936,12 @@ get '/cookbook' => require_login sub {
         # Set the record of the current entry, to display
         $record = {
             id           => $entry->id,
-            title        => $entry->title,
+            title        => scalar fix_latin( $entry->title ),
             user         => $entry->user,
             type         => $entry->type,
-            note         => $entry->note,
-            ingredients  => $entry->ingredients,
-            instructions => $entry->instructions,
+            note         => scalar fix_latin( $entry->note ),
+            ingredients  => scalar fix_latin( $entry->ingredients ),
+            instructions => scalar fix_latin( $entry->instructions ),
         };
     }
     else {
@@ -954,7 +954,7 @@ get '/cookbook' => require_login sub {
             $records->{ $result->id } =
                 {
                     id    => $result->id,
-                    title => $result->title,
+                    title => scalar fix_latin( $result->title ),
                 };
         }
     }
