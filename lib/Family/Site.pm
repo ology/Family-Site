@@ -502,12 +502,15 @@ post '/address' => require_login sub {
         $birthday = join '-', UnixDate( $birthday, "%Y", "%m", "%d" );
     }
 
+    my $first = params->{first_name};
+    my $last  = params->{last_name};
+
     # Create a new entry
     if ( params->{add} && params->{first_name} ) {
         schema->resultset('Address')->create(
             {
-                first_name => params->{first_name},
-                last_name  => params->{last_name},
+                first_name => $first,
+                last_name  => $last,
                 street     => params->{street},
                 city       => params->{city},
                 state      => params->{state},
@@ -525,14 +528,14 @@ post '/address' => require_login sub {
             my $text = sprintf
                 '%s %s: Added address for %s %s',
                 $user->{username},
-                DateTime->now(),
-                params->{first_name}, params->{last_name};
+                DateTime->now( time_zone => $TZ ),
+                $first, $last;
             "$text\n" >> io($FILE);
         }
 
         _add_history(
             who  => $user->{username},
-            what => 'add "' . params->{first_name} . ' ' . params->{last_name} . '" address',
+            what => 'add "' . $first . ' ' . $last . '" address',
             remote_addr => request->remote_address,
         );
     }
@@ -692,7 +695,7 @@ post '/event' => require_login sub {
             my $text = sprintf
                 '%s %s: Added %d/%d event: %s',
                 $user->{username},
-                DateTime->now(),
+                DateTime->now( time_zone => $TZ ),
                 $month, $day, $title;
             "$text\n" >> io($FILE);
         }
@@ -994,7 +997,7 @@ post '/recipe' => require_login sub {
             my $text = sprintf
                 '%s %s: Added recipe: %s',
                 $user->{username},
-                DateTime->now(),
+                DateTime->now( time_zone => $TZ ),
                 params->{title};
             "$text\n" >> io($FILE);
         }
