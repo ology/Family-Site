@@ -22,6 +22,7 @@
 
 <p>This rotating calendar is for one-year anniversaries.</p>
 <p>The "sticky" flag adds this event as a reminder to the site chat, year-round.</p>
+<p>The event notes only appear on the chat during the month or if the sticky flag is applied.</p>
 
 <h2>Chat</h2>
 
