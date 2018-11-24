@@ -82,6 +82,12 @@ __PACKAGE__->table("user");
   default_value: 0
   is_nullable: 0
 
+=head2 admin
+
+  data_type: 'integer'
+  default_value: 0
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -113,6 +119,8 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 15 },
   "active",
   { data_type => "integer", default_value => 0, is_nullable => 0 },
+  "admin",
+  { data_type => "integer", default_value => 0, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
