@@ -40,6 +40,9 @@ sub is_blocked {
 get '/ban' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
+    my $user = logged_in_user;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
+
     my $record;
     my $records;
     my @sorted;
@@ -323,6 +326,9 @@ post '/password_set' => require_login sub {
 
 get '/log' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
+    my $user = logged_in_user;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     # Collect the user records
     my $records;
@@ -1215,7 +1221,6 @@ post '/grant_access' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-
     send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my $pass = Text::Password::Pronounceable->generate( $PWSIZE, $PWSIZE );
@@ -1277,7 +1282,6 @@ post '/deny_access' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-
     send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my $entry = schema->resultset('Message')->search( { id => params->{id} } );
