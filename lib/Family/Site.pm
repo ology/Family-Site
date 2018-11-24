@@ -1107,8 +1107,11 @@ get '/users' => require_login sub {
     my $users = schema->resultset('User')->search( {}, { order_by => 'username' } );
     while ( my $result = $users->next ) {
         push @users, {
-            id       => $result->id,
-            username => scalar fix_latin( $result->username ),
+            id         => $result->id,
+            username   => scalar fix_latin( $result->username ),
+            active     => $result->active,
+            admin      => $result->admin,
+            last_login => $result->last_login,
         };
     }
 
