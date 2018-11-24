@@ -392,8 +392,9 @@ get '/log' => require_login sub {
         };
     }
 
-    # Get the total number of calendar events
+    # Get the total number of calendar events and messages
     my $total = schema->resultset('Calendar')->count();
+    my $total_msg = schema->resultset('Message')->count();
 
     # Collect the album files to display
     my @files = File::Find::Rule->file()->in($ALBUM);
@@ -421,6 +422,7 @@ get '/log' => require_login sub {
         recipes => $recipes,
         bans    => $bans,
         calnum  => $total,
+        msgnum  => $total_msg,
         month   => $MONTH,
         year    => $YEAR,
     };
