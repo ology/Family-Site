@@ -1176,7 +1176,7 @@ post '/user_reset' => require_login sub {
         }
     );
 
-    flash message => 'Password reset for user: ' . params->{username};
+    flash message => 'Password reset for user: ' . params->{username} . " to $pass";
 
     redirect '/users';
     halt;
