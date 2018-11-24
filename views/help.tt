@@ -1,3 +1,5 @@
+<div class="container">
+
 <h1>Family Website Help</h1>
 
 <h2>Addressbook</h2>
@@ -37,3 +39,5 @@
 <p>Please use this when logged-in at a public place.</p>
 <p>On your home device, you can stay logged in as long as the browser cookie is present.</p>
 <p>In the event that the site has to be restarted or its session files cleared, you will have to re-authenticate.</p>
+
+</div>
