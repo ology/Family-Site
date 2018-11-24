@@ -21,6 +21,7 @@ use Geo::IP::PurePerl;
 use HTML::CalendarMonthSimple;
 use IO::All -utf8;
 use Readonly;
+use Text::Password::Pronounceable;
 use Time::Ago;
 use URL::Search qw( partition_urls );
 
@@ -1155,7 +1156,7 @@ post '/user_reset' => require_login sub {
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
-    my $pass = 'chat';
+    my $pass = Text::Password::Pronounceable->generate( $PWSIZE, $PWSIZE );
 
     my $entry = schema->resultset('User')->find( { id => params->{id} } );
 
