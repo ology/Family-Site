@@ -134,6 +134,7 @@ CREATE TABLE `user` (
   `last_login` datetime DEFAULT NULL,
   `remote_addr` varchar(15) DEFAULT NULL,
   `active` int(1) NOT NULL DEFAULT '0',
+  `admin` int(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
