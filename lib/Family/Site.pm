@@ -253,7 +253,7 @@ post '/chat' => require_login sub {
         for my $part ( partition_urls $text ) {
             my ( $type, $str ) = @$part;
             if ( $type eq 'URL' ) {
-                $html .= "<a href='$str'>$str</a>";
+                $html .= qq|<a href="$str" target="_blank">$str</a>|;
             } else {
                 $html .= $str;
             }
