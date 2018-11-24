@@ -20,6 +20,7 @@
 <div class="six columns">
                 <p><% line %></p>
                 <p>Addressbook entries: <% addr %></p>
+                <p>Album files: <% files.size %></p>
                 <p>Banned IPs: <% bans %></p>
                 <p>Calendar entries: <% calnum %></p>
                 Current month events:
@@ -32,7 +33,6 @@
                 </ol>
                 <p>Cookbook entries: <% recipes %></p>
                 <p>Message entries: <% msgnum %></p>
-                <p>Album files: <% files.size %></p>
 <!--
                 <p>
                     <img src="<% files.0 %>" height="10%" width="10%" />
