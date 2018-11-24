@@ -1212,7 +1212,8 @@ post '/grant_access' => require_login sub {
 
     send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
-    my $pass = 'chat';
+    my $pass = Text::Password::Pronounceable->generate( $PWSIZE, $PWSIZE );
+
     my $new_user = params->{first_name};
 
     my @entries = schema->resultset('User')->search( { username => $new_user } );
