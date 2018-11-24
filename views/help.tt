@@ -2,6 +2,7 @@
 
 <h2>Addressbook</h2>
 
+<p>Entries are not linked to user accounts, but can be any place you wish.</p>
 <p>The entry first name is linked to edit the entry itself.</p>
 <p>The street address is linked to a Google Map of the location.</p>
 <p>The phone numbers are linked with the prefix "tel:" and email with "mailto:"</p>
