@@ -30,7 +30,6 @@ Readonly my $ALBUM   => 'public/album';
 Readonly my $GEODAT  => $ENV{HOME} . '/geoip/GeoLiteCity.dat';
 Readonly my $PWSIZE  => 6;
 Readonly my $TZ      => 'America/Los_Angeles';
-Readonly my $ADMIN   => 'Gene';
 
 sub is_blocked {
     my ($remote_address) = @_;
@@ -81,7 +80,7 @@ post '/block' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-    send_error( 'Not allowed', 403 ) if $user->{username} ne $ADMIN;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my $now = DateTime->now( time_zone => $TZ )->ymd
         . ' ' . DateTime->now( time_zone => $TZ )->hms;
@@ -1102,7 +1101,7 @@ get '/users' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my @users;
     my $users = schema->resultset('User')->search( {}, { order_by => 'username' } );
@@ -1122,7 +1121,7 @@ post '/user_delete' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my $entry = schema->resultset('User')->search( { id => params->{id} } );
     $entry->delete;
@@ -1151,7 +1150,7 @@ post '/user_reset' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my $pass = 'chat';
 
@@ -1183,7 +1182,7 @@ get '/messages' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $user = logged_in_user;
-    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my @msg;
     my $messages = schema->resultset('Message')->search( {}, { order_by => 'stamp' } );
@@ -1207,7 +1206,7 @@ post '/grant_access' => require_login sub {
 
     my $user = logged_in_user;
 
-    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my $pass = 'chat';
     my $new_user = params->{first_name};
@@ -1258,7 +1257,7 @@ post '/deny_access' => require_login sub {
 
     my $user = logged_in_user;
 
-    send_error( 'Not allowed', 403 ) unless $user->{username} eq $ADMIN;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
     my $entry = schema->resultset('Message')->search( { id => params->{id} } );
     $entry->delete;
@@ -1267,10 +1266,14 @@ post '/deny_access' => require_login sub {
     halt;
 };
 
+sub is_admin {
+    my ($username) = @_;
+    my $entry = schema->resultset('User')->find( { username => $username } );
+    return $entry->admin ? 1 : 0;
+}
+
 sub login_page_handler {
-    my $login_fail_message = vars->{login_failed}
-        ? 'LOGIN FAILED'
-        : '';
+    my $login_fail_message = vars->{login_failed} ? 'LOGIN FAILED' : '';
     my $return_url = params->{return_url} || '';
 
     template 'login', {
