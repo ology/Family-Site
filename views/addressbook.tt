@@ -42,6 +42,7 @@
 </div>
 
 <% IF ! edit %>
+<p>Hint: Select the first name link to modify or delete the contact information.</p>
 <div id="data" class="data">
     <table border="0">
         <tr>
