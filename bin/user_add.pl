@@ -8,7 +8,8 @@ use Family::Site::Schema;
 use Term::ReadKey;
 use YAML::XS 'LoadFile';
 
-my $user = shift || die "Usage: perl $0 username\n";
+my $user     = shift || die "Usage: perl $0 Username [is_admin]\n";
+my $is_admin = shift || 0;
 
 my $config = LoadFile('config.yml');
 
@@ -43,7 +44,12 @@ else {
     my $entry = $schema->resultset('User')->create({ username => $user });
 
     $entry->password($encrypted);
+
+    $entry->admin(1) if $is_admin;
+
     $entry->update;
+
+    $schema->resultset('Address')->create( { first_name => $user } );
 
     my $path = 'public/album';
     mkdir( "$path/$user" ) or warn "Can't mkdir $path/$user: $!";
