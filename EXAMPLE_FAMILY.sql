@@ -153,6 +153,8 @@ CREATE TABLE `message` (
   `first_name` varchar(20) NOT NULL DEFAULT '',
   `last_name` varchar(20) NOT NULL DEFAULT '',
   `email` varchar(50) NOT NULL,
+  `month` int(2),
+  `day` int(2),
   `message` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

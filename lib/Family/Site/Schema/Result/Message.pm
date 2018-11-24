@@ -63,6 +63,16 @@ __PACKAGE__->table("message");
   is_nullable: 0
   size: 50
 
+=head2 month
+
+  data_type: 'integer'
+  is_nullable: 1
+
+=head2 day
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =head2 stamp
 
   data_type: 'timestamp'
@@ -91,6 +101,10 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 20 },
   "email",
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 50 },
+  "month",
+  { data_type => "integer", is_nullable => 1 },
+  "day",
+  { data_type => "integer", is_nullable => 1 },
   "stamp",
   {
     data_type => "timestamp",

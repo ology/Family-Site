@@ -9,6 +9,9 @@
         <br/>
         <input type="text" name="email" size="50" maxlength="50" placeholder="Email" />
         <br/>
+        Birthday month: <input type="text" name="month" size="2" maxlength="2" placeholder="##" />
+        Day: <input type="text" name="day" size="2" maxlength="2" placeholder="##" /> (optional)
+        <br/>
         <textarea name="message" rows="4" wrap="soft" class="chat" placeholder="How are we related?"></textarea>
         <br/>
         <input type="submit" name="request" value="Request" class="button-primary" />

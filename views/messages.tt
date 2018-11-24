@@ -23,6 +23,8 @@
         <input type="hidden" name="first_name" value="<% msg.first_name %>" />
         <input type="hidden" name="last_name" value="<% msg.last_name %>" />
         <input type="hidden" name="email" value="<% msg.email %>" />
+        <input type="hidden" name="month" value="<% msg.month %>" />
+        <input type="hidden" name="day" value="<% msg.day %>" />
         <input type="submit" name="grant" value=" Grant " />
     </form>
     <form action="/deny_access" method="post" class="block">

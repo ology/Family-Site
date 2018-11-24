@@ -1090,6 +1090,8 @@ post '/request_access' => sub {
             first_name => params->{first_name},
             last_name  => params->{last_name},
             email      => params->{email},
+            month      => params->{month},
+            day        => params->{day},
             message    => params->{message},
         }
     );
@@ -1196,6 +1198,8 @@ get '/messages' => require_login sub {
             first_name => scalar fix_latin( $result->first_name ),
             last_name  => scalar fix_latin( $result->last_name ),
             email      => $result->email,
+            month      => $result->month,
+            day        => $result->day,
             message    => scalar fix_latin( $result->message ),
         };
     }
@@ -1234,6 +1238,16 @@ post '/grant_access' => require_login sub {
             email      => params->{email},
         }
     );
+
+    if ( params->{month} && params->{day} ) {
+        schema->resultset('Calendar')->create(
+            {
+                title => $new_user,
+                month => params->{month},
+                day   => params->{day},
+            }
+        );
+    }
 
     my $path = "$ALBUM/$new_user";
     mkdir($path);
