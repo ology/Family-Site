@@ -30,7 +30,7 @@ Readonly my $CAPTION => 'caption.txt';
 Readonly my $ALBUM   => 'public/album';
 Readonly my $GEODAT  => $ENV{HOME} . '/geoip/GeoLiteCity.dat';
 Readonly my $PWSIZE  => 6;
-Readonly my $TZ      => 'America/Los_Angeles';
+Readonly my $TZ      => config->{timezone}; #'America/Los_Angeles';
 
 sub is_blocked {
     my ($remote_address) = @_;

@@ -2,6 +2,8 @@
 # env-related settings should go to environments/$env.yml.
 # All the settings in this file will be loaded at Dancer's startup.
 
+timezone: "America/Los_Angeles"
+
 # Your application's name
 appname: "Family::Site"
 
