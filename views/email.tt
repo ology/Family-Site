@@ -1,3 +1,5 @@
+<% page = 'email' %>
+
 <div class="container">
 
 <% INCLUDE 'head.tt' %>
