@@ -53,4 +53,20 @@
 </div>
 <% END %>
 
+<p id="show">Toggle all calendar entries</p>
+<div id="entries">
+<% FOREACH entry IN entries %>
+    <p><a href="/calendar/<% year %>/<% entry.month %>?id=<% entry.id %>"><% entry.title %></a> <% entry.month %>/<% entry.day %></p>
+<% END %>
 </div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+    $('#entries').hide();
+    $('#show').click(function() {
+      $('#entries').toggle("slide");
+    });
+});
+</script>

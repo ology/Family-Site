@@ -625,6 +625,19 @@ get '/calendar/:year/:month' => require_login sub {
             };
     }
 
+    # Collect all entries
+    my $all_records;
+    $events = schema->resultset('Calendar')->search( {}, { order_by => { -desc => [ 'month', 'day' ] } } );
+    while ( my $result = $events->next ) {
+        push @$all_records,
+            {
+                id    => $result->id,
+                title => scalar fix_latin( $result->title ),
+                month => $result->month,
+                day   => $result->day,
+            };
+    }
+
     # Instantiate a calendar object
     my $cal = HTML::CalendarMonthSimple->new(
         month => $month,
@@ -661,6 +674,7 @@ get '/calendar/:year/:month' => require_login sub {
         prev_month => $dt->clone->subtract( months => 1 )->month,
         next_month => $dt->clone->add( months => 1 )->month,
         edit       => $record,
+        entries    => $all_records,
         method     => params->{id} ? 'update' : 'add',
     };
 };
