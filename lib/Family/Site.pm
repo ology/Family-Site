@@ -627,7 +627,7 @@ get '/calendar/:year/:month' => require_login sub {
 
     # Collect all entries
     my $all_records;
-    $events = schema->resultset('Calendar')->search( {}, { order_by => { -desc => [ 'month', 'day' ] } } );
+    $events = schema->resultset('Calendar')->search( {}, { order_by => { -asc => [ 'month', 'day' ] } } );
     while ( my $result = $events->next ) {
         push @$all_records,
             {
