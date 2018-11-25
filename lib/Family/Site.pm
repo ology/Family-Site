@@ -1138,6 +1138,7 @@ get '/users' => require_login sub {
     my @users;
     my $users = schema->resultset('User')->search( {}, { order_by => 'username' } );
     while ( my $result = $users->next ) {
+        next if $result->username eq 'Admin';
         push @users, {
             id         => $result->id,
             username   => scalar fix_latin( $result->username ),
