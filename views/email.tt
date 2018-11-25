@@ -4,7 +4,7 @@
 
 <div class="row">
 <div class="twelve columns">
-    <p>Email: <% email %></p>
+    <p>Email: <a href="mailto:<% email %>" target="_blank"><% email %></a></p>
     <p>Hi <% name %>!</p>
     <p>Your access has been approved.</p>
     <p>Your user-name is <code><% name %></code> and your temporary password is <code><% password %></code>.
