@@ -1291,6 +1291,8 @@ post '/grant_access' => require_login sub {
         name     => params->{first_name},
         email    => params->{email},
         password => $pass,
+        database => config->{plugins}{Database}{database},
+        website  => 'http://chess.ology.net:8880/',
       };
 };
 
