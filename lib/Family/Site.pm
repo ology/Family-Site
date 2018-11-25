@@ -775,6 +775,8 @@ get '/album' => require_login sub {
     my $users = schema->resultset('User')->search( { active => 1 } );
     my $records;
     while ( my $result = $users->next ) {
+        next if $result->username eq 'Admin';
+
         my @files = File::Find::Rule->file()->in( $ALBUM . '/' . $result->username );
         @files = grep { !/\.txt$/ } @files;
         my @mtimes = map { { name => $_, mtime => (stat $_)[9] } } @files;
