@@ -8,7 +8,7 @@
 <div class="twelve columns">
     <p>Email: <a href="mailto:<% email %>" target="_blank"><% email %></a></p>
     <p>Hi <% name %>!</p>
-    <p>Your <% database %> access has been approved.</p>
+    <p>Your <% database %> website access has been approved.</p>
     <p>Your user-name is <code><% name %></code> and your temporary password is <code><% password %></code> - all letters.
     <p>Log-in to <a href="<% website %>"><% website %></a> with these credentials.</p>
     <p>Next you will be asked for your <b>real</b> password that you prefer.</p>
