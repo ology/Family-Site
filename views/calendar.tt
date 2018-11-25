@@ -55,9 +55,11 @@
 
 <p id="show"><a href="#">Toggle all calendar entries</a></p>
 <div id="entries">
+    <ol>
 <% FOREACH entry IN entries %>
-    <p><a href="/calendar/<% year %>/<% entry.month %>?id=<% entry.id %>"><% entry.title %></a> <% entry.month %>/<% entry.day %></p>
+        <li><a href="/calendar/<% year %>/<% entry.month %>?id=<% entry.id %>"><% entry.title %></a> <% entry.month %>/<% entry.day %></li>
 <% END %>
+    </ol>
 </div>
 
 </div>
