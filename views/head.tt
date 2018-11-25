@@ -9,7 +9,7 @@
         <b><a class="button" href="/">Chat</a></b>
 <!--     <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b> -->
         <b><a class="button" href="/cookbook">Cookbook</a></b>
-<% IF page == 'ban' || page == 'log' || page == 'users' || page == 'messages' %>
+<% IF page == 'ban' || page == 'email' || page == 'log' || page == 'users' || page == 'messages' %>
         <b><a class="button" href="/ban">Bans</a></b>
         <b><a class="button" href="/log">Log</a></b>
         <b><a class="button" href="/messages">Messages</a></b>
