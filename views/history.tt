@@ -1,0 +1,26 @@
+<% page = 'history' %>
+
+<div class="container">
+
+<% INCLUDE head.tt %>
+
+<div id="data" class="data">
+    <table border="0">
+        <tr>
+            <th>Who</th>
+            <th>What</th>
+            <th>When</th>
+            <th>IP</th>
+        </tr>
+    <% FOREACH entry IN entries %>
+        <tr>
+            <td><% entry.who %></td>
+            <td><% entry.what %></td>
+            <td><% entry.when %></td>
+            <td><% entry.remote_addr %></td>
+        </tr>
+    <% END %>
+    </table>
+</div>
+
+</div>

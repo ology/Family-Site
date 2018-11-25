@@ -1316,6 +1316,31 @@ post '/deny_access' => require_login sub {
     halt;
 };
 
+get '/history' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
+    my $user = logged_in_user;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
+
+    # Collect all entries
+    my $all_records;
+    my $events = schema->resultset('History')->search( {}, { order_by => { -desc => '`when`' } } );
+    while ( my $result = $events->next ) {
+        push @$all_records,
+            {
+                id          => $result->id,
+                who         => scalar fix_latin( $result->who ),
+                what        => $result->what,
+                when        => $result->when,
+                remote_addr => $result->remote_addr,
+            };
+    }
+
+    template 'history', {
+        entries => $all_records,
+    };
+};
+
 sub is_admin {
     my ($username) = @_;
     my $entry = schema->resultset('User')->find( { username => $username } );
