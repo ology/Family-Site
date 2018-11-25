@@ -1109,9 +1109,9 @@ post '/request_access' => sub {
 
     send_error( 'Both first and last name needed', 400 ) unless params->{first_name} && params->{last_name};
     send_error( 'Invalid email', 400 ) unless $address;
-    send_error( 'Month range: 1-12. Day range: 1-31', 400 ) unless params->{month} && params->{day}
-        && params->{month} >= 1 && params->{month} <= 12
-        && params->{day} >= 1 && params->{day} <= 31;
+    send_error( 'Month range: 1-12. Day range: 1-31', 400 ) if params->{month} && params->{day}
+        && !( params->{month} >= 1 && params->{month} <= 12
+        && params->{day} >= 1 && params->{day} <= 31 );
     send_error( 'Message required', 400 ) unless params->{message};
 
     schema->resultset('Message')->create(
@@ -1119,8 +1119,8 @@ post '/request_access' => sub {
             first_name => params->{first_name},
             last_name  => params->{last_name},
             email      => params->{email},
-            month      => params->{month},
-            day        => params->{day},
+            params->{month} ? ( month => params->{month} ) : (),
+            params->{day} ? ( day => params->{day} ) : (),
             message    => params->{message},
         }
     );
