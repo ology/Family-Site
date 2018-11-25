@@ -1287,9 +1287,11 @@ post '/grant_access' => require_login sub {
 
     flash message => 'New user created. Please contact ' . params->{email} . ' with their initial password, ' . $pass;
 
-    # Delete message entry
-    redirect '/messages';
-    halt;
+    template 'email', {
+        name     => params->{first_name},
+        email    => params->{email},
+        password => $pass,
+      };
 };
 
 post '/deny_access' => require_login sub {
