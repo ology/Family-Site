@@ -688,6 +688,10 @@ post '/event' => require_login sub {
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
     my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
+    send_error( 'Month range: 1-12. Day range: 1-31', 400 ) unless params->{month} && params->{day}
+        && params->{month} >= 1 && params->{month} <= 12
+        && params->{day} >= 1 && params->{day} <= 31;
+
     # Collect the parameters
     my $year  = params->{year}  || $YEAR;
     my $month = params->{month} || $MONTH;
@@ -1105,6 +1109,9 @@ post '/request_access' => sub {
 
     send_error( 'Both first and last name needed', 400 ) unless params->{first_name} && params->{last_name};
     send_error( 'Invalid email', 400 ) unless $address;
+    send_error( 'Month range: 1-12. Day range: 1-31', 400 ) unless params->{month} && params->{day}
+        && params->{month} >= 1 && params->{month} <= 12
+        && params->{day} >= 1 && params->{day} <= 31;
     send_error( 'Message required', 400 ) unless params->{message};
 
     schema->resultset('Message')->create(
