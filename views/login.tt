@@ -4,7 +4,7 @@
 
 <p>You need to log in to continue.</p>
 
-<% IF error %><p><% error %></p><% END %>
+<% IF error %><p><b><% error %></b></p><% END %>
 
 <form method="post">
     <input type="text" name="username" id="username" placeholder="Username" />
