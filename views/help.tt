@@ -41,4 +41,10 @@
 <p>On your home device, you can stay logged in as long as the browser cookie is present.</p>
 <p>In the event that the site has to be restarted or its session files cleared, you will have to re-authenticate.</p>
 
+<h2>Administrator Help</h2>
+
+<p>Visit the <a href="/log">Log page</a> to see a summary of activity and an additional set of admin buttons.</p>
+<p>When a new user account is made, an album block and an addressbook entry are made, as well as an optional calendar entry.</p>
+<p>There is no email component of signup/grant - the new account process is by personal communication between administrator and new user.</p>
+
 </div>
