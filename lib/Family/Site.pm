@@ -250,6 +250,8 @@ post '/chat' => require_login sub {
 
     # Append any user text to the chat file
     if ( defined $text && $text ne '' ) {
+        send_error( 'Angle brackets are not allowed. Please use the &lt; &gt; entities instead.', 400 )
+            if $text =~ /</ || $text =~ />/;
         my $now = DateTime->now( time_zone => $TZ )->ymd
             . ' ' . DateTime->now( time_zone => $TZ )->hms;
         my $html = '';
