@@ -31,6 +31,7 @@ Readonly my $ALBUM   => 'public/album';
 Readonly my $GEODAT  => $ENV{HOME} . '/geoip/GeoLiteCity.dat';
 Readonly my $PWSIZE  => 6;
 Readonly my $TZ      => config->{timezone}; #'America/Los_Angeles';
+Readonly my $ANGLE   => 'Angle brackets are not allowed. Please use the &lt; &gt; entities instead.';
 
 sub is_blocked {
     my ($remote_address) = @_;
@@ -250,8 +251,7 @@ post '/chat' => require_login sub {
 
     # Append any user text to the chat file
     if ( defined $text && $text ne '' ) {
-        send_error( 'Angle brackets are not allowed. Please use the &lt; &gt; entities instead.', 400 )
-            if $text =~ /</ || $text =~ />/;
+        send_error( $ANGLE, 400 ) if $text =~ /<|>/;
         my $now = DateTime->now( time_zone => $TZ )->ymd
             . ' ' . DateTime->now( time_zone => $TZ )->hms;
         my $html = '';
@@ -296,6 +296,8 @@ post '/password_set' => require_login sub {
     # Get the new passwords from the form
     my $new_pwd   = params->{new_password};
     my $new_again = params->{new_password_again};
+
+    send_error( $ANGLE, 400 ) if $new_pwd =~ /<|>/ || $new_again =~ /<|>/;
 
     # If we are valid...
     if ( $new_pwd && $new_again && length($new_pwd) >= $PWSIZE && $new_pwd eq $new_again ) {
@@ -501,6 +503,14 @@ get '/addressbook' => require_login sub {
 post '/address' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
+    send_error( $ANGLE, 400 ) if params->{first_name} =~ /<|>/
+        || params->{last_name} =~ /<|>/
+        || params->{street} =~ /<|>/
+        || params->{city} =~ /<|>/
+        || params->{notes} =~ /<|>/
+        || params->{birthday} =~ /<|>/
+    ;
+
     # Get the current user
     my $user  = logged_in_user;
 
@@ -683,6 +693,8 @@ get '/calendar/:year/:month' => require_login sub {
 
 post '/event' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
+    send_error( $ANGLE, 400 ) if params->{title} =~ /<|>/ || params->{note} =~ /<|>/;
 
     # Get the current user
     my $user  = logged_in_user;
@@ -917,6 +929,8 @@ get '/album/:user' => require_login sub {
 post '/caption' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
+    send_error( $ANGLE, 400 ) if params->{caption} =~ /<|>/;
+
     my $file         = params->{file};
     my $caption      = params->{caption};
     my $target       = params->{target};
@@ -1005,6 +1019,12 @@ get '/cookbook' => require_login sub {
 
 post '/recipe' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
+    send_error( $ANGLE, 400 ) if params->{title} =~ /<|>/
+        || params->{note} =~ /<|>/
+        || params->{ingredients} =~ /<|>/
+        || params->{instructions} =~ /<|>/
+    ;
 
     my $user = logged_in_user;
 
@@ -1108,6 +1128,11 @@ get '/request' => sub {
 
 post '/request_access' => sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
+    send_error( $ANGLE, 400 ) if params->{first_name} =~ /<|>/
+        || params->{last_name} =~ /<|>/
+        || params->{message} =~ /<|>/
+    ;
 
     my $address = Email::Valid->address( params->{email} );
 
