@@ -1354,11 +1354,45 @@ get '/history' => require_login sub {
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
-    # Collect all entries
-    my $all_records;
-    my $events = schema->resultset('History')->search( {}, { order_by => { -desc => 'when' } } );
+    template 'history';
+};
+
+post '/history_search' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
+    my $user = logged_in_user;
+    send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
+
+    my $when_start;
+    my $when_end;
+    if ( params->{when_start} || params->{when_end} ) {
+        if ( params->{when_start} ) {
+            $when_start = ParseDate( params->{when_start} );
+            $when_start = join '-', UnixDate( $when_start, '%Y', '%m', '%d', '%T' );
+        }
+        else {
+            $when_start = '1970-01-01';
+        }
+        if ( params->{when_end} ) {
+            $when_end = ParseDate( params->{when_end} );
+            $when_end = join '-', UnixDate( $when_end, '%Y', '%m', '%d', '%T' );
+        }
+        else {
+            $when_end = '2032-12-31';
+        }
+    }
+
+    my $where = {
+        params->{who} ? ( who => params->{who} ) : (),
+        params->{what} ? ( what => { LIKE => '%' . params->{what} . '%' } ) : (),
+        $when_start ? ( when => { -between => [ $when_start, $when_end ] } ) : (),
+        params->{remote_addr} ? ( remote_addr => params->{remote_addr} ) : (),
+    };
+
+    my $records;
+    my $events = schema->resultset('History')->search( $where, { order_by => { -desc => 'when' } } );
     while ( my $result = $events->next ) {
-        push @$all_records,
+        push @$records,
             {
                 id          => $result->id,
                 who         => scalar fix_latin( $result->who ),
@@ -1369,7 +1403,12 @@ get '/history' => require_login sub {
     }
 
     template 'history', {
-        entries => $all_records,
+        who         => params->{who},
+        what        => params->{what},
+        when_start  => $when_start,
+        when_end    => $when_end,
+        remote_addr => params->{remote_addr},
+        entries     => $records,
     };
 };
 
