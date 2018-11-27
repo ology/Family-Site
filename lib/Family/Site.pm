@@ -703,9 +703,9 @@ post '/event' => require_login sub {
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
     my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
-    send_error( 'Month range: 1-12. Day range: 1-31', 400 ) unless params->{month} && params->{day}
-        && params->{month} >= 1 && params->{month} <= 12
-        && params->{day} >= 1 && params->{day} <= 31;
+    send_error( 'Month range: 1-12. Day range: 1-31', 400 ) if params->{month} && params->{day}
+        && !( params->{month} >= 1 && params->{month} <= 12
+        && params->{day} >= 1 && params->{day} <= 31 );
 
     # Collect the parameters
     my $year  = params->{year}  || $YEAR;
