@@ -101,7 +101,7 @@ post '/block' => require_login sub {
 
     # Create a new entry
     if ( params->{add} && $ip ) {
-        schema->resultset('Ban')->create(
+        my $new_entry = schema->resultset('Ban')->create(
             {
                 ip        => $ip,
                 last_seen => $now,
@@ -110,7 +110,7 @@ post '/block' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => "ban $ip",
+            what => "ban $ip, id: " . $new_entry->id,
             remote_addr => request->remote_address,
         );
     }
@@ -126,7 +126,7 @@ post '/block' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => "update $ip ban",
+            what => "update ip ban id: $id",
             remote_addr => request->remote_address,
         );
     }
@@ -137,7 +137,7 @@ post '/block' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => "delete $ip ban",
+            what => "delete ip ban id: $id",
             remote_addr => request->remote_address,
         );
     }
@@ -527,7 +527,7 @@ post '/address' => require_login sub {
 
     # Create a new entry
     if ( params->{add} && params->{first_name} ) {
-        schema->resultset('Address')->create(
+        my $new_entry = schema->resultset('Address')->create(
             {
                 first_name => $first,
                 last_name  => $last,
@@ -555,7 +555,7 @@ post '/address' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'add address for ' . $first . ' ' . $last,
+            what => 'add address for ' . $first . ', id: ' . $new_entry->id,
             remote_addr => request->remote_address,
         );
     }
@@ -720,7 +720,7 @@ post '/event' => require_login sub {
     # Add a new entry
     send_error( 'No title given', 400 ) if params->{add} && !$title;
     if ( params->{add} && $title && $month && $day ) {
-        schema->resultset('Calendar')->create(
+        my $new_entry = schema->resultset('Calendar')->create(
             {
                 title 	  => $title,
                 month     => $month,
@@ -742,7 +742,7 @@ post '/event' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'add event: ' . $title,
+            what => 'add event: ' . $title . ', id: ' . $new_entry->id,
             remote_addr => request->remote_address,
         );
     }
@@ -1031,7 +1031,7 @@ post '/recipe' => require_login sub {
 
     # Create a new entry
     if ( params->{add} && params->{title} ) {
-        schema->resultset('Cookbook')->create(
+        my $new_entry = schema->resultset('Cookbook')->create(
             {
                 title        => params->{title},
                 user         => $user->{username},
@@ -1054,7 +1054,7 @@ post '/recipe' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'add recipe: ' . params->{title},
+            what => 'add recipe: ' . params->{title} . ', id: ' . $new_entry->id,
             remote_addr => request->remote_address,
         );
     }
@@ -1202,7 +1202,7 @@ post '/user_delete' => require_login sub {
     schema->resultset('History')->create(
         {
             who  => $user->{username},
-            what => 'deleted: ' . params->{username} . " ($count files removed)",
+            what => 'deleted id: ' . params->{id} . " ($count files removed)",
             remote_addr => request->remote_address,
         }
     );
@@ -1234,7 +1234,7 @@ post '/user_reset' => require_login sub {
     schema->resultset('History')->create(
         {
             who  => $user->{username},
-            what => 'reset password for: ' . params->{username},
+            what => 'reset password for id: ' . params->{id},
             remote_addr => request->remote_address,
         }
     );
@@ -1313,13 +1313,13 @@ post '/grant_access' => require_login sub {
     mkdir($path);
     open( my $fh, '>', "$path/caption.txt" ) if -d $path;
 
-    $entry = schema->resultset('Message')->search( { id => params->{id} } );
-    $entry->delete;
+    my $msg = schema->resultset('Message')->search( { id => params->{id} } );
+    $msg->delete;
 
     schema->resultset('History')->create(
         {
             who  => $user->{username},
-            what => 'new user: ' . params->{first_name},
+            what => 'new user: ' . params->{first_name} . ', id: ' . $entry->id,
             remote_addr => request->remote_address,
         }
     );
