@@ -1132,6 +1132,7 @@ post '/request_access' => sub {
 
     send_error( $ANGLE, 400 ) if params->{first_name} =~ /<|>/
         || params->{last_name} =~ /<|>/
+        || params->{email} =~ /<|>/
         || params->{message} =~ /<|>/
     ;
 
