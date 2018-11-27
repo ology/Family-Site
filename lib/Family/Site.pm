@@ -509,6 +509,7 @@ post '/address' => require_login sub {
         || params->{city} =~ /<|>/
         || params->{notes} =~ /<|>/
         || params->{birthday} =~ /<|>/
+        || params->{email} =~ /<|>/
     ;
 
     # Get the current user
