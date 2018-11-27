@@ -1356,7 +1356,7 @@ get '/history' => require_login sub {
 
     # Collect all entries
     my $all_records;
-    my $events = schema->resultset('History')->search( {}, { order_by => { -desc => '`when`' } } );
+    my $events = schema->resultset('History')->search( {}, { order_by => { -desc => 'when' } } );
     while ( my $result = $events->next ) {
         push @$all_records,
             {

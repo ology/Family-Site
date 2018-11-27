@@ -52,6 +52,8 @@ plugins:
         dsn: "dbi:mysql:database=example_family"
         user: 'root'
         password: 'abc123'
+        options:
+            quote_names: 1
   Auth::Extensible:
         exit_page: '/'
         login_page_handler: 'Family::Site::login_page_handler'
