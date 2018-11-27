@@ -555,7 +555,7 @@ post '/address' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'add "' . $first . ' ' . $last . '" address',
+            what => 'add address for ' . $first . ' ' . $last,
             remote_addr => request->remote_address,
         );
     }
@@ -580,7 +580,7 @@ post '/address' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'update address for id:' . params->{id},
+            what => 'update address id: ' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -591,7 +591,7 @@ post '/address' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'delete address for id:' . params->{id},
+            what => 'delete address id: ' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -761,7 +761,7 @@ post '/event' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'update event: ' . $title,
+            what => 'update event id: ' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -772,7 +772,7 @@ post '/event' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'delete event:' . $title,
+            what => 'delete event id:' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -1073,7 +1073,7 @@ post '/recipe' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'update recipe: ' . params->{id},
+            what => 'update recipe id: ' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -1084,7 +1084,7 @@ post '/recipe' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'delete recipe: ' . params->{id},
+            what => 'delete recipe id: ' . params->{id},
             remote_addr => request->remote_address,
         );
     }
