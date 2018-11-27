@@ -32,7 +32,7 @@
                     <% END %>
                 </ol>
                 <p>Cookbook entries: <% recipes %></p>
-                <p>Message entries: <% msgnum %></p>
+                <p><% IF msgnum > 0 %><b><% END %>Message entries: <% msgnum %><% IF msgnum %></b><% END %></p>
 <!--
                 <p>
                     <img src="<% files.0 %>" height="10%" width="10%" />
