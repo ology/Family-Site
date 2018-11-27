@@ -27,7 +27,7 @@
 <h2>Chat</h2>
 
 <p>For this demo, the time stamps are all in the Pacific time-zone, but can be anywhere for a particular site.</p>
-<p>Angle brackets are not allowed. Please use the <code>&lt;</code> and <code>&gt;</code> HTML entities instead.</p>
+<p>Angle brackets are not allowed. Please use the <pre>&lt;</pre> and <pre>&gt;</pre> HTML entities instead.</p>
 
 <h2>Cookbook</h2>
 
