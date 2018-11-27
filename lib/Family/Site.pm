@@ -567,7 +567,7 @@ post '/address' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'update ' . params->{id} . ' address',
+            what => 'update address for id:' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -578,7 +578,7 @@ post '/address' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'delete ' . params->{id} . ' address',
+            what => 'delete address for id:' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -727,7 +727,7 @@ post '/event' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'add "' . $title . '" event',
+            what => 'add event: ' . $title,
             remote_addr => request->remote_address,
         );
     }
@@ -746,7 +746,7 @@ post '/event' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'update "' . $title . '" event',
+            what => 'update event: ' . $title,
             remote_addr => request->remote_address,
         );
     }
@@ -757,7 +757,7 @@ post '/event' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'delete "' . $title . '" event',
+            what => 'delete event:' . $title,
             remote_addr => request->remote_address,
         );
     }
@@ -825,7 +825,7 @@ post '/upload' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'add ' . $name . ' file',
+            what => 'add file: ' . $name,
             remote_addr => request->remote_address,
         );
     }
@@ -853,7 +853,7 @@ post '/delete' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'delete ' . $file . ' file',
+            what => 'delete file: ' . $file,
             remote_addr => request->remote_address,
         );
     }
@@ -1031,7 +1031,7 @@ post '/recipe' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'add ' . params->{title} . ' recipe',
+            what => 'add recipe: ' . params->{title},
             remote_addr => request->remote_address,
         );
     }
@@ -1050,7 +1050,7 @@ post '/recipe' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'update ' . params->{id} . ' recipe',
+            what => 'update recipe: ' . params->{id},
             remote_addr => request->remote_address,
         );
     }
@@ -1061,7 +1061,7 @@ post '/recipe' => require_login sub {
 
         _add_history(
             who  => $user->{username},
-            what => 'delete ' . params->{id} . ' recipe',
+            what => 'delete recipe: ' . params->{id},
             remote_addr => request->remote_address,
         );
     }
