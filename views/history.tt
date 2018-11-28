@@ -14,7 +14,9 @@
     <input type="text" name="when_start" size="20" maxlength="20" value="<% when_start %>" placeholder="When start?" />
     <input type="text" name="when_end" size="20" maxlength="20" value="<% when_end %>" placeholder="When end?" />
     <input type="submit" name="search" value="Search" class="button-primary" />
+<% IF reset != 0 %>
     <input type="reset" name="reset" value="Reset" class="button" />
+<% END %>
     </form>
 </div>
 </div>

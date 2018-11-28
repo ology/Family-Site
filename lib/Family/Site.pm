@@ -1409,6 +1409,7 @@ post '/history_search' => require_login sub {
         when_end    => $when_end,
         remote_addr => params->{remote_addr},
         entries     => $records,
+        reset       => 0,
     };
 };
 
