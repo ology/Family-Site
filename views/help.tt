@@ -47,6 +47,6 @@
 <p>Visit the <a href="/log">Log page</a> to see a summary of activity and an additional set of admin buttons.</p>
 <p>When a new user account is made, an album block and an addressbook entry are made, as well as an optional calendar entry.</p>
 <p>There is no email component of signup/grant - the new account process is by personal communication between administrator and new user.</p>
-<p>The history page date inputs will accept many common formats, including "yesterday" and "11/26/18."</p>
+<p>The history page date inputs will accept many common formats, including "yesterday", "today", and "11/26/18."</p>
 
 </div>
