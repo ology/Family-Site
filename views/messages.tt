@@ -16,12 +16,15 @@
     <% msg.first_name %> <% msg.last_name %>
     <<a href="mailto:<% msg.email %>"><% msg.email %></a>>
     <br/>
+    Username: <% msg.username %>
+    <br/>
     <% msg.message %>
     <br/>
     <form action="/grant_access" method="post" class="block">
         <input type="hidden" name="id" value="<% msg.id %>" />
         <input type="hidden" name="first_name" value="<% msg.first_name %>" />
         <input type="hidden" name="last_name" value="<% msg.last_name %>" />
+        <input type="hidden" name="username" value="<% msg.username %>" />
         <input type="hidden" name="email" value="<% msg.email %>" />
         <input type="hidden" name="month" value="<% msg.month %>" />
         <input type="hidden" name="day" value="<% msg.day %>" />

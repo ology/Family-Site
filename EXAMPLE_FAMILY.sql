@@ -152,6 +152,7 @@ CREATE TABLE `message` (
   `stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `first_name` varchar(20) NOT NULL DEFAULT '',
   `last_name` varchar(20) NOT NULL DEFAULT '',
+  `username` varchar(20) DEFAULT '',
   `email` varchar(50) NOT NULL,
   `month` int(2),
   `day` int(2),

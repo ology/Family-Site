@@ -1132,13 +1132,14 @@ post '/request_access' => sub {
 
     send_error( $ANGLE, 400 ) if params->{first_name} =~ /<|>/
         || params->{last_name} =~ /<|>/
+        || params->{username} =~ /<|>/
         || params->{email} =~ /<|>/
         || params->{message} =~ /<|>/
     ;
 
     my $address = Email::Valid->address( params->{email} );
 
-    send_error( 'Both first and last name needed', 400 ) unless params->{first_name} && params->{last_name};
+    send_error( 'Both first and last name are required', 400 ) unless params->{first_name} && params->{last_name};
     send_error( 'Invalid email', 400 ) unless $address;
     send_error( 'Month range: 1-12. Day range: 1-31', 400 ) if params->{month} && params->{day}
         && !( params->{month} >= 1 && params->{month} <= 12
@@ -1149,6 +1150,7 @@ post '/request_access' => sub {
         {
             first_name => params->{first_name},
             last_name  => params->{last_name},
+            username   => params->{username},
             email      => params->{email},
             params->{month} ? ( month => params->{month} ) : (),
             params->{day} ? ( day => params->{day} ) : (),
@@ -1258,6 +1260,7 @@ get '/messages' => require_login sub {
             id         => $result->id,
             first_name => scalar fix_latin( $result->first_name ),
             last_name  => scalar fix_latin( $result->last_name ),
+            username   => scalar fix_latin( $result->username ),
             email      => $result->email,
             month      => $result->month,
             day        => $result->day,
@@ -1278,10 +1281,10 @@ post '/grant_access' => require_login sub {
 
     my $pass = Text::Password::Pronounceable->generate( $PWSIZE, $PWSIZE );
 
-    my $new_user = params->{first_name};
+    my $new_user = params->{username} || params->{first_name};
 
     my @entries = schema->resultset('User')->search( { username => $new_user } );
-    send_error( 'Duplicate user first name', 400 ) if @entries;
+    send_error( 'Duplicate username', 400 ) if @entries;
 
     my $csh = Crypt::SaltedHash->new( algorithm => 'SHA-1' );
     $csh->add($pass);
@@ -1293,7 +1296,7 @@ post '/grant_access' => require_login sub {
 
     schema->resultset('Address')->create(
         {
-            first_name => $new_user,
+            first_name => params->{first_name},
             last_name  => params->{last_name},
             email      => params->{email},
         }
@@ -1302,7 +1305,7 @@ post '/grant_access' => require_login sub {
     if ( params->{month} && params->{day} ) {
         schema->resultset('Calendar')->create(
             {
-                title => $new_user,
+                title => params->{first_name},
                 month => params->{month},
                 day   => params->{day},
             }
@@ -1319,7 +1322,7 @@ post '/grant_access' => require_login sub {
     schema->resultset('History')->create(
         {
             who  => $user->{username},
-            what => 'new user: ' . params->{first_name} . ', id: ' . $entry->id,
+            what => "new user: $new_user, id: " . $entry->id,
             remote_addr => request->remote_address,
         }
     );
@@ -1328,6 +1331,7 @@ post '/grant_access' => require_login sub {
 
     template 'email', {
         name     => params->{first_name},
+        username => $new_user,
         email    => params->{email},
         password => $pass,
         database => config->{plugins}{Database}{database},

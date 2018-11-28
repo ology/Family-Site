@@ -56,6 +56,13 @@ __PACKAGE__->table("message");
   is_nullable: 0
   size: 20
 
+=head2 username
+
+  data_type: 'varchar'
+  default_value: (empty string)
+  is_nullable: 1
+  size: 20
+
 =head2 email
 
   data_type: 'varchar'
@@ -99,6 +106,8 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 20 },
   "last_name",
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 20 },
+  "username",
+  { data_type => "varchar", default_value => "", is_nullable => 1, size => 20 },
   "email",
   { data_type => "varchar", default_value => "", is_nullable => 0, size => 50 },
   "month",
