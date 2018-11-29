@@ -1144,7 +1144,7 @@ post '/request_access' => sub {
     send_error( 'Month range: 1-12. Day range: 1-31', 400 ) if params->{month} && params->{day}
         && !( params->{month} >= 1 && params->{month} <= 12
         && params->{day} >= 1 && params->{day} <= 31 );
-    send_error( 'Message required', 400 ) unless params->{message};
+#    send_error( 'Message required', 400 ) unless params->{message};
 
     schema->resultset('Message')->create(
         {
