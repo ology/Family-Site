@@ -7,7 +7,7 @@
         <input type="text" name="first_name" size="20" maxlength="20" placeholder="First name" />
         <input type="text" name="last_name" size="20" maxlength="20" placeholder="Last name" />
         <br/>
-        <input type="text" name="email" size="50" maxlength="50" placeholder="Email" />
+        <input type="text" name="email" size="40" maxlength="50" placeholder="Email" />
         <br/>
         <input type="text" name="username" size="20" maxlength="20" placeholder="User name" /> (first name if left blank)
         <br/>
