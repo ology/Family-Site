@@ -18,8 +18,10 @@
     <br/>
     Username: <% msg.username %>
     <br/>
+<!--
     <% msg.message %>
     <br/>
+-->
     <form action="/grant_access" method="post" class="block">
         <input type="hidden" name="id" value="<% msg.id %>" />
         <input type="hidden" name="first_name" value="<% msg.first_name %>" />
