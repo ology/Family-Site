@@ -466,7 +466,7 @@ get '/addressbook' => require_login sub {
     # Collect all entries
     my $records;
     my @sorted;
-    my $results = schema->resultset('Address')->search( undef, { order_by => { -asc => [ 'last_name', 'first_name' ] } } );
+    my $results = schema->resultset('Address')->search( { active => 1 }, { order_by => { -asc => [ 'last_name', 'first_name' ] } } );
     while ( my $result = $results->next ) {
         push @sorted, $result->id;
         $records->{ $result->id } =
