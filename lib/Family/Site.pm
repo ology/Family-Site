@@ -1335,7 +1335,7 @@ post '/grant_access' => require_login sub {
         email    => params->{email},
         password => $pass,
         database => config->{plugins}{Database}{database},
-        website  => 'http://chess.ology.net:8880/',
+        website  => 'http://dev.ology.net:8880/',
       };
 };
 
