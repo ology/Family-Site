@@ -23,14 +23,14 @@
         <input type="text" name="phone2" size="12" maxlength="15" value="<% edit.phone2 %>" placeholder="Phone2">
         <input type="text" name="email" size="20" maxlength="50" value="<% edit.email %>" placeholder="Email">
         &nbsp;
-        <% IF method == 'add' %>
+<% IF method == 'add' %>
             <input type="submit" name="add" value="Add" class="button-primary" />
-        <% ELSE %>
+<% ELSE %>
             <input type="hidden" name="id" value="<% edit.id %>">
             <input type="submit" name="update" value="Update" class="button-primary" />
             &nbsp;
             <a href="/addressbook" class="button">Cancel</a>
-        <% END %>
+<% END %>
     </form>
 <% IF edit %>
     <form action="/address" method="post">
