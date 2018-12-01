@@ -1327,8 +1327,6 @@ post '/grant_access' => require_login sub {
         }
     );
 
-    flash message => 'New user created. Please contact ' . params->{email} . ' with their initial password, ' . $pass;
-
     template 'email', {
         name     => params->{first_name},
         username => $new_user,
