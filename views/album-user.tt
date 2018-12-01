@@ -11,13 +11,6 @@
         <input type="file" name="filename"/>
         <input type="hidden" name="target" value="<% target %>"/>
         <input type="submit" value=" Add " class="button-primary"/>
-<!--
-    <% IF target == 'Family' %>
-        ( Adding to <b>album/Family</b> )
-    <% ELSE %>
-        ( Adding to <b>album/<% user %></b> )
-    <% END %>
--->
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br />
         &nbsp; <b>Hints: 4MB maximum size. To save a caption, press ENTER after typing it.</b>
@@ -29,17 +22,17 @@
 
 <div id="data">
 <% FOREACH file IN files %>
-<% IF file.match('(?i)\.gif$') || file.match('(?i)\.jpe?g$') || file.match('(?i)\.png$') %>
+    <% IF file.match('(?i)\.gif$') || file.match('(?i)\.jpe?g$') || file.match('(?i)\.png$') %>
     <% img_src = target _ '/' _ file %>
-<% ELSIF file.match('\.pdf$') %>
+    <% ELSIF file.match('\.pdf$') %>
     <% img_src = '/images/pdf.png' %>
-<% ELSIF file.match('\.mp3') %>
+    <% ELSIF file.match('\.mp3') %>
     <% img_src = '/images/audio.png' %>
-<% ELSIF file.match('\.mp4') %>
+    <% ELSIF file.match('\.mp4') %>
     <% img_src = '/images/video.png' %>
-<% ELSE %>
+    <% ELSE %>
     <% img_src = '/images/file.png' %>
-<% END %>
+    <% END %>
 <div class="img">
     <a href="<% target %>/<% file %>"><img src="<% img_src %>" height="10%" width="10%" /></a>
     <div class="desc">
