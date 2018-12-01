@@ -1400,7 +1400,7 @@ post '/history_search' => require_login sub {
             {
                 id          => $result->id,
                 who         => scalar fix_latin( $result->who ),
-                what        => $result->what,
+                what        => scalar fix_latin( $result->what ),
                 when        => $result->when,
                 remote_addr => $result->remote_addr,
             };
