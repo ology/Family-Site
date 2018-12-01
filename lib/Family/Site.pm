@@ -546,11 +546,11 @@ post '/address' => require_login sub {
         # Add a post to the chat about this entry.
         if ( params->{notify} ) {
             my $text = sprintf
-                '%s %s: Added address for %s %s',
+                "%s %s: Added address for %s %s\n",
                 $user->{username},
                 DateTime->now( time_zone => $TZ ),
                 $first, $last;
-            "$text\n" >> io($FILE);
+            $text >> io($FILE);
         }
 
         _add_history(
@@ -733,11 +733,11 @@ post '/event' => require_login sub {
         # Add a post to the chat about this entry.
         if ( params->{notify} ) {
             my $text = sprintf
-                '%s %s: Added %d/%d event: %s',
+                "%s %s: Added %d/%d event: %s\n",
                 $user->{username},
                 DateTime->now( time_zone => $TZ ),
                 $month, $day, $title;
-            "$text\n" >> io($FILE);
+            $text >> io($FILE);
         }
 
         _add_history(
@@ -831,11 +831,11 @@ post '/upload' => require_login sub {
                 : $name =~ /\.mp4$/i ? '/images/video.png'
                 : '/images/file.png';
             my $text = sprintf
-                '%s %s: Uploaded: <a href="album/%s"><img src="%s" height="10%" width="10%" class="vmid" /></a>',
+                qq|%s %s: Uploaded: <a href="album/%s"><img src="%s" height="10%" width="10%" class="vmid" /></a>\n|,
                 $user->{username},
                 DateTime->now( time_zone => $TZ ),
                 $name, $src;
-            "$text\n" >> io($FILE);
+            $text >> io($FILE);
         }
 
         _add_history(
@@ -1045,11 +1045,11 @@ post '/recipe' => require_login sub {
         # Add a post to the chat about this entry.
         if ( params->{notify} ) {
             my $text = sprintf
-                '%s %s: Added recipe: %s',
+                "%s %s: Added recipe: %s\n",
                 $user->{username},
                 DateTime->now( time_zone => $TZ ),
                 params->{title};
-            "$text\n" >> io($FILE);
+            $text >> io($FILE);
         }
 
         _add_history(
