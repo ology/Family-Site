@@ -9,15 +9,15 @@
     <form action="/block" method="post">
         <br clear="all"/>
         <input type="text" name="ip" size="15" maxlength="15" value="<% entry.ip %>" placeholder="IP">
-        <% IF method == 'add' %>
+<% IF method == 'add' %>
             <input type="submit" name="add" value=" Add " class="button-primary" />
-        <% ELSE %>
+<% ELSE %>
             <input type="hidden" name="id" value="<% entry.id %>">
             <input type="hidden" name="last_seen" value="<% entry.last_seen %>">
             <input type="submit" name="update" value=" Update " class="button-primary" />
             &nbsp;
             <a href="/ban" class="button">Cancel</a>
-        <% END %>
+<% END %>
     </form>
 <% IF entry %>
     <form action="/block" method="post">

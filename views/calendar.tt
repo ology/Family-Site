@@ -17,14 +17,14 @@
         <br/>
         <input type="text" name="note" size="60" maxlength="90" value="<% edit.note %>" placeholder="Event notes">
         &nbsp;
-        <% IF method == 'add' %>
+<% IF method == 'add' %>
             <input type="submit" name="add" value="Add" class="button-primary" />
-        <% ELSE %>
+<% ELSE %>
             <input type="hidden" name="id" value="<% edit.id %>">
             <input type="submit" name="update" value="Update" class="button-primary" />
             &nbsp;
             <a href="/calendar/<% year %>/<% month %>" class="button">Cancel</a>
-        <% END %>
+<% END %>
     </form>
 <% IF edit %>
     <form action="/event" method="post">

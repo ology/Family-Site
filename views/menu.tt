@@ -1,12 +1,12 @@
 <div class="menu">
-<a href="/cookbook?type=appetizer">Appetizer</a> |
-<a href="/cookbook?type=crockpot">Crockpot</a> |
-<a href="/cookbook?type=dessert">Dessert</a> |
-<a href="/cookbook?type=drink">Drink</a> |
-<a href="/cookbook?type=entree">Entree</a> |
-<a href="/cookbook?type=other">Other</a> |
-<a href="/cookbook?type=salad">Salad</a> |
-<a href="/cookbook?type=sauce">Sauce</a> |
-<a href="/cookbook?type=soup">Soup</a> |
-<b><a href="/cookbook?new=1">NEW</a></b>
+    <a href="/cookbook?type=appetizer">Appetizer</a> |
+    <a href="/cookbook?type=crockpot">Crockpot</a> |
+    <a href="/cookbook?type=dessert">Dessert</a> |
+    <a href="/cookbook?type=drink">Drink</a> |
+    <a href="/cookbook?type=entree">Entree</a> |
+    <a href="/cookbook?type=other">Other</a> |
+    <a href="/cookbook?type=salad">Salad</a> |
+    <a href="/cookbook?type=sauce">Sauce</a> |
+    <a href="/cookbook?type=soup">Soup</a> |
+    <b><a href="/cookbook?new=1">NEW</a></b>
 </div>

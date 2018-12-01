@@ -10,9 +10,9 @@
 <div class="twelve columns">
     <form action="/recipe" method="post">
         <input type="text" name="title" size="50" maxlength="90" value="<% entry.title %>" placeholder="Recipe title">
-<% IF method == 'add' %>
+    <% IF method == 'add' %>
         &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
-<% END %>
+    <% END %>
         <br/>
         <select name="type">
             <option value="appetizer" <% entry.type == 'appetizer' ? 'selected' : '' %>>Appetizer</option>
@@ -32,24 +32,24 @@
         <br/>
         <textarea name="instructions" rows="20" cols="60" placeholder="Instructions"><% entry.instructions %></textarea>
         <br/>
-        <% IF method == 'add' %>
+    <% IF method == 'add' %>
             <input type="submit" name="add" value="Add" class="button-primary" />
             &nbsp;
             <a href="/cookbook" class="button">Cancel</a>
-        <% ELSE %>
+    <% ELSE %>
             <input type="hidden" name="id" value="<% entry.id %>">
             <input type="submit" name="update" value="Update" class="button-primary" />
             &nbsp;
             <a href="/cookbook?id=<% entry.id %>" class="button">Cancel</a>
-        <% END %>
+    <% END %>
     </form>
-        <% IF entry %>
+    <% IF entry %>
     <br />
     <form action="/recipe" method="post">
         <input type="hidden" name="id" value="<% entry.id %>">
         <input type="submit" name="delete" value="Delete" class="button-primary" onclick="return confirm('Delete <% entry.title %>?')"/>
     </form>
-        <% END %>
+    <% END %>
 </div>
 </div>
 <% ELSE %>
