@@ -30,7 +30,7 @@ Readonly my $CAPTION => 'caption.txt';
 Readonly my $ALBUM   => 'public/album';
 Readonly my $GEODAT  => $ENV{HOME} . '/geoip/GeoLiteCity.dat';
 Readonly my $PWSIZE  => 6;
-Readonly my $TZ      => config->{timezone}; #'America/Los_Angeles';
+Readonly my $TZ      => config->{timezone};
 Readonly my $ANGLE   => 'Angle brackets are not allowed. Please use the &lt; &gt; entities instead.';
 
 sub is_blocked {
