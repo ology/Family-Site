@@ -1,5 +1,4 @@
 bin/app.pl
-bin/new_user.pl
 bin/user_add.pl
 bin/user_delete.pl
 bin/user_reset.pl
@@ -27,7 +26,6 @@ public/404.html
 public/500.html
 public/album/Family/caption.txt
 public/album/Family/example_family.jpg
-public/album/Gene/caption.txt
 public/css/error.css
 public/css/normalize.css
 public/css/skeleton.css
@@ -36,8 +34,6 @@ public/dispatch.cgi
 public/dispatch.fcgi
 public/favicon.ico
 public/images/audio.png
-public/images/family-logo.jpg
-public/images/Family-Site.png
 public/images/file.png
 public/images/pdf.png
 public/images/person.png
@@ -48,6 +44,8 @@ public/robots.txt
 README.md
 t/001_base.t
 t/002_index_route.t
+t/003_login_route.t
+t/004_request_route.t
 views/addressbook.tt
 views/album-user.tt
 views/album.tt
