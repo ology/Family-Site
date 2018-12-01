@@ -62,9 +62,9 @@
 
 <div class="row">
     <div class="nine columns">
-    <% FOREACH line IN chat %>
+<% FOREACH line IN chat %>
         <% line %>
-    <% END %>
+<% END %>
     </div>
     <div class="three columns">
         <b>This month:</b><br/>
@@ -80,13 +80,13 @@
         <hr/>
         <b>This year:</b><br/>
         <ul class="event">
-<% FOREACH event IN important %>
-<% NEXT IF event.month == month %>
+    <% FOREACH event IN important %>
+        <% NEXT IF event.month == month %>
             <li>
                 <i><a href="/calendar/<% year %>/<% event.month %>"><% event.month %>/<% event.day %></a></i> - <% event.title %>
                 <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
             </li>
-<% END %>
+    <% END %>
         </ul>
 <% END %>
     </div>
