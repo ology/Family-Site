@@ -251,7 +251,8 @@ post '/chat' => require_login sub {
 
     # Append any user text to the chat file
     if ( defined $text && $text ne '' ) {
-        send_error( $ANGLE, 400 ) if $text =~ /<|>/;
+        $text = defang($text);
+
         my $now = DateTime->now( time_zone => $TZ )->ymd
             . ' ' . DateTime->now( time_zone => $TZ )->hms;
         my $html = '';
@@ -296,8 +297,6 @@ post '/password_set' => require_login sub {
     # Get the new passwords from the form
     my $new_pwd   = params->{new_password};
     my $new_again = params->{new_password_again};
-
-    send_error( $ANGLE, 400 ) if $new_pwd =~ /<|>/ || $new_again =~ /<|>/;
 
     # If we are valid...
     if ( $new_pwd && $new_again && length($new_pwd) >= $PWSIZE && $new_pwd eq $new_again ) {
@@ -503,43 +502,34 @@ get '/addressbook' => require_login sub {
 post '/address' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
-    send_error( $ANGLE, 400 ) if params->{first_name} =~ /<|>/
-        || params->{last_name} =~ /<|>/
-        || params->{street} =~ /<|>/
-        || params->{city} =~ /<|>/
-        || params->{notes} =~ /<|>/
-        || params->{birthday} =~ /<|>/
-        || params->{email} =~ /<|>/
-    ;
+    my $first_name = defang(params->{first_name});
+    my $last_name = defang(params->{last_name});
+    my $street = defang(params->{street});
+    my $city = defang(params->{city});
+    my $state = defang(params->{state});
+    my $zip = defang(params->{zip});
+    my $notes = defang(params->{notes});
+    my $phone = defang(params->{phone});
+    my $phone2 = defang(params->{phone2});
+    my $email = defang(params->{email});
 
     # Get the current user
     my $user  = logged_in_user;
 
-    # Parse the birthday, if given
-    my $birthday;
-    if ( params->{birthday} ) {
-        $birthday = ParseDate( params->{birthday} );
-        $birthday = join '-', UnixDate( $birthday, "%Y", "%m", "%d" );
-    }
-
-    my $first = params->{first_name};
-    my $last  = params->{last_name};
-
     # Create a new entry
-    if ( params->{add} && params->{first_name} ) {
+    if ( params->{add} && $first_name ) {
         my $new_entry = schema->resultset('Address')->create(
             {
-                first_name => $first,
-                last_name  => $last,
-                street     => params->{street},
-                city       => params->{city},
-                state      => params->{state},
-                zip        => params->{zip},
-                phone      => params->{phone},
-                phone2     => params->{phone2},
-                email      => params->{email},
-                notes      => params->{notes},
-                birthday   => $birthday,
+                first_name => $first_name,
+                last_name  => $last_name,
+                street     => $street,
+                city       => $city,
+                state      => $state,
+                zip        => $zip,
+                phone      => $phone,
+                phone2     => $phone2,
+                email      => $email,
+                notes      => $notes,
             }
         );
 
@@ -549,13 +539,13 @@ post '/address' => require_login sub {
                 "%s %s: Added address for %s %s\n",
                 $user->{username},
                 DateTime->now( time_zone => $TZ ),
-                $first, $last;
+                $first_name, $last_name;
             $text >> io($FILE);
         }
 
         _add_history(
             who  => $user->{username},
-            what => 'add address for ' . $first . ', id: ' . $new_entry->id,
+            what => 'add address for ' . $first_name . ', id: ' . $new_entry->id,
             remote_addr => request->remote_address,
         );
     }
@@ -564,18 +554,17 @@ post '/address' => require_login sub {
     my $entry = schema->resultset('Address')->find( { id => params->{id} } );
 
     # Update the entry
-    if ( params->{update} && params->{first_name} ) {
-        $entry->first_name( params->{first_name} );
-        $entry->last_name( params->{last_name} );
-        $entry->street( params->{street} );
-        $entry->city( params->{city} );
-        $entry->state( params->{state} );
-        $entry->zip( params->{zip} );
-        $entry->phone( params->{phone} );
-        $entry->phone2( params->{phone2} );
-        $entry->email( params->{email} );
-        $entry->notes( params->{notes} );
-        $entry->birthday($birthday);
+    if ( params->{update} && $first_name ) {
+        $entry->first_name($first_name);
+        $entry->last_name($last_name);
+        $entry->street($street);
+        $entry->city($city);
+        $entry->state($state);
+        $entry->zip($zip);
+        $entry->phone($phone);
+        $entry->phone2($phone2);
+        $entry->email($email);
+        $entry->notes($notes);
         $entry->update;
 
         _add_history(
@@ -695,8 +684,6 @@ get '/calendar/:year/:month' => require_login sub {
 post '/event' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
-    send_error( $ANGLE, 400 ) if params->{title} =~ /<|>/ || params->{note} =~ /<|>/;
-
     # Get the current user
     my $user  = logged_in_user;
 
@@ -711,9 +698,9 @@ post '/event' => require_login sub {
     my $year  = params->{year}  || $YEAR;
     my $month = params->{month} || $MONTH;
     my $day   = params->{day};
-    my $title = params->{title};
     my $impor = params->{important};
-    my $note  = params->{note};
+    my $title = defang( params->{title} );
+    my $note  = defang( params->{note} );
 
     $impor = $impor && $impor eq 'on' ? 1 : 0;
 
@@ -930,10 +917,8 @@ get '/album/:user' => require_login sub {
 post '/caption' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
-    send_error( $ANGLE, 400 ) if params->{caption} =~ /<|>/;
-
     my $file         = params->{file};
-    my $caption      = params->{caption};
+    my $caption      = defang( params->{caption} );
     my $target       = params->{target};
     my $caption_file = "$ALBUM/$target/$CAPTION";
 
@@ -1021,11 +1006,10 @@ get '/cookbook' => require_login sub {
 post '/recipe' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
-    send_error( $ANGLE, 400 ) if params->{title} =~ /<|>/
-        || params->{note} =~ /<|>/
-        || params->{ingredients} =~ /<|>/
-        || params->{instructions} =~ /<|>/
-    ;
+    my $title = defang( params->{title} );
+    my $note = defang( params->{note} );
+    my $ingredients = defang( params->{ingredients} );
+    my $instructions = defang( params->{instructions} );
 
     my $user = logged_in_user;
 
@@ -1033,12 +1017,12 @@ post '/recipe' => require_login sub {
     if ( params->{add} && params->{title} ) {
         my $new_entry = schema->resultset('Cookbook')->create(
             {
-                title        => params->{title},
+                title        => $title,
                 user         => $user->{username},
                 type         => params->{type},
-                note         => params->{note},
-                ingredients  => params->{ingredients},
-                instructions => params->{instructions},
+                note         => $note,
+                ingredients  => $ingredients,
+                instructions => $instructions,
             }
         );
 
@@ -1048,13 +1032,13 @@ post '/recipe' => require_login sub {
                 "%s %s: Added recipe: %s\n",
                 $user->{username},
                 DateTime->now( time_zone => $TZ ),
-                params->{title};
+                $title;
             $text >> io($FILE);
         }
 
         _add_history(
             who  => $user->{username},
-            what => 'add recipe: ' . params->{title} . ', id: ' . $new_entry->id,
+            what => 'add recipe: ' . $title . ', id: ' . $new_entry->id,
             remote_addr => request->remote_address,
         );
     }
@@ -1063,12 +1047,12 @@ post '/recipe' => require_login sub {
     my $entry = schema->resultset('Cookbook')->find( { id => params->{id} } );
 
     # Update the entry
-    if ( params->{update} && params->{title} ) {
-        $entry->title( params->{title} );
+    if ( params->{update} && $title ) {
+        $entry->title($title);
         $entry->type( params->{type} );
-        $entry->note( params->{note} );
-        $entry->ingredients( params->{ingredients} );
-        $entry->instructions( params->{instructions} );
+        $entry->note($note);
+        $entry->ingredients($ingredients);
+        $entry->instructions($instructions);
         $entry->update;
 
         _add_history(
@@ -1134,7 +1118,6 @@ post '/request_access' => sub {
         || params->{last_name} =~ /<|>/
         || params->{username} =~ /<|>/
         || params->{email} =~ /<|>/
-        || params->{message} =~ /<|>/
     ;
 
     my $address = Email::Valid->address( params->{email} );
@@ -1144,7 +1127,6 @@ post '/request_access' => sub {
     send_error( 'Month range: 1-12. Day range: 1-31', 400 ) if params->{month} && params->{day}
         && !( params->{month} >= 1 && params->{month} <= 12
         && params->{day} >= 1 && params->{day} <= 31 );
-#    send_error( 'Message required', 400 ) unless params->{message};
 
     schema->resultset('Message')->create(
         {
@@ -1154,7 +1136,6 @@ post '/request_access' => sub {
             email      => params->{email},
             params->{month} ? ( month => params->{month} ) : (),
             params->{day} ? ( day => params->{day} ) : (),
-            message    => params->{message},
         }
     );
 
@@ -1414,6 +1395,13 @@ post '/history_search' => require_login sub {
         reset       => 0,
     };
 };
+
+sub defang {
+    my ($text) = @_;
+    $text =~ s/</&lt;/g;
+    $text =~ s/>/&gt;/g;
+    return $text;
+}
 
 sub is_admin {
     my ($username) = @_;
