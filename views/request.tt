@@ -11,14 +11,25 @@
         <br/>
         <input type="text" name="username" size="20" maxlength="20" placeholder="User name" /> (first name if left blank)
         <br/>
-        Birthday month: <input type="text" name="month" size="2" maxlength="2" placeholder="##" />
-        Day: <input type="text" name="day" size="2" maxlength="2" placeholder="##" /> (optional)
+        Birthday month: <select name="month">
+            <option value="" selected></option>
+<% FOREACH i IN [1 ..12] %>
+            <option value="<% i %>"><% i %></option>
+<% END %>
+        </select>
+        Day: <select name="day">
+            <option value="" selected></option>
+<% FOREACH i IN [1 ..31] %>
+            <option value="<% i %>"><% i %></option>
+ <% END %>
+        </select> (optional)
         <br/>
 <!--
         <textarea name="message" rows="4" wrap="soft" class="chat" placeholder="How are we related?"></textarea>
         <br/>
 -->
         <input type="submit" name="request" value="Request" class="button-primary" />
+        <input type="reset" name="reset" value="Reset" class="button" />
     </form>
 </div>
 </div>
