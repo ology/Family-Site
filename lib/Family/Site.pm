@@ -20,6 +20,7 @@ use File::Path qw( remove_tree );
 use Geo::IP::PurePerl;
 use HTML::CalendarMonthSimple;
 use IO::All -utf8;
+use Locale::US;
 use Readonly;
 use Text::Password::Pronounceable;
 use Time::Ago;
@@ -485,6 +486,9 @@ get '/addressbook' => require_login sub {
             };
     }
 
+    my $us = Locale::US->new;
+    my @code = $us->all_state_codes;
+
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
     my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
@@ -496,6 +500,7 @@ get '/addressbook' => require_login sub {
         method => params->{id} ? 'update' : 'add',
         month  => $MONTH,
         year   => $YEAR,
+        states => \@code,
     };
 };
 
