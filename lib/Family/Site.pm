@@ -650,7 +650,7 @@ get '/calendar/:year/:month' => require_login sub {
         month => $month,
         year  => $year
     );
-    $cal->border(1);
+    $cal->border(0);
 
     # Add the month entries to the calendar
     for my $id ( keys %$records ) {
