@@ -5,7 +5,7 @@
     <div class="nine columns btnright">
         <b><a class="button" href="/addressbook">Addresses</a></b>
         <b><a class="button" href="/album">Album</a></b>
-        <b><a class="button" href="/calendar/<% year %>/<% month %>">Calendar</a></b>
+        <b><a class="button" href="/calendar">Calendar</a></b>
         <b><a class="button" href="/">Chat</a></b>
 <!--     <b><a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a></b> -->
         <b><a class="button" href="/cookbook">Cookbook</a></b>

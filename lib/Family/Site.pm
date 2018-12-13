@@ -594,15 +594,22 @@ post '/address' => require_login sub {
     halt;
 };
 
-get '/calendar/:year/:month' => require_login sub {
+get '/calendar' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
     my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
+    redirect '/calendar/' . $YEAR . '/' . $MONTH;
+    halt;
+};
+
+get '/calendar/:year/:month' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
     # Collect the parameters
-    my $year  = params->{year}  || $YEAR;
-    my $month = params->{month} || $MONTH;
+    my $year  = params->{year};
+    my $month = params->{month};
 
     # Get the current entry
     my $entry = schema->resultset('Calendar')->find( { id => params->{id} } );
