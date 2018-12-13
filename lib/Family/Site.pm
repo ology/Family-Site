@@ -907,7 +907,7 @@ get '/album/:user' => require_login sub {
 
     # Redirect to the album page
     template 'album-user', {
-        page     => 'album',
+        page     => $target,
         files    => \@files,
         captions => $captions,
         target   => $target,
