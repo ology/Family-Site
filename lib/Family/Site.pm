@@ -197,7 +197,6 @@ get '/' => require_login sub {
     }
 
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
-    my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
     # Collect the events for the current month
     my @cal;
@@ -231,8 +230,6 @@ get '/' => require_login sub {
         lines     => $lines,
         cal       => \@cal,
         important => \@important,
-        month     => $MONTH,
-        year      => $YEAR,
     };
 };
 
@@ -389,7 +386,6 @@ get '/log' => require_login sub {
     }
 
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
-    my $YEAR  = DateTime->now( time_zone => $TZ )->year;
 
     # Collect the events for the current month
     my @cal;
@@ -433,8 +429,6 @@ get '/log' => require_login sub {
         bans    => $bans,
         calnum  => $total,
         msgnum  => $total_msg,
-        month   => $MONTH,
-        year    => $YEAR,
     };
 };
 
@@ -489,17 +483,12 @@ get '/addressbook' => require_login sub {
     my $us = Locale::US->new;
     my @code = $us->all_state_codes;
 
-    my $MONTH = DateTime->now( time_zone => $TZ )->month;
-    my $YEAR  = DateTime->now( time_zone => $TZ )->year;
-
     # Redirect to the addressbook page
     template 'addressbook', {
         edit   => $record,
         data   => $records,
         sorted => \@sorted,
         method => params->{id} ? 'update' : 'add',
-        month  => $MONTH,
-        year   => $YEAR,
         states => \@code,
     };
 };
@@ -783,9 +772,6 @@ post '/event' => require_login sub {
 get '/album' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
-    my $MONTH = DateTime->now( time_zone => $TZ )->month;
-    my $YEAR  = DateTime->now( time_zone => $TZ )->year;
-
     my $users = schema->resultset('User')->search( { active => 1 } );
     my $records;
     while ( my $result = $users->next ) {
@@ -801,8 +787,6 @@ get '/album' => require_login sub {
     }
 
     template 'album', {
-        month => $MONTH,
-        year  => $YEAR,
         users => $records,
     };
 };
@@ -912,17 +896,12 @@ get '/album/:user' => require_login sub {
             or die "Can't close $caption_file: $!";
     }
 
-    my $MONTH = DateTime->now( time_zone => $TZ )->month;
-    my $YEAR  = DateTime->now( time_zone => $TZ )->year;
-
     # Redirect to the album page
     template 'album-user', {
         files    => \@files,
         captions => $captions,
         target   => $target,
         user     => $user->{username},
-        month    => $MONTH,
-        year     => $YEAR,
     };
 };
 
@@ -1000,17 +979,12 @@ get '/cookbook' => require_login sub {
         }
     }
 
-    my $MONTH = DateTime->now( time_zone => $TZ )->month;
-    my $YEAR  = DateTime->now( time_zone => $TZ )->year;
-
     template 'cookbook', {
         new    => params->{new},
         edit   => params->{edit},
         entry  => $record,
         data   => $records,
         sorted => \@sorted,
-        month  => $MONTH,
-        year   => $YEAR,
         method => params->{id} ? 'update' : 'add',
     };
 };
