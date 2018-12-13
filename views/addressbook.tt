@@ -1,5 +1,3 @@
-<% page = 'addressbook' %>
-
 <div class="container">
 
 <% INCLUDE head.tt %>

@@ -1,5 +1,3 @@
-<% page = 'users' %>
-
 <div class="container">
 
 <% INCLUDE 'head.tt' %>

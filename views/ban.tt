@@ -1,5 +1,3 @@
-<% page = 'ban' %>
-
 <div class="container">
 
 <% INCLUDE head.tt %>

@@ -1,5 +1,3 @@
-<% page = 'messages' %>
-
 <div class="container">
 
 <% INCLUDE 'head.tt' %>

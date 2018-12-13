@@ -1,5 +1,3 @@
-<% page = 'album' %>
-
 <div class="container">
 
 <% INCLUDE head.tt %>

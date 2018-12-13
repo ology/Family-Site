@@ -1,6 +1,4 @@
 <%
-    page = 'family chat'
-
     named = {
         '1'  = 'January'
         '2'  = 'February'

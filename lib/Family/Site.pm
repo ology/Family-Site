@@ -75,6 +75,7 @@ get '/ban' => require_login sub {
     }
 
     template 'ban', {
+        page   => 'ban',
         entry  => $record,
         data   => $records,
         sorted => \@sorted,
@@ -225,6 +226,7 @@ get '/' => require_login sub {
 
     # Redirect to the main site template
     template 'index', {
+        page      => 'family chat',
         user      => $user->{username},
         chat      => \@content,
         lines     => $lines,
@@ -286,7 +288,10 @@ post '/chat' => require_login sub {
 
 get '/password' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
-    template 'password', { help => 0 };
+    template 'password', {
+        page => 'password',
+        help => 0,
+    };
 };
 
 post '/password_set' => require_login sub {
@@ -420,6 +425,7 @@ get '/log' => require_login sub {
 
     # Redirect to the log page
     template 'log', {
+        page    => 'log',
         line    => $last,
         sorted  => \@sorted,
         cal     => \@cal,
@@ -485,6 +491,7 @@ get '/addressbook' => require_login sub {
 
     # Redirect to the addressbook page
     template 'addressbook', {
+        page   => 'addressbook',
         edit   => $record,
         data   => $records,
         sorted => \@sorted,
@@ -669,6 +676,7 @@ get '/calendar/:year/:month' => require_login sub {
 
     # Redirect to the calendar page
     template 'calendar', {
+        page       => 'calendar',
         calendar   => $cal->as_HTML,
         year       => $year,
         month      => $month,
@@ -787,6 +795,7 @@ get '/album' => require_login sub {
     }
 
     template 'album', {
+        page  => 'album',
         users => $records,
     };
 };
@@ -898,6 +907,7 @@ get '/album/:user' => require_login sub {
 
     # Redirect to the album page
     template 'album-user', {
+        page     => 'album',
         files    => \@files,
         captions => $captions,
         target   => $target,
@@ -980,6 +990,7 @@ get '/cookbook' => require_login sub {
     }
 
     template 'cookbook', {
+        page   => 'cookbook',
         new    => params->{new},
         edit   => params->{edit},
         entry  => $record,
@@ -1149,6 +1160,7 @@ get '/users' => require_login sub {
     }
 
     template 'users', {
+        page  => 'users',
         users => \@users,
     };
 };
@@ -1236,6 +1248,7 @@ get '/messages' => require_login sub {
     }
 
     template 'messages', {
+        page     => 'messages',
         messages => \@msg,
     };
 };
@@ -1295,6 +1308,7 @@ post '/grant_access' => require_login sub {
     );
 
     template 'email', {
+        page     => 'email',
         name     => params->{first_name},
         username => $new_user,
         email    => params->{email},
@@ -1323,7 +1337,9 @@ get '/history' => require_login sub {
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
-    template 'history';
+    template 'history', {
+        page => 'history',
+    };
 };
 
 post '/history_search' => require_login sub {
@@ -1372,6 +1388,7 @@ post '/history_search' => require_login sub {
     }
 
     template 'history', {
+        page        => 'history',
         who         => params->{who},
         what        => params->{what},
         when_start  => $when_start,
@@ -1400,6 +1417,7 @@ sub login_page_handler {
     my $return_url = params->{return_url} || '';
 
     template 'login', {
+        page       => 'login',
         error      => $login_fail_message,
         return_url => $return_url,
         help       => 0,

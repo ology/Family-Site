@@ -1,5 +1,3 @@
-<% page = 'calendar' %>
-
 <div class="container">
 
 <% INCLUDE head.tt %>

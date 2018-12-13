@@ -4,11 +4,7 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=<% settings.charset %>" />
 <meta name="google" content="notranslate">
-<!--
-<% page = request.request_uri.match('^\/([\w+/]+)$').0.ucfirst %>
-<% page = page || 'Chat' %>
--->
-<title>Family <% page %>!</title>
+<title><% page FILTER ucfirst %>!</title>
 <link rel="stylesheet" href="<% request.uri_base %>/css/normalize.css" />
 <link rel="stylesheet" href="<% request.uri_base %>/css/skeleton.css" />
 <link rel="stylesheet" href="<% request.uri_base %>/css/style.css" />
