@@ -232,6 +232,7 @@ get '/' => require_login sub {
         lines     => $lines,
         cal       => \@cal,
         important => \@important,
+        month     => $MONTH,
     };
 };
 
