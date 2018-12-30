@@ -32,7 +32,7 @@
 <h2>Cookbook</h2>
 
 <p>Entries are listed according to their "recipe type", like "Appetizer" for instance.</p>
-<p>To add a new recipe, click the "NEW" link in the categories list.</p>
+<p>To add a new recipe, click the <a href="/cookbook?new=1">"NEW"</a> link in the categories list.</p>
 <p>The Ingredients and Instructions input boxes can be resized in most browsers.</p>
 <p>When viewing an entry, clicking the title will edit the entry itself.</p>
 
