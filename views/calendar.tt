@@ -47,6 +47,8 @@
 </div>
 </div>
 
+Hint: Event notes only appear on the chat sidebar.
+
 <div>
     <% calendar %>
 </div>
