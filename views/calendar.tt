@@ -16,9 +16,9 @@
             <option value="<% i %>" <% IF i == edit.day %>selected<% END %>><% i %></option>
 <% END %>
         </select>
-        &nbsp; &nbsp; Sticky: <input type="checkbox" name="important" <% IF edit.important %>checked<% END %>>
+        &nbsp; Sticky: <input type="checkbox" name="important" <% IF edit.important %>checked<% END %>>
 <% IF method == 'add' %>
-        &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
+        &nbsp; Notify chat: <input type="checkbox" name="notify" />
 <% END %>
         <br/>
         <input type="text" name="note" size="60" maxlength="90" value="<% edit.note %>" placeholder="Event notes">
