@@ -249,6 +249,7 @@ post '/chat' => require_login sub {
     # Trim the text
     $text =~ s/^\s*//;
     $text =~ s/\s*$//;
+    $text =~ s/(?:\r\n|\n){3,}/\n\n/g;
 
     # Append any user text to the chat file
     if ( defined $text && $text ne '' ) {
