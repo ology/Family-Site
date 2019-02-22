@@ -394,17 +394,6 @@ get '/log' => require_login sub {
 
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
 
-    # Collect the events for the current month
-    my @cal;
-    my $events = schema->resultset('Calendar')->search( { month => $MONTH }, { order_by => 'day' } );
-    while ( my $result = $events->next ) {
-        push @cal, {
-            title => scalar fix_latin( $result->title ),
-            month => $result->month,
-            day   => $result->day,
-        };
-    }
-
     # Get the total number of calendar events and messages
     my $total = schema->resultset('Calendar')->count();
     my $total_msg = schema->resultset('Message')->count();
@@ -430,7 +419,6 @@ get '/log' => require_login sub {
         page    => 'log',
         line    => $last,
         sorted  => \@sorted,
-        cal     => \@cal,
         files   => \@files,
         addr    => $addresses,
         recipes => $recipes,

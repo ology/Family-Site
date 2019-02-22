@@ -21,12 +21,6 @@
         <p>Album files: <% files.size %></p>
         <p>Banned IPs: <% bans %></p>
         <p>Calendar entries: <% calnum %></p>
-        Current month events:
-        <ol>
-<% FOREACH event IN cal %>
-            <li><% event.title %> - <% event.day %></li>
-<% END %>
-        </ol>
         <p>Cookbook entries: <% recipes %></p>
         <p><% IF msgnum > 0 %><b><% END %>Message entries: <% msgnum %><% IF msgnum %></b><% END %></p>
     </div>
