@@ -8,8 +8,8 @@
     <form action="/upload" method="POST" enctype="multipart/form-data">
         <input type="file" name="filename"/>
         <input type="hidden" name="target" value="<% target %>"/>
+        Notify chat: <input type="checkbox" name="notify" />
         <input type="submit" value=" Add " class="button-primary"/>
-        &nbsp; &nbsp; Notify chat: <input type="checkbox" name="notify" />
         <br />
         &nbsp; <b>Hints: 4MB maximum size. To save a caption, press ENTER after typing it.</b>
     </form>
