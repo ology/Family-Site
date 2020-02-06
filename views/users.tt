@@ -10,7 +10,7 @@
 <% FOREACH user in users %>
 <div class="row">
 <div class="twelve columns">
-    <b><% user.username %></b> (active: <% user.active %>, admin: <% user.admin %>) <% user.last_login %>
+    <b><% user.username %></b> - active: <% user.active %>, admin: <% user.admin %>, last seen: <% user.last_login %>
     <br/>
     <form action="/user_delete" method="post" class="block">
         <input type="hidden" name="id" value="<% user.id %>" />
