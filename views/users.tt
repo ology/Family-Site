@@ -22,9 +22,9 @@
         <input type="hidden" name="username" value="<% user.username %>" />
         <input type="submit" name="reset" value="Reset" onclick="return confirm('Reset <% user.username %>?')" />
     </form>
-    <hr>
 </div>
 </div>
+<hr>
 <% END %>
 
 </div>
