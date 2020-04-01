@@ -284,12 +284,14 @@ get '/m' => require_login sub {
     };
 };
 
-
 post '/chat' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
     # Get the current user
-    my $user  = logged_in_user;
+    my $user = logged_in_user;
+
+    # What is the template that is calling us?
+    my $tmpl = params->{template};
 
     # Set the chat parameters
     my $text  = defined params->{text} ? params->{text} : '';
@@ -333,7 +335,7 @@ post '/chat' => require_login sub {
     }
 
     # Return to the main page
-    redirect '/';
+    redirect $tmpl ? "/$tmpl" : '/';
     halt;
 };
 
