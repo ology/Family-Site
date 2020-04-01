@@ -2,7 +2,7 @@
 
   <div class="row">
     <form action="/chat" method="post">
-        <textarea name="text" rows="4" wrap="soft" class="chat" placeholder="What's on your mind, <% user %>?" autofocus></textarea>
+        <textarea name="text" rows="4" wrap="soft" placeholder="What's on your mind, <% user %>?" autofocus></textarea>
         <br>
         <input type="submit" name="Chat" value=" Chat " class="button-primary" />
     </form>
