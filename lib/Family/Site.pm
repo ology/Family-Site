@@ -236,6 +236,55 @@ get '/' => require_login sub {
     };
 };
 
+get '/m' => require_login sub {
+    send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
+
+    # Get the current user
+    my $user  = logged_in_user;
+    my $entry = schema->resultset('User')->find( { username => $user->{username} } );
+
+    # Redirect to set a new password if they are not active
+    if ( !$entry->active ) {
+        redirect 'password';
+        halt;
+    }
+
+    # Log the user presence
+    my $now = DateTime->now( time_zone => $TZ )->ymd
+        . ' ' . DateTime->now( time_zone => $TZ )->hms;
+    $entry->last_login($now);
+    $entry->remote_addr( request->remote_address );
+    $entry->update;
+
+    # Set the number of chat posts ("lines") to show
+    my $lines = params->{lines} || 100;
+
+    # Set the content to show, to the chat posts
+    my @content;
+    if ( -e $FILE ) {
+        my $counter = 0;
+        my $io = io($FILE);
+        $io->backwards;
+        while( defined( my $line = $io->getline ) ) {
+            last if ++$counter > $lines;
+            $line = fix_latin($line);
+            my ( $who, $when, $what ) = ( $line =~ /^(\w+) ([T \d:-]+): (.*)$/ );
+            my $formatted = sprintf '<b>%s</b> <span class="smallstamp">%s:</span> %s',
+                $who, $when, $what;
+            push @content, '<p>' . $formatted . '</p>';
+        }
+    }
+
+    # Redirect to the main site template
+    template 'm', {
+        page  => 'family chat',
+        user  => $user->{username},
+        chat  => \@content,
+        lines => $lines,
+    };
+};
+
+
 post '/chat' => require_login sub {
     send_error( 'Not allowed', 403 ) if is_blocked( request->remote_address );
 
