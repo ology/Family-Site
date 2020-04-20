@@ -1,7 +1,5 @@
 package Family::Site;
 
-# ABSTRACT: Family::Site
-
 our $VERSION = '0.23';
 
 use Crypt::SaltedHash;
