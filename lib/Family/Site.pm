@@ -379,7 +379,6 @@ post '/password_set' => require_login sub {
             remote_addr => request->remote_address,
         );
 
-        # Return to the main page
         redirect '/';
         halt;
     }
