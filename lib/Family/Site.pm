@@ -339,7 +339,7 @@ post '/chat' => require_login sub {
         );
     }
 
-    # Return to the main page
+    # Return to the calling template or main page
     redirect $tmpl ? "/$tmpl" : '/';
     halt;
 };
