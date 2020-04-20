@@ -1,6 +1,6 @@
 package Family::Site;
 
-our $VERSION = '0.23';
+our $VERSION = '0.2400';
 
 use Crypt::SaltedHash;
 use Dancer qw( :syntax );
