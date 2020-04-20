@@ -7,6 +7,7 @@ our $VERSION = '0.23';
 use Crypt::SaltedHash;
 use Dancer qw( :syntax );
 use Dancer::Plugin::Auth::Extensible;
+use Dancer::Plugin::Browser::Detect;
 use Dancer::Plugin::DBIC qw( schema resultset );
 use Dancer::Plugin::FlashMessage;
 use Date::Manip;
@@ -168,6 +169,12 @@ get '/' => require_login sub {
     # Redirect to set a new password if they are not active
     if ( !$entry->active ) {
         redirect 'password';
+        halt;
+    }
+
+    my $browser = browser_detect();
+    if ( $browser->mobile ) {
+        redirect 'm';
         halt;
     }
 
