@@ -1,8 +1,13 @@
 <div class="container">
 
   <div class="row">
+    <a class="button" href="/addressbook">Addresses</a>
+    <a class="button" href="/album">Album</a>
+    <a class="button" href="/calendar">Calendar</a>
+    <a class="button" href="/cookbook">Cookbook</a>
+    <br>
     <form action="/chat" method="post">
-        <textarea name="text" rows="2" wrap="soft" placeholder="What's on your mind, <% user %>?" autofocus></textarea>
+        <textarea name="text" rows="2" cols="10" wrap="soft" placeholder="What's on your mind, <% user %>?" autofocus></textarea>
         <br>
         <input type="hidden" name="template" value="m" />
         <input type="submit" name="Chat" value=" Chat " class="button-primary" />
