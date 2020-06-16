@@ -7,7 +7,7 @@
     <a class="button" href="/cookbook">Cookbook</a>
     <br>
     <form action="/chat" method="post">
-        <textarea name="text" rows="2" cols="10" wrap="soft" placeholder="What's on your mind, <% user %>?" autofocus></textarea>
+        <textarea name="text" rows="2" cols="10" wrap="soft" placeholder="What's on your mind, <% user %>?" autofocus style="box-sizing: border-box;"></textarea>
         <br>
         <input type="hidden" name="template" value="m" />
         <input type="submit" name="Chat" value=" Chat " class="button-primary" />
