@@ -231,7 +231,7 @@ get '/' => require_login sub {
 
     # Redirect to the main site template
     template 'index', {
-        page      => 'family chat',
+        page      => 'chat',
         user      => $user->{username},
         chat      => \@content,
         lines     => $lines,
@@ -282,7 +282,7 @@ get '/m' => require_login sub {
 
     # Redirect to the main site template
     template 'm', {
-        page  => 'family chat',
+        page  => 'chat',
         user  => $user->{username},
         chat  => \@content,
         lines => $lines,
