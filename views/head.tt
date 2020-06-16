@@ -9,13 +9,14 @@
         <a class="button" href="/">Chat</a>
 <!--     <a class="button" href="https://www.paypal.me/geneboggs/10">Contribute</a> -->
         <a class="button" href="/cookbook">Cookbook</a>
+        <a class="button" href="/logout">Logout</a>
 <% IF page == 'history' || page == 'ban' || page == 'email' || page == 'log' || page == 'users' || page == 'messages' %>
+        <br>
         <a class="button" href="/ban">Bans</a>
         <a class="button" href="/history">History</a>
         <a class="button" href="/log">Log</a>
         <a class="button" href="/messages">Messages</a>
         <a class="button" href="/users">Users</a>
 <% END %>
-        <a class="button" href="/logout">Logout</a>
     </div>
 </div>
