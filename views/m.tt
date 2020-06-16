@@ -5,6 +5,7 @@
     <a class="button" href="/album">Album</a>
     <a class="button" href="/calendar">Calendar</a>
     <a class="button" href="/cookbook">Cookbook</a>
+    <a class="button" href="/logout">Logout</a>
     <br>
     <form action="/chat" method="post">
         <textarea name="text" rows="2" cols="10" wrap="soft" placeholder="What's on your mind, <% user %>?" autofocus style="width: 100%; box-sizing: border-box;"></textarea>
