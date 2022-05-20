@@ -16,7 +16,7 @@
         </ol>
     </div>
     <div class="six columns">
-        <p><% ago %>:<br><% line %></p>
+        <p><% line %></p>
         <p>Addressbook entries: <% addr %></p>
         <p>Album files: <% files.size %></p>
         <p>Banned IPs: <% bans %></p>
