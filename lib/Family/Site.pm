@@ -438,6 +438,7 @@ get '/log' => require_login sub {
 
     # Get the last line of the chat
     my $last = '';
+    my $ago  = '';
     if ( -e $FILE ) {
         my $io = io($FILE);
         $io->backwards;
@@ -445,6 +446,13 @@ get '/log' => require_login sub {
             $last = fix_latin($line);
             last;
         }
+        (my $stamp = $last) =~ s/^\w+ (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}):.*$/$1/;
+
+        # Find the time ago, since last_login
+        my $last_login = DateTime::Format::DateParse->parse_datetime( $last, 'local' );
+        my $duration   = $now->subtract_datetime_absolute($last_login);
+        my $seconds    = $duration->seconds();
+        $ago           = ucfirst Time::Ago->in_words($seconds);
     }
 
     my $MONTH = DateTime->now( time_zone => $TZ )->month;
@@ -473,6 +481,7 @@ get '/log' => require_login sub {
     template 'log', {
         page    => 'log',
         line    => $last,
+        ago     => $ago,
         sorted  => \@sorted,
         files   => \@files,
         addr    => $addresses,
