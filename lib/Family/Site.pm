@@ -757,8 +757,9 @@ post '/event' => require_login sub {
     # Get the current user
     my $user  = logged_in_user;
 
-    my $MONTH = DateTime->now( time_zone => $TZ )->month;
-    my $YEAR  = DateTime->now( time_zone => $TZ )->year;
+    my $now = DateTime->now( time_zone => $TZ );
+    my $MONTH = $now->month;
+    my $YEAR  = $now->year;
 
     send_error( 'Month range: 1-12. Day range: 1-31', 400 ) if params->{month} && params->{day}
         && !( params->{month} >= 1 && params->{month} <= 12
