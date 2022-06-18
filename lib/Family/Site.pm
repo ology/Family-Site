@@ -88,8 +88,8 @@ post '/block' => require_login sub {
     my $user = logged_in_user;
     send_error( 'Not allowed', 403 ) unless is_admin( $user->{username} );
 
-    my $now = DateTime->now( time_zone => $TZ )->ymd
-        . ' ' . DateTime->now( time_zone => $TZ )->hms;
+    my $now = DateTime->now( time_zone => $TZ );
+    my $stamp = $now->ymd . ' ' . $now->hms;
 
     my $id = params->{id};
     $id =~ s/\D//g;
@@ -105,7 +105,7 @@ post '/block' => require_login sub {
         my $new_entry = schema->resultset('Ban')->create(
             {
                 ip        => $ip,
-                last_seen => $now,
+                last_seen => $stamp,
             }
         );
 
@@ -177,11 +177,14 @@ get '/' => require_login sub {
     }
 
     # Log the user presence
-    my $now = DateTime->now( time_zone => $TZ )->ymd
-        . ' ' . DateTime->now( time_zone => $TZ )->hms;
-    $entry->last_login($now);
+    my $now = DateTime->now( time_zone => $TZ );
+    my $stamp = $now->ymd . ' ' . $now->hms;
+    $entry->last_login($stamp);
     $entry->remote_addr( request->remote_address );
     $entry->update;
+
+    my $MONTH = $now->month;
+    my $DAY = $now->day;
 
     # Set the number of chat posts ("lines") to show
     my $lines = params->{lines} || 100;
@@ -201,10 +204,6 @@ get '/' => require_login sub {
             push @content, '<p>' . $formatted . '</p>';
         }
     }
-
-    my $now = DateTime->now( time_zone => $TZ );
-    my $MONTH = $now->month;
-    my $DAY = $now->day;
 
     # Collect the events for the current month
     my @cal;
@@ -730,6 +729,10 @@ get '/calendar/:year/:month' => require_login sub {
         time_zone => $TZ,
     );
 
+    my $now = DateTime->now( time_zone => $TZ );
+    my $MONTH = $now->month;
+    my $DAY = $now->day;
+
     # Redirect to the calendar page
     template 'calendar', {
         page       => 'calendar',
@@ -743,6 +746,8 @@ get '/calendar/:year/:month' => require_login sub {
         edit       => $record,
         entries    => $all_records,
         method     => params->{id} ? 'update' : 'add',
+        month      => $MONTH,
+        day        => $DAY,
     };
 };
 
