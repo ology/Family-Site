@@ -8,12 +8,12 @@
         <input type="text" name="title" size="20" maxlength="20" value="<% edit.title %>" placeholder="Event title">
         Month: <select name="month">
 <% FOREACH i IN [1 ..12] %>
-            <option value="<% i %>" <% IF i == edit.month %>selected<% END %>><% i %></option>
+            <option value="<% i %>" <% IF i == edit.month || i == month %>selected<% END %>><% i %></option>
 <% END %>
         </select>
         Day: <select name="day">
 <% FOREACH i IN [1 ..31] %>
-            <option value="<% i %>" <% IF i == edit.day %>selected<% END %>><% i %></option>
+            <option value="<% i %>" <% IF i == edit.day || i == day %>selected<% END %>><% i %></option>
 <% END %>
         </select>
         &nbsp; Sticky: <input type="checkbox" name="important" <% IF edit.important %>checked<% END %>>
