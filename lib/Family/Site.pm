@@ -202,7 +202,9 @@ get '/' => require_login sub {
         }
     }
 
-    my $MONTH = DateTime->now( time_zone => $TZ )->month;
+    my $now = DateTime->now( time_zone => $TZ );
+    my $MONTH = $now->month;
+    my $DAY = $now->day;
 
     # Collect the events for the current month
     my @cal;
@@ -238,6 +240,7 @@ get '/' => require_login sub {
         cal       => \@cal,
         important => \@important,
         month     => $MONTH,
+        day       => $DAY,
     };
 };
 

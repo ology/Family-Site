@@ -69,7 +69,9 @@
         <ul class="event">
 <% FOREACH event IN cal %>
             <li>
+                <% IF event.day == day %><b><% END %>
                 <i><% event.day %></i> - <% event.title %>
+                <% IF event.day == day %></b><% END %>
                 <% IF event.note %><br/> &nbsp;&nbsp; <span class="event_note"><% event.note %></span><% END %>
             </li>
 <% END %>
