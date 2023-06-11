@@ -2,6 +2,7 @@ requires 'Crypt::SaltedHash';
 requires 'Dancer';
 requires 'Dancer::Plugin::Auth::Extensible';
 requires 'Dancer::Plugin::Browser::Detect';
+requires 'Dancer::Plugin::Database';
 requires 'Dancer::Plugin::DBIC';
 requires 'Dancer::Plugin::FlashMessage';
 requires 'Date::Manip';
