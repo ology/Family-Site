@@ -9,6 +9,7 @@ requires 'Date::Manip';
 requires 'DateTime';
 requires 'DateTime::Duration';
 requires 'DateTime::Format::DateParse';
+requires 'DBD::mysql';
 requires 'Email::Valid';
 requires 'Encoding::FixLatin';
 requires 'File::Find::Rule';
