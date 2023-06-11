@@ -17,6 +17,7 @@ requires 'IO::All';
 requires 'inc::Module::Install'; # mystery requirement
 requires 'Locale::US';
 requires 'Readonly';
+requires 'Template';
 requires 'Text::Password::Pronounceable';
 requires 'Time::Ago';
 requires 'URL::Search';
