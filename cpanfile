@@ -14,6 +14,7 @@ requires 'File::Find::Rule';
 requires 'Geo::IP::PurePerl';
 requires 'HTML::CalendarMonthSimple';
 requires 'IO::All';
+requires 'inc::Module::Install'; # mystery requirement
 requires 'Locale::US';
 requires 'Readonly';
 requires 'Text::Password::Pronounceable';
