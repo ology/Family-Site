@@ -14,6 +14,7 @@ requires 'DBD::mysql';
 requires 'Email::Valid';
 requires 'Encoding::FixLatin';
 requires 'File::Find::Rule';
+requires 'File::ReadBackwards';
 requires 'Geo::IP::PurePerl';
 requires 'HTML::CalendarMonthSimple';
 requires 'IO::All';
