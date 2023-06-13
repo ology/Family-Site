@@ -1,16 +1,16 @@
 requires 'Crypt::SaltedHash';
+requires 'DBD::mysql';
 requires 'Dancer';
 requires 'Dancer::Plugin::Auth::Extensible';
 requires 'Dancer::Plugin::Browser::Detect';
-requires 'Dancer::Plugin::Database';
 requires 'Dancer::Plugin::DBIC';
+requires 'Dancer::Plugin::Database';
 requires 'Dancer::Plugin::FlashMessage';
 requires 'Date::Manip';
 requires 'DateTime';
 requires 'DateTime::Duration';
 requires 'DateTime::Format::DateParse';
 requires 'DateTime::Format::MySQL';
-requires 'DBD::mysql';
 requires 'Email::Valid';
 requires 'Encoding::FixLatin';
 requires 'File::Find::Rule';
@@ -18,7 +18,6 @@ requires 'File::ReadBackwards';
 requires 'Geo::IP::PurePerl';
 requires 'HTML::CalendarMonthSimple';
 requires 'IO::All';
-requires 'inc::Module::Install'; # mystery requirement
 requires 'Locale::US';
 requires 'Mo::builder';
 requires 'Readonly';
@@ -26,3 +25,4 @@ requires 'Template';
 requires 'Text::Password::Pronounceable';
 requires 'Time::Ago';
 requires 'URL::Search';
+requires 'inc::Module::Install'; # mystery requirement
