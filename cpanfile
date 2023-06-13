@@ -20,6 +20,7 @@ requires 'HTML::CalendarMonthSimple';
 requires 'IO::All';
 requires 'inc::Module::Install'; # mystery requirement
 requires 'Locale::US';
+requires 'Mo::builder';
 requires 'Readonly';
 requires 'Template';
 requires 'Text::Password::Pronounceable';
